@@ -1,0 +1,10 @@
+.card{
+    width: 800px;
+    margin: 20px;
+    
+}
+
+.btnCard{
+    display: flex;
+    flex-direction: column;
+}

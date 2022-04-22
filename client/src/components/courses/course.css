@@ -1,0 +1,28 @@
+
+.courseCard{
+    display: flex;
+    
+    width: 890px;
+    justify-content: center;
+}
+
+.courseItem{
+    
+}
+
+.courseTitle{
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 110%;
+    text-align: center;
+    color: #2d3846;
+    margin: 87px auto 45px;
+}
+.containerCourse{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+    align-items: center;
+    text-align: center;
+}
