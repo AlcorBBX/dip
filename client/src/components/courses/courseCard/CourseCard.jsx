@@ -7,13 +7,15 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { LOGIN_ROUTE } from "../../../utils/consts";
+import { NavLink } from "react-router-dom";
 
 const CourseCard = observer(() => {
 
     return(
         <div className="card">
-
-            <Card sx={{ maxWidth: 155}}>
+            <NavLink to={LOGIN_ROUTE} style={{textDecoration: 'none'}}>
+            <Card sx={{ maxWidth: 155}} >
             <CardMedia
                 component="img"
                 height="150"
@@ -35,6 +37,7 @@ const CourseCard = observer(() => {
                 </div>
             </CardActions>
             </Card>
+            </NavLink>
         </div>
     )
 })

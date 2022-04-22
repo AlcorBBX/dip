@@ -5,7 +5,7 @@ import { AppBar, Typography, Container, Box, Button, Toolbar, Link, Divider } fr
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { observer } from 'mobx-react-lite';
 import { Context } from '../../index';
-import { COURSE_ROUTE, LOGIN_ROUTE } from '../../utils/consts';
+import { COURSE_ROUTE, LOGIN_ROUTE, PROFILE_ROUTE } from '../../utils/consts';
 
 const Header = observer(() => {
     const{user} = useContext(Context)
@@ -55,6 +55,8 @@ const Header = observer(() => {
                             </Button>
                             <Button 
                             variant="text" 
+                            to={PROFILE_ROUTE}
+                            onClick={() => history(PROFILE_ROUTE)}
                             // disabled 
                             // endIcon={<KeyboardArrowDownIcon />}
                             >

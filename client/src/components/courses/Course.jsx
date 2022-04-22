@@ -11,7 +11,7 @@ const Course = observer(() => {
       <div className="containerCourse">
         <div className="courseInner">
         <div className="courseItem">
-          <h1 className="courseTitle">Что ты хочешь выучить?</h1>
+          <h1 className="courseTitle" style={{color: "#eee", fontWeight: '200', fontSize: '1.6em'}}>Что ты хочешь выучить?</h1>
         </div>
         <div className="courseCard">
           <CourseCard/>

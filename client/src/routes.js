@@ -1,6 +1,7 @@
-import { COURSE_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE } from "./utils/consts"
+import { COURSE_ROUTE, LOGIN_ROUTE, PROFILE_ROUTE, REGISTRATION_ROUTE } from "./utils/consts"
 import Login from './components/login/Login'
 import Course from './components/courses/Course'
+import Profile from './components/profile/Profile'
 
 // массив списка маршрутов до тех страниц, к которым имеет доступ только авторизованный юзер
 export const authRoutes = [
@@ -21,6 +22,12 @@ export const publicRoutes = [
         path: COURSE_ROUTE,
         // компонент, который будет вызываться
         Component: Course
+    },
+    {  
+        // путь
+        path: PROFILE_ROUTE,
+        // компонент, который будет вызываться
+        Component: Profile
     },
 
      {   
