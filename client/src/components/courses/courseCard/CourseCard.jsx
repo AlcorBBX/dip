@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect } from 'react'
 import './courseCard.css'
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -7,11 +7,11 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { LOGIN_ROUTE } from "../../../utils/consts";
+import { LEARN_ROUTE } from "../../../utils/consts";
 import { NavLink } from "react-router-dom";
-import { deleteCourse, fetchCourse } from "../../../http/courseAPI";
+import { fetchCourse } from "../../../http/courseAPI";
 import { Context } from '../../../index'
-import { Input, TextField } from "@mui/material";
+
 
 const CourseCard = observer(() => {
 
@@ -26,7 +26,7 @@ const CourseCard = observer(() => {
     return(
         <div className="card">
         {course.course.map(course => 
-            
+            <NavLink to={LEARN_ROUTE} style={{textDecoration: "none"}}>
             <Card key={course.id} sx={{ maxWidth: 155, margin: 1}} >
             <CardMedia
                 
@@ -51,7 +51,7 @@ const CourseCard = observer(() => {
                 </div>
             </CardActions>
             </Card>
-            
+            </NavLink>
             )}
         </div>
     )

@@ -1,0 +1,41 @@
+.sl-learn-course__main{
+    left: 0;
+    margin: 0 auto;
+    max-width: 976px;
+    padding-top: 88px;
+    right: 0;
+    top: 0;
+}
+
+.sl-learn-course__main__desc-wrapper{
+
+    align-items: center;
+    display: flex;
+    margin-bottom: 48px;
+    
+}
+
+
+
+
+
+.sl-course-desc__icon{
+    border-radius: 50%;
+    height: 90px;
+    width: 110px;
+    margin-right: 32px;
+}
+
+.sl-course-desc__title{
+    color: #f9f9fa;
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.sl-course-desc__desc{
+    color: #c8d2db;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 150%;
+}
