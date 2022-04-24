@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import { Context } from '../../index'
 import { login, regisration } from '../../http/userAPI'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
-import { LOGIN_ROUTE, REGISTRATION_ROUTE } from '../../utils/consts';
+import { COURSE_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE } from '../../utils/consts';
 import './index.css';
 import { Button, Card, Input, TextField, Typography } from '@mui/material';
 import { observer } from 'mobx-react-lite';
@@ -27,12 +27,12 @@ const Login = observer(() => {
             let data;
         if (isLogin) {
             data = await login(email, password)
-
         } 
         else {
             data = await regisration(email, password)
         }
         // сохраняем данные о пользователи в юзерстор
+        user.setUser({})
         user.setUser(user)
         user.setIsAuth(true)
         }catch (e) {
@@ -62,6 +62,8 @@ const Login = observer(() => {
                     : <div className = "w-auto">Есть аккаунт? <NavLink style={{color: "#9c27b0", fontWeight: '200'}} to={LOGIN_ROUTE}>Войти</NavLink></div>}
                     <Button 
                      onClick={click} 
+                     
+                     
                     variant="outlined" sx={{ mt: 3 }}>{isLogin ? 'Войти' : 'Зарегестрироваться'}</Button>
 
                 </form>

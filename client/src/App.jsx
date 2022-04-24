@@ -13,7 +13,7 @@ const App = observer(() => {
   useEffect(()=>{
     //вызываем функцию check и если она выполнилась успешно, то 
     check().then(data =>{
-      user.setUser(true)
+      user.setUser(data)
       user.setIsAuth(true)
     })
   }, [])

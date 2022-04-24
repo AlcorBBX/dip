@@ -7,18 +7,18 @@ const Router = require('express')
 const router = new Router()
 
 // импорт контроллера
-const deviceController = require('../controllers/deviceController')
+const courseController = require('../controllers/courseController')
 
 // импорт мидлвейра с проверкой роли
 const checkRoles = require('../middleware/checkRoleMiddleware')
 
 
 // .post() создание бренда и т.д
-router.post('/', checkRoles('ADMIN'), deviceController.create)
+router.post('/', checkRoles('ADMIN'), courseController.create)
 // .get() получение девайсов
 // /:id - для того, чтоб получить отдельно конкретный девайс
-router.get('/', deviceController.getAll)
-router.get('/:id', deviceController.getOne)
+router.get('/', courseController.getAll)
+router.get('/:id', courseController.getOne)
 
 
 // экспорт роутера

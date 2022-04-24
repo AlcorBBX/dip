@@ -2,12 +2,12 @@
 const uuid = require('uuid')
 const path = require('path')
 // импорт моделей
-const {Device, DeviceInfo} = require('../models/models')
+const {Course, CourseInfo} = require('../models/models')
 // импорт ошибок
 const ApiError = require('../error/ApiError')
 
 
-class DeviceController {
+class CourseController {
 
     // функция для создания
     async create(req, res, next){
@@ -21,7 +21,7 @@ class DeviceController {
             // перемещение файла (__путь до текущей папки с контроллерами, ".. чтоб вернутся на директорию назад", "папку статик", назв файла)
             img.mv(path.resolve(__dirname, '..', 'static', fileName))
             // создание девайса 
-            const device = await Device.create({name, price, brandId, typeId, img: fileName})
+            const course = await Course.create({name, price, brandId, typeId, img: fileName})
             
             // если мы передали инфо в теле запроса
             if (info){
@@ -30,15 +30,15 @@ class DeviceController {
                 info = JSON.parse(info)
                 // с помощью .forEach пробегаемся по массиву
                 // для каждого элемента вызываем функцию .create()
-                info.forEach(i => DeviceInfo.create({
+                info.forEach(i => CourseInfo.create({
                     title : i.title,
                     description : i.description,
-                    deviceId: device.id
+                    courseId: course.id
                 }))
             }
 
             
-            return res.json(device)
+            return res.json(course)
         } catch (e) {
             next(ApiError.badRequest(e.message));
         }
@@ -59,29 +59,29 @@ class DeviceController {
         //*** если у нас в страница, то 2*9=18 18-9=9 - отступ девайсов
         let offset = page * limit - limit
 
-        let device;
+        let course;
 
         // фильтрация по бренду и типу, а так же по страницам и кол-ву девайсов
         // .findAndCountAll() - предназначена для пагинации, выводит кол-во товара в count
         if(!brandId && !typeId) {
             // поиск всех девайсов без фильтрации и запись их в device
-            device = await Device.findAndCountAll({limit, offset})
+            course = await Device.findAndCountAll({limit, offset})
         }
         if (brandId && !typeId) {
             // поиск всех девайсов с фильтром по бренду и запись их в device
-            device = await Device.findAndCountAll({where:{brandId}, limit, offset})
+            course = await Device.findAndCountAll({where:{brandId}, limit, offset})
         }
         if (!brandId && typeId) {
             // поиск всех девайсов с фильтром по типу и запись их в device
-            device = await Device.findAndCountAll({where:{typeId}, limit, offset})
+            course = await Device.findAndCountAll({where:{typeId}, limit, offset})
         }
         if (brandId && typeId) {
             // поиск всех девайсов с фильтром по типу и бренду и запись их в device
-            device = await Device.findAndCountAll({where:{typeId, brandId}, limit, offset})
+            course = await Device.findAndCountAll({where:{typeId, brandId}, limit, offset})
         }
 
         // возвращаем массив девайсов
-        return res.json(device)
+        return res.json(course)
     }
 
     // функция для получения конкретного девайса
@@ -89,20 +89,20 @@ class DeviceController {
         // получаем id из параметров (параметр в роутере)
         const {id} = req.params
         // вызов функции файндВан и передача инфы в девайс
-        const device = await Device.findOne(
+        const course = await Course.findOne(
             {
                 // условие, по которому неоходимо искать девайс
                 where: {id},
                 // получение массива характеристик
                 // модель, которую надо подгрузить и название поля, которое будет в этом объекте
-                include:[{model: DeviceInfo, as: 'info'}]
+                include:[{model: CourseInfo, as: 'info'}]
             }
         )
         // возвращаем на клиент девайс
-        return res.json(device)
+        return res.json(course)
     }
 }
 
 
 // импорт нового объекта из класса ЮзерКонтроллер
-module.exports = new DeviceController();
+module.exports = new CourseController();

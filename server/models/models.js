@@ -15,23 +15,24 @@ const User = sequelize.define('user', {
     id : {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     email : {type: DataTypes.STRING, unique: true},
     password : {type: DataTypes.STRING},
-    role : {type: DataTypes.STRING, defaultValue: 'USER'}
+    role : {type: DataTypes.STRING, defaultValue: 'USER'},
+    img: {type: DataTypes.STRING, allowNull: true},
 })
 
 const Basket = sequelize.define('basket', {
     id : {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
 })
 
-const BasketDevice = sequelize.define('basket_device', {
+const BasketCourse = sequelize.define('basket_course', {
     id : {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
 })
 
-const Device = sequelize.define('device', {
+const Course = sequelize.define('course', {
     id : {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     name: {type: DataTypes.STRING, unique: true, allowNull: false},
     price: {type: DataTypes.INTEGER, allowNull: false},
     rating: {type: DataTypes.INTEGER, defaultValue: 0},
-    img: {type: DataTypes.STRING, allowNull: false},
+    img: {type: DataTypes.STRING, allowNull: true},
 })
 
 const Type = sequelize.define('type', {
@@ -49,7 +50,7 @@ const Rating = sequelize.define('rating', {
     rate : {type: DataTypes.STRING, allowNull: false},
 })
 
-const DeviceInfo = sequelize.define('device_info', {
+const CourseInfo = sequelize.define('course_info', {
     id : {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     title : {type: DataTypes.STRING, allowNull: false},
     description : {type: DataTypes.STRING, allowNull: false},
@@ -72,26 +73,26 @@ Basket.belongsTo(User)
 User.hasMany(Rating)
 Rating.belongsTo(User)
 
-Basket.hasMany(BasketDevice)
-BasketDevice.belongsTo(Basket)
+Basket.hasMany(BasketCourse)
+BasketCourse.belongsTo(Basket)
 
-Type.hasMany(Device)
-Device.belongsTo(Type)
+Type.hasMany(Course)
+Course.belongsTo(Type)
 
-Brand.hasMany(Device)
-Device.belongsTo(Brand)
+Brand.hasMany(Course)
+Course.belongsTo(Brand)
 
-Device.hasMany(Rating)
-Rating.belongsTo(Device)
+Course.hasMany(Rating)
+Rating.belongsTo(Course)
 
-Device.hasMany(BasketDevice)
-BasketDevice.belongsTo(Device)
+Course.hasMany(BasketCourse)
+BasketCourse.belongsTo(Course)
 
 // .hasMany() - одна запись Девайс содержит много записей ДевайсИнфо
 // .belongsTo() - сущность ДевайИнфо принадлежит Девайс
 // as: '...' - название поля, которое будет у массива характеристик
-Device.hasMany(DeviceInfo, {as: 'info'})
-DeviceInfo.belongsTo(Device)
+Course.hasMany(CourseInfo, {as: 'info'})
+CourseInfo.belongsTo(Course)
 
 // .belongsToMany() - многие ко многим(много типов к многим брендом)
 // Type.belongsToMany(Brand, {through: связующая таблица (TypeBrand)})
@@ -102,11 +103,11 @@ Brand.belongsToMany(Type, {through: TypeBrand})
 module.exports = {
     User,
     Basket,
-    BasketDevice,
-    Device,
+    BasketCourse,
+    Course,
     Type,
     Brand,
     Rating,
     TypeBrand,
-    DeviceInfo,
+    CourseInfo,
 }

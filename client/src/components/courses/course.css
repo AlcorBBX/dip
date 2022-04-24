@@ -1,4 +1,4 @@
-.course::before{
+/* .course::before{
     content: "";
     width: 100%;
     height: 100%;
@@ -8,10 +8,13 @@
     background-image: linear-gradient(120deg, #483F59 0%, #2F3A59 100%);
     animation: gradient 10s ease infinite;
     
-}
+} */
+
+
+
 .courseCard{
     display: flex;
-    
+    flex-wrap: wrap;
     width: 890px;
     justify-content: center;
 }
