@@ -1,11 +1,14 @@
-import { Avatar } from '@mui/material'
+import { Avatar, Button } from '@mui/material'
 import { observer } from 'mobx-react-lite'
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Context } from '../../index'
 import './profile.css'
-const Profile = observer(() => {
+import ProfileAvatar from './modals/ProfileAvatar'
 
+
+const Profile = observer(() => {
   const {user} = useContext(Context)
+  const [courseVisible, setCourseVisible] = useState(false);
 
   return (
     <div className='profileMain'>
@@ -13,15 +16,16 @@ const Profile = observer(() => {
           <div className="profileInner">
             <div className="profileItem" >
               <Avatar className='profileAvatar' 
-              src="https://sun9-62.userapi.com/s/v1/if2/rPNAY2OpZuQbdvp2B0N_mN7ArYfMI7zdj6pCoD_aeHH5roK7i0pxBOqJQD0P7XHPAMwLYtCPOeKOYvqC9x0mfMhf.jpg?size=823x1080&quality=96&type=album" 
+              key={user.user.id}
+              src={user.user.img} 
               sx={{ width: 128, height: 128 }}
                />
             </div>
             <div className="profileItem" >
               <p className="profileText" key={user.user.id}>{user.user.email}</p>
-              {/* <NavLink to={SUBSCRIBE_ROUTE} className="navbar__item">
-                <Button type="primary">Оформить платную подписку</Button>
-              </NavLink> */}
+              <Button variant="default"
+          onClick={() => setCourseVisible(true)}>Изменить профиль</Button>
+              <ProfileAvatar show={courseVisible} onHide={() => setCourseVisible(false)}/>
             </div>
             </div>
           </div>

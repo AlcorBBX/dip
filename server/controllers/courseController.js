@@ -12,33 +12,26 @@ class CourseController {
     // функция для создания
     async create(req, res, next){
         try {
-            // получение информации из тела запроса
-            let {name, price, brandId, typeId, info} = req.body
-            // получение фотки девайса
-            const {img} = req.files
-            // генерация случайного id 
-            let fileName = uuid.v4() + ".jpg"
-            // перемещение файла (__путь до текущей папки с контроллерами, ".. чтоб вернутся на директорию назад", "папку статик", назв файла)
-            img.mv(path.resolve(__dirname, '..', 'static', fileName))
-            // создание девайса 
-            const course = await Course.create({name, price, brandId, typeId, img: fileName})
-            
-            // если мы передали инфо в теле запроса
-            if (info){
-                // данные приходят в виде строки, 
-                // поэтому этот массив необходимо парсить
-                info = JSON.parse(info)
-                // с помощью .forEach пробегаемся по массиву
-                // для каждого элемента вызываем функцию .create()
-                info.forEach(i => CourseInfo.create({
-                    title : i.title,
-                    description : i.description,
-                    courseId: course.id
-                }))
-            }
-
-            
+            let {name, img} = req.body
+            const course = await Course.create({name, img})
             return res.json(course)
+              
+            
+        } catch (e) {
+            next(ApiError.badRequest(e.message));
+        }
+    }
+
+    
+
+
+    async delete(req, res, next){
+        try {
+            let {id} = req.body
+            const course = await Course.delete({id})
+            return res.json(course)
+              
+            
         } catch (e) {
             next(ApiError.badRequest(e.message));
         }
@@ -65,19 +58,19 @@ class CourseController {
         // .findAndCountAll() - предназначена для пагинации, выводит кол-во товара в count
         if(!brandId && !typeId) {
             // поиск всех девайсов без фильтрации и запись их в device
-            course = await Device.findAndCountAll({limit, offset})
+            course = await Course.findAndCountAll({limit, offset})
         }
         if (brandId && !typeId) {
             // поиск всех девайсов с фильтром по бренду и запись их в device
-            course = await Device.findAndCountAll({where:{brandId}, limit, offset})
+            course = await Course.findAndCountAll({where:{brandId}, limit, offset})
         }
         if (!brandId && typeId) {
             // поиск всех девайсов с фильтром по типу и запись их в device
-            course = await Device.findAndCountAll({where:{typeId}, limit, offset})
+            course = await Course.findAndCountAll({where:{typeId}, limit, offset})
         }
         if (brandId && typeId) {
             // поиск всех девайсов с фильтром по типу и бренду и запись их в device
-            course = await Device.findAndCountAll({where:{typeId, brandId}, limit, offset})
+            course = await Course.findAndCountAll({where:{typeId, brandId}, limit, offset})
         }
 
         // возвращаем массив девайсов
