@@ -1,13 +1,13 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { COURSE_ROUTE } from '../../../utils/consts'
+import { LESSON_ROUTE } from '../../../utils/consts'
 import './learnLesson.css'
 
 
 const LearnLesson = () => {
   return (
     <div className='sl-group__item_sl-group__item-full'>
-    <NavLink to={COURSE_ROUTE} style={{textDecoration: "none"}}>
+    <NavLink to={LESSON_ROUTE} style={{textDecoration: "none"}}>
         <div className='sl-lesson-item-full'>
             <div className='sl-lesson-item__content'>
                 <div className='sl-lesson-item__index'>

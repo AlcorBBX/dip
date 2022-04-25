@@ -35,6 +35,7 @@ const Login = observer(() => {
         user.setUser({})
         user.setUser(user)
         user.setIsAuth(true)
+        history(COURSE_ROUTE)
         }catch (e) {
         alert(e.response.data.message)
         }
@@ -58,11 +59,11 @@ const Login = observer(() => {
                     value={password} 
                     onChange = {e => setPassword(e.target.value)} 
                     type="password" placeholder="" label="Пароль" />
-                    { isLogin ? <div>Нет аккаунта? <NavLink style={{color: "#9c27b0", fontWeight: '200'}} to={REGISTRATION_ROUTE}>Зарегестрироваться</NavLink></div>
-                    : <div className = "w-auto">Есть аккаунт? <NavLink style={{color: "#9c27b0", fontWeight: '200'}} to={LOGIN_ROUTE}>Войти</NavLink></div>}
+                    { isLogin ? <div>Нет аккаунта? <NavLink style={{color: "#9c27b0", fontWeight: '400px', fontSize: '20px', textDecoration: 'none'}} to={REGISTRATION_ROUTE}>Зарегестрироваться</NavLink></div>
+                    : <div className = "w-auto">Есть аккаунт? <NavLink style={{color: "#9c27b0", fontWeight: '400px', fontSize: '20px', textDecoration: 'none'}} to={LOGIN_ROUTE}>Войти</NavLink></div>}
                     <Button 
                      onClick={click} 
-                     
+                     to={COURSE_ROUTE}
                      
                     variant="outlined" sx={{ mt: 3 }}>{isLogin ? 'Войти' : 'Зарегестрироваться'}</Button>
 

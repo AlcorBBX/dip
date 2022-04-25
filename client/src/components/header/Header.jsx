@@ -15,6 +15,7 @@ const Header = observer(() => {
         user.setUser({})
         user.setIsAuth(false)
         localStorage.removeItem('token')
+        history(LOGIN_ROUTE)
     }
 
 
@@ -24,7 +25,6 @@ const Header = observer(() => {
                 <div className='logo_div'>
                     
                     <Typography
-                        // component={NavLink}
                         to={COURSE_ROUTE}
                         onClick={() => history(COURSE_ROUTE)}
                         color={"#fff"}
@@ -70,6 +70,7 @@ const Header = observer(() => {
                             variant="outlined" 
                             // component={NavLink}
                             // to="/login"
+                            to={LOGIN_ROUTE}
                             onClick={() => logOut()}
                             >
                                 Выход

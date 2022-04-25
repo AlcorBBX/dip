@@ -1,0 +1,70 @@
+
+@import url(https://fonts.googleapis.com/css?family=Fira+Mono:regular,500,700);
+
+.sl-lesson__content-container{
+    padding-top: 100px;
+    margin: 0 auto;
+    max-width: 567px;
+    padding-bottom: 50px;
+    padding-left: calc(100vw - 100%);
+    width: 100%;
+}
+
+.sl-lesson__content-comments{
+    position: fixed;
+    right: 150px;
+}
+
+.sl-description{
+    
+}
+
+.sl-description-title{
+    font-family: Fira Mono;
+    color: rgb(255, 255, 255);
+    text-align: left;
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 150%;
+    word-break: break-word;
+    
+}
+
+
+.sl-description-subtitle{
+    font-family: Fira Mono;
+    margin-top: 40px;
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+
+
+}
+
+
+.sl-description-code {
+    background: #292929;
+    border-radius: 8px;
+    color: #e4ecf8;
+    font-family: Fira Mono;
+    font-size: 14px;
+    margin: 16px 0 32px;
+    padding: 16px;
+    position: relative;
+    white-space: break-spaces;
+}
+
+
+.sl-description-note{
+    align-items: center;
+    background: #f6e9c8;
+    border-radius: 8px;
+    display: flex;
+    margin: 32px 0;
+    padding: 16px;
+}
+
+.sl-description-note__content{
+    color: #2D3846;
+    font-family: Fira Mono;
+    font-size: 14px;
+}
