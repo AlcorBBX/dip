@@ -1,0 +1,9 @@
+.messagesContainer::-webkit-scrollbar{
+    width: 100px;
+}
+
+.messagesContainer{
+    height: 400px;
+    overflow-y: auto;
+}
+

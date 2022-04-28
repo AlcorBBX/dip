@@ -11,12 +11,15 @@ import { LEARN_ROUTE } from "../../../utils/consts";
 import { NavLink } from "react-router-dom";
 import { fetchCourse } from "../../../http/courseAPI";
 import { Context } from '../../../index'
+// import { Slide } from "@mui/material";
 
 
 const CourseCard = observer(() => {
 
     const {course} = useContext(Context)
-
+    // function TransitionUp(props) {
+    //     return <Slide {...props} direction="up" />;
+    //   }
     
 
     useEffect(() => {

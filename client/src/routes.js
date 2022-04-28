@@ -1,23 +1,29 @@
-import { COURSE_ROUTE, LEARN_ROUTE, LOGIN_ROUTE, PROFILE_ROUTE, REGISTRATION_ROUTE, LESSON_ROUTE } from "./utils/consts"
+import { COURSE_ROUTE, LEARN_ROUTE, LOGIN_ROUTE, PROFILE_ROUTE, REGISTRATION_ROUTE, LESSON_ROUTE, CHAT_ROUTE, PRACTIC_ROUTE } from "./utils/consts"
 import Login from './components/login/Login'
 import Course from './components/courses/Course'
 import Profile from './components/profile/Profile'
 import Learn from './components/learn/Learn'
 import Lesson from './components/lesson/Lesson'
+import ChatPage from "./components/chat/ChatPage"
+import LessonPractic from "./components/lesson/lessonPractic/LessonPractic"
+
+
 // массив списка маршрутов до тех страниц, к которым имеет доступ только авторизованный юзер
-export const authRoutes = [
-    
-]
-
-
+export const authRoutes = []
 // массив списка маршрутов до тех страниц, к которым имеет доступ любой юзер
 export const publicRoutes = [
-    // {   
-    //     // путь
-    //     path: SHOP_ROUTE,
-    //     // компонент, который будет вызываться
-    //     Component: Shop
-    // },
+    {  
+        // путь
+        path: PRACTIC_ROUTE,
+        // компонент, который будет вызываться
+        Component: LessonPractic
+    },
+    {  
+        // путь
+        path: CHAT_ROUTE,
+        // компонент, который будет вызываться
+        Component: ChatPage
+    },
     {  
         // путь
         path: LESSON_ROUTE,

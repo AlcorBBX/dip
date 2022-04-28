@@ -1,5 +1,6 @@
 import React from 'react'
 import './lesson.css'
+import LessonPractic from './lessonPractic/LessonPractic'
 
 const Lesson = () => {
   return (
@@ -29,6 +30,8 @@ const Lesson = () => {
                 installing and configuring different tools.</span>
             </div>
         </div>
+
+        {/* <LessonPractic/> */}
     </div>
   )
 }

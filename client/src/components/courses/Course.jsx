@@ -8,7 +8,7 @@ import CreateCourse from './modals/CreateCourse'
 const Course = observer(() => {
   const [courseVisible, setCourseVisible] = useState(false);
 
-    return(
+    return (
         <div className="course">
     {/* <TypeBar/> */}
       <div className="containerCourse">

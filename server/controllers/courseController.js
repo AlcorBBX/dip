@@ -94,6 +94,25 @@ class CourseController {
         // возвращаем на клиент девайс
         return res.json(course)
     }
+
+
+    // async updateCourse(req, res) {
+    //     const { id, name, img } = req.body
+    //     console.log(req.body)
+
+    //     const data = await Course.findOne
+    //         .update(
+    //             {
+    //                 name: name,
+    //                 img: img,
+    //             },
+    //             { where: {id}, }
+    //         )
+    //     .then((result) => result)
+    //     .catch((result) => result)
+    //     console.log(data)
+    //     res.send(data);
+    // }
 }
 
 
