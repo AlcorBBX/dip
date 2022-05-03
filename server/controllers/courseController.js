@@ -2,7 +2,7 @@
 const uuid = require('uuid')
 const path = require('path')
 // импорт моделей
-const {Course, CourseInfo} = require('../models/models')
+const {Course, CourseInfo, LessonInfo} = require('../models/models')
 // импорт ошибок
 const ApiError = require('../error/ApiError')
 
@@ -27,8 +27,10 @@ class CourseController {
 
     async delete(req, res, next){
         try {
-            let {id} = req.body
-            const course = await Course.delete({id})
+            let {name} = req.body
+            const course = await Course.destroy({
+                where: {name}
+            })
             return res.json(course)
               
             
@@ -36,6 +38,20 @@ class CourseController {
             next(ApiError.badRequest(e.message));
         }
     }
+
+    async deleteTask(req, res){
+        try {
+          const { id } = req.params;
+          const result = await pool.query("DELETE FROM course WHERE id = $1", [id]);
+      
+        //   if (result.rowCount === 0)
+        //     return res.status(404).json({ message: "Task not found" });
+            console.log(result)
+          return res.sendStatus(204);
+        } catch (error) {
+          next(error);
+        }
+      };
 
     // функция для получения
     async getAll(req, res){
@@ -88,13 +104,12 @@ class CourseController {
                 where: {id},
                 // получение массива характеристик
                 // модель, которую надо подгрузить и название поля, которое будет в этом объекте
-                include:[{model: CourseInfo, as: 'info'}]
+                include:[{model: CourseInfo, as: 'info'}],
             }
         )
         // возвращаем на клиент девайс
         return res.json(course)
     }
-
 
     // async updateCourse(req, res) {
     //     const { id, name, img } = req.body

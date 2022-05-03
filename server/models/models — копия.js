@@ -53,7 +53,7 @@ const Rating = sequelize.define('rating', {
 const CourseInfo = sequelize.define('course_info', {
     id : {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     title : {type: DataTypes.STRING, allowNull: false},
-    description : {type: DataTypes.STRING, allowNull: false},
+    description : {type: DataTypes.STRING, defaultValue: 'None'},
 })
 
 // связующая таблица для типа и бренда (внешние ключи секвалайз добавит сам)
@@ -104,11 +104,11 @@ Comments.belongsTo(User)
 CourseInfo.hasOne(Comments)
 Comments.belongsTo(CourseInfo)
 
-Course.hasOne(LessonInfo)
-LessonInfo.belongsTo(Course)
+CourseInfo.hasOne(Lesson)
+Lesson.belongsTo(CourseInfo)
 
-Course.hasOne(Lesson)
-Lesson.belongsTo(Course)
+Lesson.hasOne(LessonInfo)
+LessonInfo.belongsTo(Lesson)
 
 
 // ffsffffffffffffffffffffffffffff

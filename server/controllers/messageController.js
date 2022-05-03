@@ -20,4 +20,16 @@ class MessageController{
             next(ApiError.badRequest(e.message));
         }
     }
+
+    async getAll(req, res){
+        // получение инфы из строки запроса
+        let {courseId} = req.query
+
+        let course;
+
+        course = await Course.findAndCountAll({courseId})
+
+        // возвращаем массив девайсов
+        return res.json(course)
+    }
 }

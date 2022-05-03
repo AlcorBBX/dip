@@ -38,7 +38,7 @@ export const publicRoutes = [
     },
     {  
         // путь
-        path: LEARN_ROUTE,
+        path: LEARN_ROUTE + '/:id',
         // компонент, который будет вызываться
         Component: Learn
     },

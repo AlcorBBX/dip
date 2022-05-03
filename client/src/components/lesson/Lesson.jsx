@@ -1,6 +1,5 @@
 import React from 'react'
 import './lesson.css'
-import LessonPractic from './lessonPractic/LessonPractic'
 
 const Lesson = () => {
   return (

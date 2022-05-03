@@ -1,12 +1,16 @@
 import { Button, Input } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import React, { useState } from 'react'
+import { deleteCourse } from "../../http/courseAPI";
 import './course.css'
 import CourseCard from './courseCard/CourseCard'
 import CreateCourse from './modals/CreateCourse'
 
 const Course = observer(() => {
   const [courseVisible, setCourseVisible] = useState(false);
+  const [id, setId] = useState('')
+  
+
 
     return (
         <div className="course">
@@ -19,7 +23,7 @@ const Course = observer(() => {
           onClick={() => setCourseVisible(true)}>
             Добавить курс
           </Button>
-          <Input/>
+          <Input value = {id} onChange={e => setId(e.target.value)}/>
           <Button size="small">Удалить</Button>
           <CreateCourse show={courseVisible} onHide={() => setCourseVisible(false)}/>
         </div>

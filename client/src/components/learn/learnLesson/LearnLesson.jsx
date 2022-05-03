@@ -1,12 +1,17 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { NavLink, useParams } from 'react-router-dom'
+import { fetchOneCourse } from '../../../http/courseAPI'
 import { LESSON_ROUTE } from '../../../utils/consts'
 import './learnLesson.css'
 
 
 const LearnLesson = () => {
+    // const {id} = useParams()
+    // const [course, setCourse] = useState( {infoLesson: []})
+
   return (
     <div className='sl-group__item_sl-group__item-full'>
+    
     <NavLink to={LESSON_ROUTE} style={{textDecoration: "none"}}>
         <div className='sl-lesson-item-full'>
             <div className='sl-lesson-item__content'>

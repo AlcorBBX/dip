@@ -20,6 +20,17 @@ const CourseCard = observer(() => {
     // function TransitionUp(props) {
     //     return <Slide {...props} direction="up" />;
     //   }
+
+    const handleDelete = async (id) => {
+        try {
+          await fetch(`http://localhost:5000/course/${id}`, {
+            method: "DELETE",
+          });
+        //   setTasks(tasks.filter((task) => task.id !== id));
+        } catch (error) {
+          console.error(error);
+        }
+      };
     
 
     useEffect(() => {
@@ -29,7 +40,7 @@ const CourseCard = observer(() => {
     return(
         <div className="card">
         {course.course.map(course => 
-            <NavLink to={LEARN_ROUTE} style={{textDecoration: "none"}}>
+            <NavLink to={LEARN_ROUTE+ '/' + course.id} style={{textDecoration: "none"}}>
             <Card key={course.id} sx={{ maxWidth: 155, margin: 1}} >
             <CardMedia
                 
@@ -50,7 +61,7 @@ const CourseCard = observer(() => {
             <CardActions>
                 <div className="btnCard">
                 <Button size="small" >Редактировать</Button>
-                <Button size="small">Удалить</Button>
+                <Button size="small" onClick={() => handleDelete(course.id)}>Удалить</Button>
                 </div>
             </CardActions>
             </Card>
