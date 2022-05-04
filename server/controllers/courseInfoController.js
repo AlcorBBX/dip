@@ -12,8 +12,14 @@ class CourseInfoController {
     // функция для создания
     async create(req, res, next){
         try {
-            let {title, description, name, subname, courseId} = req.body
-            const course = await CourseInfo.create({title, description, name, subname, courseId})
+            let {name, subname, courseId} = req.body
+            const course = await CourseInfo.create(
+                {
+                    name: name,
+                    subname: subname,
+                    courseId: courseId,
+                },
+            )
             return res.json(course)
               
             

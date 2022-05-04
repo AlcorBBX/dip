@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite'
 import React, { useContext, useState } from 'react'
 import { Context } from '../../index'
 import './profile.css'
-import ProfileAvatar from './modals/ProfileAvatar'
+import ProfileUpdate from './modals/ProfileUpdate'
 import { CHAT_ROUTE } from '../../utils/consts'
 import { useNavigate } from 'react-router-dom'
 
@@ -33,7 +33,7 @@ const Profile = observer(() => {
           onClick={() => setCourseVisible(true)}>Изменить профиль</Button>
               <Button to={CHAT_ROUTE}
                       onClick={() => history(CHAT_ROUTE)}>Общий чат</Button>
-              <ProfileAvatar show={courseVisible} onHide={() => setCourseVisible(false)}/>
+              <ProfileUpdate show={courseVisible} onHide={() => setCourseVisible(false)}/>
             </div>
             </div>
           </div>

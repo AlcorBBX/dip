@@ -11,6 +11,6 @@ const checkRoles = require('../middleware/checkRoleMiddleware')
 
 
 // .post() создание бренда и т.д
-router.post('/', checkRoles('ADMIN'), courseInfoController.create)
+router.post('/', courseInfoController.create)
 
 module.exports = router

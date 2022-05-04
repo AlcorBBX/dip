@@ -1,11 +1,12 @@
 import React, {useContext, useEffect, useState} from 'react';
 import { Context } from '../../../index';
-import { createCourse, fetchTypes } from '../../../http/courseAPI';
 import { Box, Button, Input, Modal } from '@mui/material';
+import { createCourseInfo } from '../../../http/courseInfoAPI';
+import { useParams } from 'react-router-dom';
 
-const CreateCourse = ({show, onHide}) => {
+const CreateLessonInfo = ({show, onHide}) => {
 //   const {course} = useContext(Context)
-
+  const {courseId} = useParams()
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [name, setName] = useState('')
@@ -27,37 +28,32 @@ const CreateCourse = ({show, onHide}) => {
   const addCourse = () => {
     
       const formData = new FormData()
-      formData.append("title", title)
-      formData.append("description", description)
 
       formData.append("name", name)
       formData.append("subname", subname)
     //   formData.append("id", id)
-      createCourse(formData).then(data => onHide())
+      createCourseInfo(formData).then(data => onHide())
       console.log(formData)
   }
 
 
   
-    return (
+  return (
         
-        <div>
-            <Modal onClose={onHide} open={show} 
-            aria-labelledby="child-modal-title" aria-describedby="child-modal-description">
-                <Box sx={{ ...style, width: 400 }}>
-                    <h2 id="child-modal-title">Добавление курса</h2>
-                    <Input placeholder='Название курса' id="child-modal-description" value = {title} onChange={e => setTitle(e.target.value)}/>
-                    <Input placeholder='Ссылка на картинку' id="child-modal-description" value={description} onChange={e => setDescription(e.target.value)}/>
-
-                    <Input placeholder='Ссылка на картинку' id="child-modal-description" value={name} onChange={e => setName(e.target.value)}/>
-                    <Input placeholder='Ссылка на картинку' id="child-modal-description" value={subname} onChange={e => setSubname(e.target.value)}/>
-                    <Button variant="default" onClick={addCourse}>Добавить</Button>
-                    </Box>
-                    
-            </Modal>
-        </div>
-    )
+    <div>
+        <Modal onClose={onHide} open={show} 
+        aria-labelledby="child-modal-title" aria-describedby="child-modal-description">
+            <Box sx={{ ...style, width: 400 }}>
+                <h2 id="child-modal-title">Добавление курса</h2>
+                <Input placeholder='Название курса' id="child-modal-description" value = {name} onChange={e => setName(e.target.value)}/>
+                <Input placeholder='Ссылка на картинку' id="child-modal-description" value={subname} onChange={e => setSubname(e.target.value)}/>
+                <Button variant="default" onClick={addCourse}>Добавить</Button>
+                </Box>
+                
+        </Modal>
+    </div>
+)
 }
 
 
-export default CreateCourse;
+export default CreateLessonInfo;

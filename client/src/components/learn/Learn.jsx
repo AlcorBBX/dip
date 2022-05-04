@@ -6,10 +6,12 @@ import { fetchCourse, fetchOneCourse } from '../../http/courseAPI'
 import { Context } from '../../index'
 import { LESSON_ROUTE } from '../../utils/consts'
 import './learn.css'
-import LearnLesson from './learnLesson/LearnLesson'
+import CreateLessonInfo from './modals/CreateLessonInfo'
+import LearnLeasson from './learnLesson/LearnLesson'
 
 const Learn = observer(() => {
   // const {courseInfo} = useContext(Context)
+  const [courseVisible, setCourseVisible] = useState(false);
   const {id} = useParams()
   const history = useNavigate()
   const [course, setCourse] = useState( {info: []})
@@ -37,6 +39,10 @@ const Learn = observer(() => {
                     <span className='sl-lesson-item__title'>{info.subname}</span>
                     </div>
                 )}
+          <div className='sl-group__item_sl-group__item-full'>
+            <button onClick={() => setCourseVisible(true)}>Добавить</button>
+            
+          </div>
 
       {/* {course.infoLesson.map((info, index) =>
                     <div key={info.id}>
@@ -47,6 +53,7 @@ const Learn = observer(() => {
         
         {/* <LearnLesson/> */}
       </div>
+      <CreateLessonInfo show={courseVisible} onHide={() => setCourseVisible(false)}/>
     </div>
   )
 })

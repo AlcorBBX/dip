@@ -19,6 +19,6 @@ router.post('/login', userController.login)
 // проверка авторизован ли пользователь
 router.get('/auth', authMiddleware, userController.check)
 
-router.put('/:id', userController.updateUser)
+router.put('/update/:id', userController.updateCourse)
 // экспорт роутера
 module.exports = router

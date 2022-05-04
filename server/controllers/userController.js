@@ -83,11 +83,48 @@ class UserController {
     async updateUser(req,res){
         try{
             const {id,email,password} = req.params
-            const user = await User.create({id,email,password})
+            const user = await User.update({id,email,password})
             return res.json(user)                
           } catch (e) {
               next(ApiError.badRequest(e.message));
           }         
+    }
+
+     async updateTask (req, res) {
+        try {
+          const { id } = req.params;
+          const { email, password } = req.body;
+      
+          const result = await pool.query(
+            "UPDATE user SET email = $1, password = $2 WHERE id = $3 RETURNING *",
+            [email, password, id]
+          );
+      
+          if (result.rows.length === 0)
+            return res.status(404).json({ message: "Task not found" });
+      
+          return res.json(result.rows[0]);
+        } catch (error) {
+          next(error);
+        }
+      };
+
+      async updateCourse(req, res) {
+        const { id } = req.params;
+          const { email, password } = req.body;
+        console.log(req.body)
+
+        const data = await User.update(
+                {
+                    email: email,
+                    password: password,
+                },
+                { where: {id}, }
+            )
+        .then((result) => result)
+        .catch((result) => result)
+        console.log(data)
+        res.send(data);
     }
 }
 
