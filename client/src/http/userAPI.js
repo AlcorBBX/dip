@@ -28,3 +28,12 @@ export const check = async () => {
     localStorage.setItem('token', data.token)
     return jwt_decode(data.token)
 }
+
+export const updateUser = async (user) => {
+    // ответ, который будет возвращаться от сервера
+    // пост запрос базовый url берется из системной переменой, к нему добавляем api/... 
+    // как тело запроса мы передайем 
+    const {data} = await $authHost.put('api/profile', user);
+    // возвращаем данные
+    return data
+}

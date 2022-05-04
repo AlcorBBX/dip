@@ -5,3 +5,13 @@ export const fetchOneCourseInfo = async (id) => {
     const {data} = await $host.get('api/courseInfo/' + id);
     return data
 }
+
+
+export const createCourse = async (courseInfo) => {
+    // ответ, который будет возвращаться от сервера
+    // пост запрос базовый url берется из системной переменой, к нему добавляем api/... 
+    // как тело запроса мы передайем 
+    const {data} = await $authHost.post('api/courseInfo', courseInfo);
+    // возвращаем данные
+    return data
+}

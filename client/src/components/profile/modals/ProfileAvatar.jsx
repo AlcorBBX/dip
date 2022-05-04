@@ -8,6 +8,20 @@ const ProfileAvatar = ({show, onHide}) => {
 
   const [name, setName] = useState('')
   const [img, setImg] = useState('')
+  const [password, setPassword] = useState('')
+
+
+  const updateUser = async (id) => {
+    try {
+      await fetch(`http://localhost:5000/profile/${id}`, {
+        method: "UPDATE",
+      });
+    //   setTasks(tasks.filter((task) => task.id !== id));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const style = {
     position: 'absolute',
     top: '50%',
@@ -31,7 +45,8 @@ const ProfileAvatar = ({show, onHide}) => {
                     <h2 id="child-modal-title">Изменение профиля</h2>
                     <Input placeholder='Никнейм' id="child-modal-description" value = {name} onChange={e => setName(e.target.value)}/>
                     <Input placeholder='Ссылка на картинку' id="child-modal-description" value={img} onChange={e => setImg(e.target.value)}/>
-                    <Button variant="default">Изменить</Button>
+                    <Input placeholder='Пароль' id="child-modal-description" value={password} onChange={e => setPassword(e.target.value)}/>
+                    <Button variant="default" onClick={() => updateUser(user.id)}>Изменить</Button>
                     </Box>
                     
             </Modal>

@@ -41,8 +41,7 @@ const CourseCard = observer(() => {
         <div className="card">
         {course.course.map(course =>  
             <div>
-            <Card onClick={() => history(LEARN_ROUTE+ '/' + course.id)} key={course.id} sx={{ maxWidth: 155, margin: 1}}
-            style={{cursor: 'pointer'}} >
+            <Card sx={{ maxWidth: 155, margin: 1}}>
             <CardMedia
                 
                 component="img"
@@ -64,8 +63,9 @@ const CourseCard = observer(() => {
             <div className="btnCard">
                 <Button size="small" onClick={() => setCourseVisible(true)}>Редактировать</Button>
                 <Button size="small" onClick={() => handleDelete(course.id)}>Удалить</Button>
+                <Button onClick={() => history(LEARN_ROUTE+ '/' + course.id)} key={course.id}>Открыть</Button>
                 </div>
-            :<p></p>}
+            :<Button onClick={() => history(LEARN_ROUTE+ '/' + course.id)} key={course.id}>Открыть</Button>}
                 
                 <UpdateCourse show={courseVisible} onHide={() => setCourseVisible(false)}/>
             </CardActions>

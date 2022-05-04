@@ -79,6 +79,16 @@ class UserController {
         // передаем токен на клиент
         return res.json({token})
     }
+
+    async updateUser(req,res){
+        try{
+            const {id,email,password} = req.params
+            const user = await User.create({id,email,password})
+            return res.json(user)                
+          } catch (e) {
+              next(ApiError.badRequest(e.message));
+          }         
+    }
 }
 
 

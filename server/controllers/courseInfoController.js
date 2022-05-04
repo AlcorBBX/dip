@@ -2,18 +2,18 @@
 const uuid = require('uuid')
 const path = require('path')
 // импорт моделей
-const {Course, CourseInfo} = require('../models/models')
+const {CourseInfo, Lesson} = require('../models/models')
 // импорт ошибок
 const ApiError = require('../error/ApiError')
 
 
-class CourseController {
+class CourseInfoController {
 
     // функция для создания
     async create(req, res, next){
         try {
-            let {name, img} = req.body
-            const course = await Course.create({name, img})
+            let {title, description, name, subname, courseId} = req.body
+            const course = await CourseInfo.create({title, description, name, subname, courseId})
             return res.json(course)
               
             
@@ -28,7 +28,7 @@ class CourseController {
     async delete(req, res, next){
         try {
             let {id} = req.body
-            const course = await Course.destroy({
+            const course = await CourseInfo.destroy({
                 where: {id}
             })
             return res.json(course)
@@ -57,59 +57,20 @@ class CourseController {
       async updateCourse(req,res){
           try{
               const {id,name,img} = req.params
-              const course = await Course.create({id, name, img})
+              const course = await CourseInfo.create({id, name, img})
               return res.json(course)                
             } catch (e) {
                 next(ApiError.badRequest(e.message));
             }         
       }
 
-    // функция для получения
-    async getAll(req, res){
-        // получение инфы из строки запроса
-        let {brandId, typeId, limit, page} = req.query
-
-        // дефолтное знаечение страницы, если она не указана, то откроется 1
-        page = page || 1
-        // деф. значение лимита, если он не указан, то будет выводится по 9 девайсов
-        limit = limit || 9
-        // отступ девайсов
-        //*** например мы перешли на 2 страницу и первые 9 товаров нам надо пропустить
-        //*** мы умножаем страницу на лимит и отнимаем лимит
-        //*** если у нас в страница, то 2*9=18 18-9=9 - отступ девайсов
-        let offset = page * limit - limit
-
-        let course;
-
-        // фильтрация по бренду и типу, а так же по страницам и кол-ву девайсов
-        // .findAndCountAll() - предназначена для пагинации, выводит кол-во товара в count
-        if(!brandId && !typeId) {
-            // поиск всех девайсов без фильтрации и запись их в device
-            course = await Course.findAndCountAll({limit, offset})
-        }
-        if (brandId && !typeId) {
-            // поиск всех девайсов с фильтром по бренду и запись их в device
-            course = await Course.findAndCountAll({where:{brandId}, limit, offset})
-        }
-        if (!brandId && typeId) {
-            // поиск всех девайсов с фильтром по типу и запись их в device
-            course = await Course.findAndCountAll({where:{typeId}, limit, offset})
-        }
-        if (brandId && typeId) {
-            // поиск всех девайсов с фильтром по типу и бренду и запись их в device
-            course = await Course.findAndCountAll({where:{typeId, brandId}, limit, offset})
-        }
-
-        // возвращаем массив девайсов
-        return res.json(course)
-    }
 
     // функция для получения конкретного девайса
     async getOne(req, res){
         // получаем id из параметров (параметр в роутере)
         const {id} = req.params
         // вызов функции файндВан и передача инфы в девайс
-        const course = await Course.findOne(
+        const course = await CourseInfo.findOne(
             {
                 // условие, по которому неоходимо искать девайс
                 where: {id},
@@ -118,7 +79,7 @@ class CourseController {
                 include:[{model: CourseInfo, as: 'info'}],
             }
         )
-        // возвращаем на клиент девайс
+        // возвращаем на клиенsт девайс
         return res.json(course)
     }
 
@@ -143,4 +104,4 @@ class CourseController {
 
 
 // импорт нового объекта из класса ЮзерКонтроллер
-module.exports = new CourseController();
+module.exports = new CourseInfoController();
