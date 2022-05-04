@@ -27,7 +27,7 @@ class CourseController {
 
     async delete(req, res, next){
         try {
-            let {id} = req.body
+            let {id} = req.params
             const course = await Course.destroy({
                 where: {id}
             })

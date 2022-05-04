@@ -29,11 +29,11 @@ export const createCourse = async (course) => {
 }
 
 
-export const deleteCourse = async (course) => {
+export const deleteCourse = async (id) => {
     // ответ, который будет возвращаться от сервера
     // пост запрос базовый url берется из системной переменой, к нему добавляем api/... 
     // как тело запроса мы передайем 
-    const {data} = await $authHost.delete('api/course', course);
+    const {data} = await $host.delete('api/course/delete/' + id);
     // возвращаем данные
     return data
 }

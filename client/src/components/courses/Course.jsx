@@ -1,6 +1,7 @@
 import { Button, Input } from "@mui/material";
 import { observer } from "mobx-react-lite";
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { fetchCourse } from "../../http/courseAPI";
 import { Context } from "../../index";
 import './course.css'
 import CourseCard from './courseCard/CourseCard'
@@ -10,8 +11,13 @@ const Course = observer(() => {
   const {user} = useContext(Context)
   const [courseVisible, setCourseVisible] = useState(false);
   const [id, setId] = useState('')
-  
-  console.log(user.user.role)
+  // const [change, setChange] = useState(false)
+  // const {course} = useContext(Context)
+
+//   useEffect(() => {
+//     setChange(change ?? false)
+//   fetchCourse().then(data => course.setCourse(data.rows))
+// }, [change])
 
     return (
         <div className="course">

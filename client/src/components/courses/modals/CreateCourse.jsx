@@ -1,12 +1,14 @@
 import React, {useContext, useEffect, useState} from 'react';
 import { Context } from '../../../index';
-import { createCourse, fetchTypes } from '../../../http/courseAPI';
+import { createCourse, fetchCourse, fetchTypes } from '../../../http/courseAPI';
 import { Box, Button, Input, Modal } from '@mui/material';
 import axios from 'axios';
+import { observer } from 'mobx-react-lite';
 
 const CreateCourse = ({show, onHide}) => {
   const {course} = useContext(Context)
 
+  const [changeC, setChangec] = useState(false)
 
   const [title, setTitle] = useState('')
   const [img, setImg] = useState('')
@@ -28,11 +30,13 @@ const CreateCourse = ({show, onHide}) => {
       const formData = new FormData()
       formData.append("name", title)
       formData.append("img", img)
-      createCourse(formData).then(data => onHide())
-      console.log(formData)
+      createCourse(formData).then(data => setChangec(true), onHide())
   }
 
-
+    useEffect(() => {
+        setChangec(false)
+    fetchCourse().then(data => course.setCourse(data.rows))
+    }, [changeC])
   
     return (
         

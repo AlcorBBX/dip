@@ -9,7 +9,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { LEARN_ROUTE } from "../../../utils/consts";
 import { useNavigate } from "react-router-dom";
-import { fetchCourse } from "../../../http/courseAPI";
+import { deleteCourse, fetchCourse } from "../../../http/courseAPI";
 import { Context } from '../../../index';
 import UpdateCourse from '../modals/UpdateCourse'
 
@@ -21,12 +21,11 @@ const CourseCard = observer(() => {
     const history = useNavigate()
     const {user} = useContext(Context)
 
+    const [change, setChange] = useState(false)
+
     const handleDelete = async (id) => {
         try {
-          await fetch(`http://localhost:5000/course/${id}`, {
-            method: "DELETE",
-          });
-        //   setTasks(tasks.filter((task) => task.id !== id));
+          deleteCourse(id).then(data => setChange(true)).finally()
         } catch (error) {
           console.error(error);
         }
@@ -34,8 +33,9 @@ const CourseCard = observer(() => {
     
 
     useEffect(() => {
+      setChange(false)
     fetchCourse().then(data => course.setCourse(data.rows))
-  }, [])
+  }, [change])
 
     return(
         <div className="card">

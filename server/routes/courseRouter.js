@@ -16,7 +16,10 @@ const checkRoles = require('../middleware/checkRoleMiddleware')
 // .post() создание бренда и т.д
 router.post('/', checkRoles('ADMIN'), courseController.create)
 // router.delete('/:id', courseController.delete)deleteTask
-router.delete('/:id', courseController.deleteTask)
+
+router.delete('/delete/:id', courseController.delete)
+
+
 router.put('/:id', courseController.updateCourse)
 
 // .get() получение девайсов

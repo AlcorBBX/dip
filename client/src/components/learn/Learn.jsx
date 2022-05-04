@@ -25,6 +25,7 @@ const Learn = observer(() => {
         <img className='sl-course-desc__icon' src={course.img} alt='React'/>
         <div className='sl-course-desc__texts-wrapper'>
           <h1 className='sl-course-desc__title'>{course.name}</h1>
+          <p>{course.rating}</p>
         </div>
       </div>
 
