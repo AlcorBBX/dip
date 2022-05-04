@@ -6,7 +6,7 @@ export const regisration = async (email, password) => {
     // ответ, который будет возвращаться от сервера
     // пост запрос базовый url берется из системной переменой, к нему добавляем api/... 
     // как тело запроса мы передайем емейл, пароль и роль (чтоб не было проблем с доступом)
-    const {data} = await $host.post('api/user/registration', {email, password, role:'ADMIN'});
+    const {data} = await $host.post('api/user/registration', {email, password, role:'USER'});
     // после того, как запрос прошел, мы в локальное хранилище по ключу token будем помещать токен из тела запроса
     localStorage.setItem('token', data.token)    
     // возвращаем результат декодирования токена, который находится внутри этого тела

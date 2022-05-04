@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './courseCard.css'
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -8,18 +8,18 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { LEARN_ROUTE } from "../../../utils/consts";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { fetchCourse } from "../../../http/courseAPI";
-import { Context } from '../../../index'
-// import { Slide } from "@mui/material";
+import { Context } from '../../../index';
+import UpdateCourse from '../modals/UpdateCourse'
+
 
 
 const CourseCard = observer(() => {
-
+    const [courseVisible, setCourseVisible] = useState(false);
     const {course} = useContext(Context)
-    // function TransitionUp(props) {
-    //     return <Slide {...props} direction="up" />;
-    //   }
+    const history = useNavigate()
+    const {user} = useContext(Context)
 
     const handleDelete = async (id) => {
         try {
@@ -39,15 +39,16 @@ const CourseCard = observer(() => {
 
     return(
         <div className="card">
-        {course.course.map(course => 
-            <NavLink to={LEARN_ROUTE+ '/' + course.id} style={{textDecoration: "none"}}>
-            <Card key={course.id} sx={{ maxWidth: 155, margin: 1}} >
+        {course.course.map(course =>  
+            <div>
+            <Card onClick={() => history(LEARN_ROUTE+ '/' + course.id)} key={course.id} sx={{ maxWidth: 155, margin: 1}}
+            style={{cursor: 'pointer'}} >
             <CardMedia
                 
                 component="img"
                 height="150"
                 image={course.img}
-                alt="react"
+                alt="course"
             />
             <CardContent>
             <Typography gutterBottom variant="h5" component="div">
@@ -59,13 +60,17 @@ const CourseCard = observer(() => {
             </Typography>
             </CardContent>
             <CardActions>
-                <div className="btnCard">
-                <Button size="small" >Редактировать</Button>
+            {user.user.role === "ADMIN"?
+            <div className="btnCard">
+                <Button size="small" onClick={() => setCourseVisible(true)}>Редактировать</Button>
                 <Button size="small" onClick={() => handleDelete(course.id)}>Удалить</Button>
                 </div>
+            :<p></p>}
+                
+                <UpdateCourse show={courseVisible} onHide={() => setCourseVisible(false)}/>
             </CardActions>
             </Card>
-            </NavLink>
+            </div>
             )}
         </div>
     )

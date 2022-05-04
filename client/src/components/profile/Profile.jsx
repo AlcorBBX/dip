@@ -26,6 +26,9 @@ const Profile = observer(() => {
             </div>
             <div className="profileItem" >
               <p className="profileText" key={user.user.id}>{user.user.email}</p>
+              {user.user.role === "ADMIN"?
+              <p>ADMIN</p>
+              :<p></p>}
               <Button variant="default"
           onClick={() => setCourseVisible(true)}>Изменить профиль</Button>
               <Button to={CHAT_ROUTE}

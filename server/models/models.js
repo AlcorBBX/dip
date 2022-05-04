@@ -54,6 +54,8 @@ const CourseInfo = sequelize.define('course_info', {
     id : {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     title : {type: DataTypes.STRING, allowNull: false},
     description : {type: DataTypes.STRING, allowNull: false},
+    name : {type: DataTypes.STRING, allowNull: false},
+    subname : {type: DataTypes.STRING, allowNull: false},
 })
 
 // связующая таблица для типа и бренда (внешние ключи секвалайз добавит сам)

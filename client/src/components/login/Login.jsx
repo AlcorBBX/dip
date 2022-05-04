@@ -4,7 +4,7 @@ import { login, regisration } from '../../http/userAPI'
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { COURSE_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE } from '../../utils/consts';
 import './index.css';
-import { Button, Card, Input, TextField, Typography } from '@mui/material';
+import { Button, Card, TextField, Typography } from '@mui/material';
 import { observer } from 'mobx-react-lite';
     
     
@@ -30,11 +30,13 @@ const Login = observer(() => {
         } 
         else {
             data = await regisration(email, password)
+            // user.setIsAdmin(false)
         }
         // сохраняем данные о пользователи в юзерстор
         user.setUser({})
         user.setUser(user)
-        user.setIsAuth(true)
+        // user.setIsAuth(true)
+        
         history(COURSE_ROUTE)
         }catch (e) {
         alert(e.response.data.message)

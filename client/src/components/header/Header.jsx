@@ -17,13 +17,13 @@ const Header = observer(() => {
         localStorage.removeItem('token')
         history(LOGIN_ROUTE)
     }
-
+    
+    
 
     return(
         <div className="header_active">
             <div className='containerHeader' >
                 <div className='logo_div'>
-                    
                     <Typography
                         to={COURSE_ROUTE}
                         onClick={() => history(COURSE_ROUTE)}

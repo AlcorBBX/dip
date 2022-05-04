@@ -1,15 +1,17 @@
 import { Divider } from '@mui/material'
 import { observer } from 'mobx-react-lite'
 import React, { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { NavLink, useNavigate, useParams } from 'react-router-dom'
 import { fetchCourse, fetchOneCourse } from '../../http/courseAPI'
 import { Context } from '../../index'
+import { LESSON_ROUTE } from '../../utils/consts'
 import './learn.css'
 import LearnLesson from './learnLesson/LearnLesson'
 
 const Learn = observer(() => {
   // const {courseInfo} = useContext(Context)
   const {id} = useParams()
+  const history = useNavigate()
   const [course, setCourse] = useState( {info: []})
   useEffect(() => {
     fetchOneCourse(id).then(data => setCourse(data))
@@ -23,24 +25,26 @@ const Learn = observer(() => {
         <img className='sl-course-desc__icon' src={course.img} alt='React'/>
         <div className='sl-course-desc__texts-wrapper'>
           <h1 className='sl-course-desc__title'>{course.name}</h1>
-          <div>
-          {course.info.map((info, index) =>
-                    <div key={info.id}>
-                    <span className='sl-course-desc__desc'>{info.description}</span>
-                    </div>
-                )}
-          </div>          
         </div>
       </div>
 
       <div className='sl-learn-course__main__modules-wrapper'>
-      {/* {course.infoLesson.map((infoLesson, index) =>
-                    <div key={infoLesson.id}>
-                      {infoLesson.title}
+      
+          {course.info.map((info, index) =>
+                    <div key={info.id} onClick={() => history(LESSON_ROUTE)} style={{cursor: 'pointer'}} className='sl-group__item_sl-group__item-full'>
+                    <span className='sl-lesson-item__index'>{info.name}</span>
+                    <span className='sl-lesson-item__title'>{info.subname}</span>
+                    </div>
+                )}
+
+      {/* {course.infoLesson.map((info, index) =>
+                    <div key={info.id}>
+                      {info.name}
+                      {info.subname}
                     </div>
                 )} */}
         
-        <LearnLesson/>
+        {/* <LearnLesson/> */}
       </div>
     </div>
   )

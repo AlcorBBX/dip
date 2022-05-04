@@ -16,12 +16,14 @@ export default class CourseCours {
             // {id: 10, name: 'Ruby', rating: '5', img: 'https://sololearnuploads.azureedge.net/uploads/courses/1081.png'},
         this._course = []
         this._selectedType = {}
+        
         makeAutoObservable(this)
     }
 
     setName(name) {
         this._name = name
     }
+
 
     setType(type) {
         this._type = type
@@ -38,6 +40,7 @@ export default class CourseCours {
     get name() {
         return this._name
     }
+
 
     get type() {
         return this._type
