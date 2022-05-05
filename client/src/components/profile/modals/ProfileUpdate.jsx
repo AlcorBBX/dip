@@ -10,8 +10,8 @@ const ProfileUpdate = ({show, onHide}) => {
   const [password, setPassword] = useState('')
 
   const [task, setTask] = useState({
-    email: "rr",
-    password: "rr",
+    email: "qwertyy",
+    // password: "rr",
   });
   // const [change, setChange] = useState(false)
 

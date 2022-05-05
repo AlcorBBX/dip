@@ -22,6 +22,18 @@ class CourseInfoController {
         }
     }
 
+    // async createLesson(req, res, next){
+    //     try {
+    //         let {title, text, code, atention} = req.body
+    //         const course = await CourseInfo.create({title, text, code, atention})
+    //         return res.json(course)
+              
+            
+    //     } catch (e) {
+    //         next(ApiError.badRequest(e.message));
+    //     }
+    // }
+
     
 
 

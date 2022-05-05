@@ -37,7 +37,9 @@ const Login = observer(() => {
         user.setUser(user)
         // user.setIsAuth(true)
         
+        
         history(COURSE_ROUTE)
+        window.location.reload()
         }catch (e) {
         alert(e.response.data.message)
         }

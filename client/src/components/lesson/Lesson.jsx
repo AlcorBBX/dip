@@ -14,7 +14,7 @@ const Lesson = observer(() => {
     useEffect(() => {
         // setChange(false)
         fetchOneCourseLesson(id).then(data => setCourseInfo(data))
-
+        console.log(courseInfo)
       }, [])
 
       console.log(courseInfo.info)
@@ -23,11 +23,9 @@ const Lesson = observer(() => {
     <div className='sl-lesson__content-container'>
         <p className='sl-lesson__content-comments'>125 Комментария</p>
         <div className='sl-description'>
-    {courseInfo.info.map((info) =>
-                    <div>
-                    {console.log(Number(id), info.id)}
-                    {info.id === Number(id) ?
-                        <div key={info.id}>
+        {courseInfo.info.map((info) =>
+                    <div>                  
+                        <div key={info.id[0]}>
                             <span className='sl-description-title'>{info.title}</span><br/>
                             <span className='sl-description-subtitle'>{info.text}</span><br/>
                             <div className='sl-description-code '>
@@ -36,13 +34,9 @@ const Lesson = observer(() => {
                             <div className='sl-description-note'>
                                 <span className='sl-description-note__content'>{info.atention}</span>
                             </div>
-                        </div>
-                    
-                    :<p></p>}
-                    </div>
-                    
+                        </div>                   
+                    </div>                
                 )}
-        
         </div>
     </div>
   )

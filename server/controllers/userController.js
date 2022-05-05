@@ -117,7 +117,7 @@ class UserController {
         const data = await User.update(
                 {
                     email: email,
-                    password: password,
+                    // password: password,
                 },
                 { where: {id}, }
             )
