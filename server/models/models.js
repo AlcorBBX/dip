@@ -109,9 +109,8 @@ Comments.belongsTo(CourseInfo)
 Course.hasOne(LessonInfo)
 LessonInfo.belongsTo(Course)
 
-CourseInfo.hasOne(Lesson)
+CourseInfo.hasMany(Lesson, {as: 'info'})
 Lesson.belongsTo(CourseInfo)
-
 
 // ffsffffffffffffffffffffffffffff
 User.hasMany(Rating)

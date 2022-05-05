@@ -26,7 +26,7 @@ export const publicRoutes = [
     },
     {  
         // путь
-        path: LESSON_ROUTE,
+        path: LESSON_ROUTE + '/:id',
         // компонент, который будет вызываться
         Component: Lesson
     },

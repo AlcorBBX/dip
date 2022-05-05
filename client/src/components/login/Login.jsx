@@ -43,7 +43,6 @@ const Login = observer(() => {
         }
 
     }
-    // color: "#9c27b0"
 
     return(
         <div className='Login'>

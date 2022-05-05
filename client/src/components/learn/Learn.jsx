@@ -28,8 +28,6 @@ const Learn = observer(() => {
     fetchOneCourse(id).then(data => setCourse(data))
   }, [change])
 
-
-  console.log(course.info.id)
   return (
     <div className='sl-learn-course__main' style={{paddingTop: "100px"}}>
       <div className='sl-learn-course__main__desc-wrapper'>

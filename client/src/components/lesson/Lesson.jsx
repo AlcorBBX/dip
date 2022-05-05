@@ -1,51 +1,49 @@
 import { observer } from 'mobx-react-lite'
 import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { fetchOneCourseInfo } from '../../http/courseInfoAPI'
+import { fetchOneCourseInfo, fetchOneCourseLesson } from '../../http/courseInfoAPI'
 import { Context } from '../../index'
 import './lesson.css'
 
 const Lesson = observer(() => {
-    const [courseInfo, setCourseInfo] = useState( {infoCourse: []})
-    
+    const [courseInfo, setCourseInfo] = useState( {info: []})
+    const [i, setI] = useState()
     const {id} = useParams()
 
 
     useEffect(() => {
         // setChange(false)
-        fetchOneCourseInfo(id).then(data => setCourseInfo(data))
+        fetchOneCourseLesson(id).then(data => setCourseInfo(data))
+
       }, [])
-      console.log(courseInfo.infoCourse)
+
+      console.log(courseInfo.info)
 
   return (
     <div className='sl-lesson__content-container'>
         <p className='sl-lesson__content-comments'>125 Комментария</p>
         <div className='sl-description'>
-            <span className='sl-description-title'>Create React App</span>
-            <p className='sl-description-subtitle'>
-            In the previous lesson we learned how to add React to a simple HTML document using the script tags.
-            However, real web apps have a different scale, contain multiple files, use 3rd party libraries, etc.<br/><br/>
-
-            Facebook has created a handy tool called Create React App that makes it easy to setup a React project with just a simple command!<br/><br/>
-
-            To get started, make sure you have a recent version of Node installed on your machine.<br/><br/>
-            Run the following commands in the Terminal to create and start a React app called "my-app":<br/><br/>
-            </p>
-            <div className='sl-description-code '>
-                <span className='sl-description-text'>npx create-react-app my-app<br/>
-                                                    cd my-app<br/>
-                                                    npm start </span>
-            </div>
-            <p className='sl-description-subtitle'>This will install all the required 
-                dependencies, configure and start the project on localhost:3000.</p>
-            <div className='sl-description-note'>
-                <span className='sl-description-note__content'><strong>Create React App</strong> allows us 
-                to focus on the code, rather than 
-                installing and configuring different tools.</span>
-            </div>
+    {courseInfo.info.map((info) =>
+                    <div>
+                    {console.log(Number(id), info.id)}
+                    {info.id === Number(id) ?
+                        <div key={info.id}>
+                            <span className='sl-description-title'>{info.title}</span><br/>
+                            <span className='sl-description-subtitle'>{info.text}</span><br/>
+                            <div className='sl-description-code '>
+                                <span className='sl-description-text'>{info.code}</span><br/>
+                            </div>
+                            <div className='sl-description-note'>
+                                <span className='sl-description-note__content'>{info.atention}</span>
+                            </div>
+                        </div>
+                    
+                    :<p></p>}
+                    </div>
+                    
+                )}
+        
         </div>
-
-        {/* <LessonPractic/> */}
     </div>
   )
 })

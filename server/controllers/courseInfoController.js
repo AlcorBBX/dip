@@ -76,7 +76,7 @@ class CourseInfoController {
                 where: {id},
                 // получение массива характеристик
                 // модель, которую надо подгрузить и название поля, которое будет в этом объекте
-                include:[{model: Lesson, as: 'infoCourse'}],
+                include:[{model: Lesson, as: 'info'}],
             }
         )
         // возвращаем на клиенsт девайс
