@@ -1,7 +1,22 @@
-import React from 'react'
+import { observer } from 'mobx-react-lite'
+import React, { useContext, useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
+import { fetchOneCourseInfo } from '../../http/courseInfoAPI'
+import { Context } from '../../index'
 import './lesson.css'
 
-const Lesson = () => {
+const Lesson = observer(() => {
+    const [courseInfo, setCourseInfo] = useState( {infoCourse: []})
+    
+    const {id} = useParams()
+
+
+    useEffect(() => {
+        // setChange(false)
+        fetchOneCourseInfo(id).then(data => setCourseInfo(data))
+      }, [])
+      console.log(courseInfo.infoCourse)
+
   return (
     <div className='sl-lesson__content-container'>
         <p className='sl-lesson__content-comments'>125 Комментария</p>
@@ -33,6 +48,6 @@ const Lesson = () => {
         {/* <LessonPractic/> */}
     </div>
   )
-}
+})
 
 export default Lesson

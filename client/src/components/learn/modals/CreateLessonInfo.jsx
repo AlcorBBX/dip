@@ -3,15 +3,15 @@ import { Context } from '../../../index';
 import { Box, Button, Input, Modal } from '@mui/material';
 import { createCourseInfo } from '../../../http/courseInfoAPI';
 import { useParams } from 'react-router-dom';
+import { observer } from 'mobx-react-lite';
+import { fetchOneCourse } from '../../../http/courseAPI';
 
-const CreateLessonInfo = ({show, onHide}) => {
-//   const {course} = useContext(Context)
-  const {courseId} = useParams()
-  const [title, setTitle] = useState('')
-  const [description, setDescription] = useState('')
+const CreateLessonInfo = observer(({show, onHide, setChange}) => {
+  
+  const {id} = useParams()
   const [name, setName] = useState('')
   const [subname, setSubname] = useState('')
-//   const [id, setId] = useState('')
+
   const style = {
     position: 'absolute',
     top: '50%',
@@ -31,13 +31,12 @@ const CreateLessonInfo = ({show, onHide}) => {
 
       formData.append("name", name)
       formData.append("subname", subname)
+      formData.append("courseId", id)
     //   formData.append("id", id)
       createCourseInfo(formData).then(data => onHide())
-      console.log(formData)
+      setChange(true)
+      console.log(formData.courseId, id)
   }
-
-
-  
   return (
         
     <div>
@@ -46,14 +45,14 @@ const CreateLessonInfo = ({show, onHide}) => {
             <Box sx={{ ...style, width: 400 }}>
                 <h2 id="child-modal-title">Добавление курса</h2>
                 <Input placeholder='Название курса' id="child-modal-description" value = {name} onChange={e => setName(e.target.value)}/>
-                <Input placeholder='Ссылка на картинку' id="child-modal-description" value={subname} onChange={e => setSubname(e.target.value)}/>
+                <Input placeholder='Название' id="child-modal-description" value={subname} onChange={e => setSubname(e.target.value)}/>
                 <Button variant="default" onClick={addCourse}>Добавить</Button>
                 </Box>
                 
         </Modal>
     </div>
 )
-}
+})
 
 
 export default CreateLessonInfo;

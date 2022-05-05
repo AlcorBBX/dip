@@ -1,12 +1,16 @@
 import {makeAutoObservable} from "mobx";
 
-export default class CourseCours {
+export default class CourseInfoStore {
     constructor() {
+        this._courseInfo = []
         this._title = {}
         this._description = {}
-        this._courseInfo = []
         this._selectedType = {}
         makeAutoObservable(this)
+    }
+
+    setCourseInfo(_courseInfo) {
+        this.__courseInfo = _courseInfo
     }
 
     setTitle(title) {
@@ -15,8 +19,9 @@ export default class CourseCours {
     setDescription(description) {
         this._description = description
     }
-    setCourseInfo(courseInfo) {
-        this._courseInfo = courseInfo
+
+    get courseInfo() {
+        return this._courseInfo
     }
 
     get title() {
@@ -25,9 +30,5 @@ export default class CourseCours {
 
     get description() {
         return this._description
-    }
-
-    get courseInfo() {
-        return this._courseInfo
     }
 }

@@ -13,13 +13,7 @@ class CourseInfoController {
     async create(req, res, next){
         try {
             let {name, subname, courseId} = req.body
-            const course = await CourseInfo.create(
-                {
-                    name: name,
-                    subname: subname,
-                    courseId: courseId,
-                },
-            )
+            const course = await CourseInfo.create({name, subname, courseId})
             return res.json(course)
               
             
@@ -33,7 +27,7 @@ class CourseInfoController {
 
     async delete(req, res, next){
         try {
-            let {id} = req.body
+            let {id} = req.params
             const course = await CourseInfo.destroy({
                 where: {id}
             })
@@ -82,7 +76,7 @@ class CourseInfoController {
                 where: {id},
                 // получение массива характеристик
                 // модель, которую надо подгрузить и название поля, которое будет в этом объекте
-                include:[{model: CourseInfo, as: 'info'}],
+                include:[{model: Lesson, as: 'infoCourse'}],
             }
         )
         // возвращаем на клиенsт девайс

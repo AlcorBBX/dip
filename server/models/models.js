@@ -52,8 +52,8 @@ const Rating = sequelize.define('rating', {
 
 const CourseInfo = sequelize.define('course_info', {
     id : {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    title : {type: DataTypes.STRING, allowNull: false},
-    description : {type: DataTypes.STRING, allowNull: false},
+    title : {type: DataTypes.STRING, allowNull: true},
+    description : {type: DataTypes.STRING, allowNull: true},
     name : {type: DataTypes.STRING, allowNull: false},
     subname : {type: DataTypes.STRING, allowNull: false},
 })
@@ -65,10 +65,10 @@ const TypeBrand = sequelize.define('type_brand', {
 
 const Lesson = sequelize.define('lesson', {
     id : {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    title : {type: DataTypes.STRING, allowNull: false},
-    text : {type: DataTypes.STRING, allowNull: false},
-    code : {type: DataTypes.STRING, allowNull: false},
-    atention : {type: DataTypes.STRING, allowNull: false},
+    title : {type: DataTypes.STRING, allowNull: true},
+    text : {type: DataTypes.STRING, allowNull: true},
+    code : {type: DataTypes.STRING, allowNull: true},
+    atention : {type: DataTypes.STRING, allowNull: true},
 })
 
 const LessonInfo = sequelize.define('lesson_info', {
@@ -109,8 +109,8 @@ Comments.belongsTo(CourseInfo)
 Course.hasOne(LessonInfo)
 LessonInfo.belongsTo(Course)
 
-Course.hasOne(Lesson)
-Lesson.belongsTo(Course)
+CourseInfo.hasOne(Lesson)
+Lesson.belongsTo(CourseInfo)
 
 
 // ffsffffffffffffffffffffffffffff
