@@ -55,8 +55,8 @@ const Header = observer(() => {
                             </Button>
                             <Button 
                             variant="text" 
-                            to={PROFILE_ROUTE}
-                            onClick={() => history(PROFILE_ROUTE)}
+                            // to={PROFILE_ROUTE}
+                            onClick={() => history(PROFILE_ROUTE + '/' + user.user.id )}
                             // disabled 
                             // endIcon={<KeyboardArrowDownIcon />}
                             >
@@ -90,13 +90,6 @@ const Header = observer(() => {
                         }
                             
                         </Box>
-                    {/* } */}
-                    {/* {!isAuth && */}
-                        
-                    {/* } */}
-                    {/* {isAuth && */}
-                        
-                    {/* } */}
                 </div>
 
             </div>

@@ -20,7 +20,7 @@ export const publicRoutes = [
     },
     {  
         // путь
-        path: CHAT_ROUTE,
+        path: CHAT_ROUTE + '/:id',
         // компонент, который будет вызываться
         Component: ChatPage
     },
@@ -44,7 +44,7 @@ export const publicRoutes = [
     },
     {  
         // путь
-        path: PROFILE_ROUTE,
+        path: PROFILE_ROUTE + '/:id',
         // компонент, который будет вызываться
         Component: Profile
     },

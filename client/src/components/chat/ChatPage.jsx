@@ -5,24 +5,28 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import {fetchMessage, createMessage} from '../../http/chatAPI'
 import {Context} from '../../index'
 import { fetchUsers } from '../../http/userAPI';
+import { useParams } from 'react-router-dom';
 
 const ChatPage = () => {
+  const {id} = useParams()
   const [users, setUsers] = useState([])
   useEffect(() => {
-    fetchUsers().then(data => setUsers(data.rows))
+    fetchUsers().then(data => setUsers(data.rows)).finally(setFinal(true))
 }, [])
   const [change, setChange] = useState(false)
   const [message, setMessage] = useState([])
-  
+  const [final, setFinal] = useState(false)
+ 
   useEffect(() => {
     setChange(false)
     fetchMessage().then(data => setMessage(data.rows))
 }, [change])
-
+// {users === undefined ? console.log("stop") : console.log(users.email)}
+// console.log(message.userId)
   return (
     <Container style={{ paddingTop: "100px"}}>
       <Messages message={message} users={users}/>
-      <MessageForm setChange={setChange}/>
+      <MessageForm setChange={setChange} id={id}/>
     </Container>
   )
 }
@@ -43,7 +47,8 @@ const Message = ({m, users}) => {
   //   {console.log(user.email)}
   //   </div>
   //   )}
-  console.log(users)
+  // {users === undefined ? console.log("stop") : console.log(users.email)}
+  
   // console.log(users.id[m.userId].email)
   const message = {
     url: 'https://via.placeholder.com/150',
@@ -57,7 +62,8 @@ const Message = ({m, users}) => {
         <div>
           <div>
           {/* <p key={m.userId}>{users[m.userId].email}</p> */}
-          <p>Anonim</p>
+          {users === undefined ? "loading" : <p>{users.email}</p>}
+          {/* <p>Anonim</p> */}
           </div>
           <p>{m.text}</p>
         </div>
@@ -66,12 +72,12 @@ const Message = ({m, users}) => {
 }
 
 
-const MessageForm = ({setChange}) => {
+const MessageForm = ({setChange, id}) => {
   const {user} = useContext(Context)
   const [text, setText] = useState('')
   const [userId, setUserId] = useState()
-  
-
+  // {id !== undefined ? setUserId(Number(id)) : console.log("stop")}
+  console.log(user.user.id)
   const addMessage = () => {
     setUserId(user.user.id)
     console.log(userId)
@@ -86,6 +92,7 @@ const MessageForm = ({setChange}) => {
           <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
           <Input value={text} onChange={e => setText(e.target.value)} id="input-with-sx" placeholder = 'Message' variant="standard" style={{width: '300px'}}/>
           <Button onClick={addMessage}>Отправить</Button>
+          
         </Box>
     </div>
   )
