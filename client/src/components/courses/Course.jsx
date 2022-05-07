@@ -10,14 +10,6 @@ import CreateCourse from './modals/CreateCourse'
 const Course = observer(() => {
   const {user} = useContext(Context)
   const [courseVisible, setCourseVisible] = useState(false);
-  const [id, setId] = useState('')
-  // const [change, setChange] = useState(false)
-  // const {course} = useContext(Context)
-
-//   useEffect(() => {
-//     setChange(change ?? false)
-//   fetchCourse().then(data => course.setCourse(data.rows))
-// }, [change])
 
     return (
         <div className="course">
@@ -32,10 +24,7 @@ const Course = observer(() => {
           onClick={() => setCourseVisible(true)}>
             Добавить курс
           </Button>
-          <Input value = {id} onChange={e => setId(e.target.value)}/>
-          <Button size="small">Удалить</Button>
           </div>
-
           :<p></p>}
           
           <CreateCourse show={courseVisible} onHide={() => setCourseVisible(false)}/>
