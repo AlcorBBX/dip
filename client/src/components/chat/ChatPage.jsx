@@ -8,11 +8,9 @@ import { fetchUsers } from '../../http/userAPI';
 
 const ChatPage = () => {
   const [users, setUsers] = useState([])
-
   useEffect(() => {
     fetchUsers().then(data => setUsers(data.rows))
 }, [])
-  // console.log(users)
   const [change, setChange] = useState(false)
   const [message, setMessage] = useState([])
   
@@ -30,6 +28,7 @@ const ChatPage = () => {
 }
 
 const Messages = ({message, users}) => {
+  // console.log(users)
   return (
     <div style={{height: '400px', width: '500px', overflowY: 'auto' , margin: '0 auto'}}>
       {message.map((m) => <Message m = {m} users={users}/>) }
@@ -44,16 +43,22 @@ const Message = ({m, users}) => {
   //   {console.log(user.email)}
   //   </div>
   //   )}
+  console.log(users)
+  // console.log(users.id[m.userId].email)
   const message = {
     url: 'https://via.placeholder.com/150',
-    author: 'Dimych',
-    text: 'Hello friends'
     }
     return (
       <div style={{display: 'flex', marginBottom: '20px'}}>
+      {/* <div key={users.id[m.userId]}>
+        {console.log(users)}
+      </div> */}
         <img alt='avatar' src={message.url} style={{height: "36px", borderRadius: "50%", marginRight: '10px'}}/> 
         <div>
-          <p key={m.userId}>{users.email}</p>
+          <div>
+          {/* <p key={m.userId}>{users[m.userId].email}</p> */}
+          <p>Anonim</p>
+          </div>
           <p>{m.text}</p>
         </div>
     </div>
