@@ -14,6 +14,7 @@ export default class UserStore {
     // функции для изменения состояния (action)
 
     // функция принимает параметрами булевое значение и присваивает его переменной _isAuth
+
     setIsAuth(bool){
         this._isAuth = bool
     }
@@ -40,4 +41,5 @@ export default class UserStore {
     get user(){
         return this._user
     }
+    
 }

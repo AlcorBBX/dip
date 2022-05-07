@@ -46,9 +46,11 @@ const CourseCard = observer(() => {
                 
                 component="img"
                 height="150"
-                image={course.img}
+                // image={course.img}
+                image={"http://localhost:5000/" + course.img}
                 alt="course"
             />
+            
             <CardContent>
             <Typography gutterBottom variant="h5" component="div">
             {course.id},{course.name}

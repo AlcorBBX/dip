@@ -33,7 +33,7 @@ const Login = observer(() => {
             // user.setIsAdmin(false)
         }
         // сохраняем данные о пользователи в юзерстор
-        user.setUser({})
+        // user.setUser({})
         user.setUser(user)
         // user.setIsAuth(true)
         

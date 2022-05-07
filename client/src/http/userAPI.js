@@ -37,3 +37,16 @@ export const updateUser = async (id,email, password) => {
     // возвращаем данные
     return data
 }
+
+
+export const fetchUsers = async () => {
+    // ответ, который будет возвращаться от сервера
+    const {data} = await $host.get('api/user');
+    return data
+}
+
+export const fetchOneUsers = async (id) => {
+    // ответ, который будет возвращаться от сервера
+    const {data} = await $host.get('api/user/' + id);
+    return data
+}

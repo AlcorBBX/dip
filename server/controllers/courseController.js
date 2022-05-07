@@ -12,16 +12,28 @@ class CourseController {
     // функция для создания
     async create(req, res, next){
         try {
-            let {name, img} = req.body
-            const course = await Course.create({name, img})
-            return res.json(course)
-              
-            
+            const {img} = req.files
+            const {name} = req.body
+            let fileName = uuid.v4() + ".png"
+            img.mv(path.resolve(__dirname, '..', 'static', fileName))
+            const course = await Course.create({name, img: fileName})
+            return res.json(course)        
         } catch (e) {
             next(ApiError.badRequest(e.message));
         }
     }
 
+    // async create(req, res, next){
+    //     try {
+    //         let {name, img} = req.body
+    //         const course = await Course.create({name, img})
+    //         return res.json(course)
+              
+            
+    //     } catch (e) {
+    //         next(ApiError.badRequest(e.message));
+    //     }
+    // }
     
 
 

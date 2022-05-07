@@ -20,5 +20,10 @@ router.post('/login', userController.login)
 router.get('/auth', authMiddleware, userController.check)
 
 router.put('/update/:id', userController.updateCourse)
+
+
+router.get('/', userController.getAll)
+
+router.get('/:id', userController.getOne)
 // экспорт роутера
 module.exports = router

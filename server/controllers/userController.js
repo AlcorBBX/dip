@@ -126,6 +126,34 @@ class UserController {
         console.log(data)
         res.send(data);
     }
+
+
+    async getAll(req, res){
+        // получение инфы из строки запроса
+        let {email, role, img} = req.query
+
+        let course;
+
+        course = await User.findAndCountAll({email, role, img})
+
+        // возвращаем массив девайсов
+        return res.json(course)
+    }
+
+
+    async getOne(req, res){
+        // получаем id из параметров (параметр в роутере)
+        const {id} = req.params
+        // вызов функции файндВан и передача инфы в девайс
+        const course = await User.findOne(
+            {
+                // условие, по которому неоходимо искать девайс
+                where: {id}
+            }
+        )
+        // возвращаем на клиент девайс
+        return res.json(course)
+    }
 }
 
 
