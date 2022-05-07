@@ -1,4 +1,4 @@
-const {Course, CourseInfo} = require('../models/models')
+const {Chat} = require('../models/models')
 
 // const {Chat} = require('../models/models')
 
@@ -7,8 +7,8 @@ const ApiError = require('../error/ApiError')
 class MessageController{
     async create(req, res, next){
         try {
-            let {name, img} = req.body
-            const course = await Course.create({name, img})
+            let {text, userId} = req.body
+            const course = await Chat.create({text, userId})
             return res.json(course)
 
             // let {name, text} = req.body
@@ -23,13 +23,28 @@ class MessageController{
 
     async getAll(req, res){
         // получение инфы из строки запроса
-        let {courseId} = req.query
+        let {text, userId} = req.query
 
         let course;
 
-        course = await Course.findAndCountAll({courseId})
+        course = await Chat.findAndCountAll({text, userId})
+
+        // возвращаем массив девайсов
+        return res.json(course)
+    }
+
+
+    async getMessageUser(req, res){
+        // получение инфы из строки запроса
+        let {userId} = req.query
+
+        let course;
+
+        course = await Chat.findAndCountAll({userId})
 
         // возвращаем массив девайсов
         return res.json(course)
     }
 }
+
+module.exports = new MessageController();
