@@ -6,7 +6,7 @@ import { Box, Button, Input, Modal } from '@mui/material';
 
 const UpdateCourse = ({show, onHide}) => {
   const {course} = useContext(Context)
-  const [email, setEmail] = useState('')
+  const [name, setName] = useState('')
 
   const [title, setTitle] = useState('')
   const [img, setImg] = useState('')
@@ -24,11 +24,18 @@ const UpdateCourse = ({show, onHide}) => {
     pb: 3,
   };
 
-  const update = async (id, email, password) => {
-    console.log(id, email, password)
+  const [task, setTask] = useState({
+    name: {name},
+    // password: "rr",
+  });
+  const handleChange = (e) =>
+    setTask({ ...task, [e.target.name]: e.target.value });
+
+  const update = async (name) => {
+    console.log(name)
     try {
       const users = [{
-        "name": email,
+        "name": name,
       }]
     //   updateUser(id, email, password).then(data => console.log(data)).finally()
     // } 
@@ -37,7 +44,7 @@ const UpdateCourse = ({show, onHide}) => {
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(users[0]),
+        body: JSON.stringify(users),
       }
     );
     await response.json();
@@ -57,7 +64,7 @@ const UpdateCourse = ({show, onHide}) => {
             aria-labelledby="child-modal-title" aria-describedby="child-modal-description">
                 <Box sx={{ ...style, width: 400 }}>
                     <h2 id="child-modal-title">Редактирование курса</h2>
-                    <Input placeholder='Название курса' id="child-modal-description" value = {email} onChange={e => setEmail(e.target.value)}/>
+                    <Input placeholder='Название курса' id="child-modal-description" value = {name} onChange={e => setName(e.target.value)}/>
                     <Input placeholder='Ссылка на картинку' id="child-modal-description" value={img} onChange={e => setImg(e.target.value)}/>
                     <Button variant="default" onClick={update}>Редактировать</Button>
                     </Box>
