@@ -9,34 +9,40 @@ const Lesson = observer(() => {
     const [courseInfo, setCourseInfo] = useState( {info: []})
     const [i, setI] = useState()
     const {id} = useParams()
-
-
+    const [first, setfirst] = useState(true)
     useEffect(() => {
-        // setChange(false)
-        fetchOneCourseLesson(id).then(data => setCourseInfo(data))
-        console.log(courseInfo)
-      }, [])
+        {courseInfo.length > 1 ? setfirst(false): setfirst(true)}
+        console.log(id)
+        fetchOneCourseLesson(Number(id)).then(data => setCourseInfo(data)).finally(console.log(courseInfo.info))
+        // console.log(courseInfo.id)
+      }, [first])
 
-      console.log(courseInfo.info)
-
+    //   console.log(courseInfo.info[id].title)
+    
+    
   return (
     <div className='sl-lesson__content-container'>
         <p className='sl-lesson__content-comments'>125 Комментария</p>
         <div className='sl-description'>
-        {courseInfo.info.map((info) =>
+
+        {/* {courseInfo.info.id[1] !== undefined ?
+        <p key={courseInfo.info.id[1]}>{courseInfo.info.title}</p>   
+        : <p>loading</p>} */}
+
+        {/* {courseInfo.info.map((info) =>
                     <div>                  
-                        <div key={info.id[0]}>
-                            <span className='sl-description-title'>{info.title}</span><br/>
-                            <span className='sl-description-subtitle'>{info.text}</span><br/>
+                        <div>
+                            <span className='sl-description-title' key={info.id[id]}>{info !== undefined ? info.title: "loading"}</span><br/>
+                            <span className='sl-description-subtitle'>{info !== undefined ? info.subtitle: "loading"}</span><br/>
                             <div className='sl-description-code '>
-                                <span className='sl-description-text'>{info.code}</span><br/>
+                                <span className='sl-description-text'>{info !== undefined ? info.text: "loading"}</span><br/>
                             </div>
                             <div className='sl-description-note'>
-                                <span className='sl-description-note__content'>{info.atention}</span>
+                                <span className='sl-description-note__content'>{info !== undefined ? info.atention: "loading"}</span>
                             </div>
                         </div>                   
                     </div>                
-                )}
+                )} */}
         </div>
     </div>
   )

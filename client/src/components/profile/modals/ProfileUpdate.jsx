@@ -3,14 +3,14 @@ import { Context } from '../../../index';
 import { Box, Button, Input, Modal } from '@mui/material';
 import {updateUser} from '../../../http/userAPI'
 
-const ProfileUpdate = ({show, onHide}) => {
+const ProfileUpdate = ({setfirst, show, onHide}) => {
   const {user} = useContext(Context)
   const [email, setEmail] = useState('')
   const [img, setImg] = useState('')
   const [password, setPassword] = useState('')
 
   const [task, setTask] = useState({
-    email: "qwertyy",
+    email: {email},
     // password: "rr",
   });
   // const [change, setChange] = useState(false)
@@ -18,11 +18,9 @@ const ProfileUpdate = ({show, onHide}) => {
   const update = async (id, email, password) => {
     console.log(id, email, password)
     try {
-    //   const users = [{
-    //     "id": id,
-    //     "email": email,
-    //     "password": password
-    //   }]
+      const users = [{
+        "email": email,
+      }]
     //   updateUser(id, email, password).then(data => console.log(data)).finally()
     // } 
     const response = await fetch(
@@ -30,13 +28,15 @@ const ProfileUpdate = ({show, onHide}) => {
       {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(task),
+        body: JSON.stringify(users[0]),
       }
     );
     await response.json();}
     catch (error) {
       console.error(error);
     }
+    setfirst(true)
+    onHide()
   };
   
 

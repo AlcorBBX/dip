@@ -15,7 +15,7 @@ const Learn = observer(() => {
   const {id} = useParams()
   const history = useNavigate()
   const [course, setCourse] = useState( {info: []})
-  
+  console.log({id})
   const handleDelete = async (id) => {
     try {
       deleteCourseInfo(id).then(data => setChange(true)).finally()

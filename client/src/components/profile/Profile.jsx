@@ -15,13 +15,14 @@ const Profile = () => {
   // const {user} = useContext(Context)
   const [users, setUsers] = useState()
   const [courseVisible, setCourseVisible] = useState(false);
+  const [first, setfirst] = useState(false)
 
   const [final, setFinal] = useState(false)
   
   useEffect(() => {
-    // setChange(false)
+    setfirst(false)
     fetchOneUsers(Number(id)).then(data => setUsers(data)).finally(setFinal(true))
-}, [])
+}, [first])
 // console.log(final)
 //     {users === undefined ?
 //       console.log("stop")
@@ -48,7 +49,7 @@ const Profile = () => {
           onClick={() => setCourseVisible(true)}>Изменить профиль</Button>
               <Button to={CHAT_ROUTE}
                       onClick={() => history(CHAT_ROUTE+ '/' + id)}>Общий чат</Button>
-              <ProfileUpdate show={courseVisible} onHide={() => setCourseVisible(false)}/>
+              <ProfileUpdate setfirst={setfirst} show={courseVisible} onHide={() => setCourseVisible(false)}/>
             </div>
             </div>
           </div>
