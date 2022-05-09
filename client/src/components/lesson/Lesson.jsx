@@ -4,16 +4,17 @@ import { useParams } from 'react-router-dom'
 import {  fetchOneCourseLesson } from '../../http/courseInfoAPI'
 import { Context } from '../../index'
 import './lesson.css'
+import LessonCreate from './modals/LessonCreate'
 
 const Lesson = () => {
-    
+    const [courseVisible, setCourseVisible] = useState(false);
     const [i, setI] = useState()
     const {id} = useParams()
     const [first, setfirst] = useState(true)
 
 
     const [courseInfo, setCourseInfo] = useState( )
-    console.log(id)
+    
     useEffect(() => {
         // setChange(false)
         fetchOneCourseLesson(id).then(data => setCourseInfo(data)).finally()
@@ -40,7 +41,8 @@ const Lesson = () => {
                                 <span className='sl-description-note__content'>{courseInfo.info[0] === undefined? "": courseInfo.info[0].atention}</span>
                             </div>
                         </div>
-                        <button>Добавить</button>                   
+                        <button onClick={() => setCourseVisible(true)}>Добавить</button>  
+                        <LessonCreate id={id} show={courseVisible} onHide={() => setCourseVisible(false)}/>                 
                     </div>                
         </div>
     </div>

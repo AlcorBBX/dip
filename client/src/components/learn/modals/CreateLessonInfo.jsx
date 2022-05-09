@@ -33,8 +33,9 @@ const CreateLessonInfo = observer(({show, onHide, setChange}) => {
       formData.append("subname", subname)
       formData.append("courseId", id)
     //   formData.append("id", id)
-      createCourseInfo(formData).then(data => onHide())
-      setChange(true)
+      createCourseInfo(formData).then(data => setChange(true))
+      
+      onHide()
       console.log(formData.courseId, id)
   }
   return (

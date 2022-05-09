@@ -1,16 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import { Box, Button, Input, Modal } from '@mui/material';
+import { createCourseLesson } from '../../../http/courseInfoAPI';
 
 
-const LessonCreate = ({show, onHide}) => {
+const LessonCreate = ({id, show, onHide}) => {
 //   const {course} = useContext(Context)
 
   const [changeC, setChangec] = useState(false)
-
+  console.log("id="+id)
   const [title, setTitle] = useState('')
   const [text, setText] = useState('')
   const [code, setCode] = useState('')
-  const [atention, setAtenrion] = useState('')
+  const [atention, setAtention] = useState('')
+  const [courseInfoId, setCourseInfoId] = useState()
   const style = {
     position: 'absolute',
     top: '50%',
@@ -27,15 +29,18 @@ const LessonCreate = ({show, onHide}) => {
   const addCourse = () => {
     
       const formData = new FormData()
-      formData.append("name", title)
+      formData.append("title", title)
       formData.append("text", text)
-    //   createCourse(formData).then(data => setChangec(true), onHide())
+      formData.append("code", code)
+      formData.append("atention", atention)
+      formData.append("courseInfoId", id)
+      createCourseLesson(formData).then(data => onHide())
   }
 
-    useEffect(() => {
-        setChangec(false)
-    // fetchCourse().then(data => course.setCourse(data.rows))
-    }, [changeC])
+    // useEffect(() => {
+    //     setChangec(false)
+    // // fetchCourse().then(data => course.setCourse(data.rows))
+    // }, [changeC])
   
     return (
         
@@ -46,6 +51,9 @@ const LessonCreate = ({show, onHide}) => {
                     <h2 id="child-modal-title">Добавление урока</h2>
                     <Input placeholder='Название курса' id="child-modal-description" value = {title} onChange={e => setTitle(e.target.value)}/>
                     <Input placeholder='Ссылка на картинку' id="child-modal-description" value={text} onChange={e => setText(e.target.value)}/>
+                    
+                    <Input placeholder='Ссылка на картинку' id="child-modal-description" value={code} onChange={e => setCode(e.target.value)}/>
+                    <Input placeholder='Ссылка на картинку' id="child-modal-description" value={atention} onChange={e => setAtention(e.target.value)}/>
                     <Button variant="default" onClick={addCourse}>Добавить</Button>
                     </Box>
                     
