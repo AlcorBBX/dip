@@ -13,6 +13,7 @@ const checkRoles = require('../middleware/checkRoleMiddleware')
 // .post() создание бренда и т.д
 router.post('/', courseInfoController.create)
 
+router.post('/lesson/', courseInfoController.createLesson)
 // router.post('/:id', courseInfoController.createLesson)
 
 router.delete('/delete/:id', courseInfoController.delete)

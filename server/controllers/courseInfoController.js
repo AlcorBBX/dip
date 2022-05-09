@@ -22,6 +22,18 @@ class CourseInfoController {
         }
     }
 
+    async createLesson(req, res, next){
+        try {
+            let {title, text, code, atention, courseInfoId} = req.body
+            const course = await Lesson.create({title, text, code, atention, courseInfoId})
+            return res.json(course)
+              
+            
+        } catch (e) {
+            next(ApiError.badRequest(e.message));
+        }
+    }
+
     // async createLesson(req, res, next){
     //     try {
     //         let {title, text, code, atention} = req.body
@@ -92,7 +104,8 @@ class CourseInfoController {
             }
         )
         // возвращаем на клиенsт девайс
-        return res.json(course)
+        console.log(course)
+        return res.send(course)
     }
 
     // async updateCourse(req, res) {

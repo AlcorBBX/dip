@@ -24,6 +24,14 @@ export const createCourseInfo = async (courseinfo) => {
     return data
 }
 
+export const createCourseLesson = async (courseinfo) => {
+    // ответ, который будет возвращаться от сервера
+    // пост запрос базовый url берется из системной переменой, к нему добавляем api/... 
+    // как тело запроса мы передайем 
+    const {data} = await $authHost.post('api/lesson', courseinfo);
+    // возвращаем данные
+    return data
+}
 // export const createCourseLesson = async (id) => {
 //     // ответ, который будет возвращаться от сервера
 //     // пост запрос базовый url берется из системной переменой, к нему добавляем api/... 
