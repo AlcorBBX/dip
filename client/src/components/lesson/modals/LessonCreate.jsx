@@ -3,7 +3,7 @@ import { Box, Button, Input, Modal } from '@mui/material';
 import { createCourseLesson } from '../../../http/courseInfoAPI';
 
 
-const LessonCreate = ({id, show, onHide}) => {
+const LessonCreate = ({id, setChange, show, onHide}) => {
 //   const {course} = useContext(Context)
 
   const [changeC, setChangec] = useState(false)
@@ -34,7 +34,7 @@ const LessonCreate = ({id, show, onHide}) => {
       formData.append("code", code)
       formData.append("atention", atention)
       formData.append("courseInfoId", id)
-      createCourseLesson(formData).then(data => onHide())
+      createCourseLesson(formData).then(data => setChange(true), onHide())
   }
 
     // useEffect(() => {
@@ -49,11 +49,11 @@ const LessonCreate = ({id, show, onHide}) => {
             aria-labelledby="child-modal-title" aria-describedby="child-modal-description">
                 <Box sx={{ ...style, width: 400 }}>
                     <h2 id="child-modal-title">Добавление урока</h2>
-                    <Input placeholder='Название курса' id="child-modal-description" value = {title} onChange={e => setTitle(e.target.value)}/>
-                    <Input placeholder='Ссылка на картинку' id="child-modal-description" value={text} onChange={e => setText(e.target.value)}/>
+                    <Input placeholder='Заголовок урока' id="child-modal-description" value = {title} onChange={e => setTitle(e.target.value)}/>
+                    <Input placeholder='Текст урока' id="child-modal-description" value={text} onChange={e => setText(e.target.value)}/>
                     
-                    <Input placeholder='Ссылка на картинку' id="child-modal-description" value={code} onChange={e => setCode(e.target.value)}/>
-                    <Input placeholder='Ссылка на картинку' id="child-modal-description" value={atention} onChange={e => setAtention(e.target.value)}/>
+                    <Input placeholder='Пример кода' id="child-modal-description" value={code} onChange={e => setCode(e.target.value)}/>
+                    <Input placeholder='Предупреждение' id="child-modal-description" value={atention} onChange={e => setAtention(e.target.value)}/>
                     <Button variant="default" onClick={addCourse}>Добавить</Button>
                     </Box>
                     

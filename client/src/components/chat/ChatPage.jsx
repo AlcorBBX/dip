@@ -13,6 +13,8 @@ const ChatPage = () => {
   useEffect(() => {
     fetchUsers().then(data => setUsers(data.rows)).finally(setFinal(true))
 }, [])
+  console.log(users)
+
   const [change, setChange] = useState(false)
   const [message, setMessage] = useState([])
   const [final, setFinal] = useState(false)

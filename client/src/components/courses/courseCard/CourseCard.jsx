@@ -12,6 +12,9 @@ import { useNavigate } from "react-router-dom";
 import { deleteCourse, fetchCourse } from "../../../http/courseAPI";
 import { Context } from '../../../index';
 import UpdateCourse from '../modals/UpdateCourse'
+import DeleteIcon from '@mui/icons-material/Delete';
+import SendIcon from '@mui/icons-material/Send';
+import EditIcon from '@mui/icons-material/Edit';
 
 
 
@@ -63,11 +66,11 @@ const CourseCard = observer(() => {
             <CardActions>
             {user.user.role === "ADMIN"?
             <div className="btnCard">
-                <Button size="small" onClick={() => setCourseVisible(true)}>Редактировать</Button>
-                <Button size="small" onClick={() => handleDelete(course.id)}>Удалить</Button>
-                <Button onClick={() => history(LEARN_ROUTE+ '/' + course.id)} key={course.id}>Открыть</Button>
+                <Button style={{marginBottom: '5px'}} variant="outlined" color="warning" size="small" onClick={() => setCourseVisible(true)}>Редактировать</Button>
+                <Button variant="outlined" color="error" size="small" onClick={() => handleDelete(course.id)}>Удалить</Button>
+                <Button endIcon={<SendIcon />} onClick={() => history(LEARN_ROUTE+ '/' + course.id)} key={course.id}>Открыть</Button>
                 </div>
-            :<Button onClick={() => history(LEARN_ROUTE+ '/' + course.id)} key={course.id}>Открыть</Button>}
+            :<Button style={{margin: '0 auto'}} onClick={() => history(LEARN_ROUTE+ '/' + course.id)} key={course.id}>Открыть</Button>}
                 
                 <UpdateCourse show={courseVisible} onHide={() => setCourseVisible(false)}/>
             </CardActions>

@@ -53,16 +53,22 @@ const Login = observer(() => {
                 style={{color: "#eee", fontWeight: '200', fontSize: '1.6em', margin: '0', pading: '0' }}>{ isLogin ? 'Авторизация' : 'Регистрация'}</Typography>
                 <form className='form'>
                     <TextField className="loginInp" 
-                    value={email} 
-                    onChange = {e => setEmail(e.target.value)}
-                    type="text" placeholder="" label="Email" 
+                        value={email} 
+                        onChange = {e => setEmail(e.target.value)}
+                        type="text" placeholder="" label="Email" 
                         style={{border: '0px', marginBottom: '20px'}}
                     />
                     <TextField  
-                    value={password} 
-                    onChange = {e => setPassword(e.target.value)} 
-                    type="password" placeholder="" label="Пароль" />
-                    { isLogin ? <div>Нет аккаунта? <NavLink style={{color: "#9c27b0", fontWeight: '400px', fontSize: '20px', textDecoration: 'none'}} to={REGISTRATION_ROUTE}>Зарегестрироваться</NavLink></div>
+                        value={password} 
+                        onChange = {e => setPassword(e.target.value)} 
+                        type="password" placeholder="" label="Пароль"/>
+                    { isLogin ? <div 
+                            style={{display: 'flex', margin: '0 auto', alignItems: 'center'}}>
+                        <p style={{marginRight: '5px', color: 'lightGrey', fontWeight: '400px', fontSize: '18px'}}>Нет аккаунта?</p> 
+                        <NavLink 
+                            style={{color: "gold", fontWeight: '400px', fontSize: '20px', textDecoration: 'none'}} 
+                            to={REGISTRATION_ROUTE}>Зарегестрироваться</NavLink>
+                    </div>
                     : <div className = "w-auto">Есть аккаунт? <NavLink style={{color: "#9c27b0", fontWeight: '400px', fontSize: '20px', textDecoration: 'none'}} to={LOGIN_ROUTE}>Войти</NavLink></div>}
                     <Button 
                      onClick={click} 

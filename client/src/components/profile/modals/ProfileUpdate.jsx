@@ -8,6 +8,13 @@ const ProfileUpdate = ({setfirst, show, onHide}) => {
   const [email, setEmail] = useState('')
   const [img, setImg] = useState('')
   const [password, setPassword] = useState('')
+  const [file, setFile] = useState()
+
+  const selectFile = e => {
+    // сохраняем файл в состояниях по 0 индексу!!!
+    setFile(e.target.files[0])
+    console.log(file.name)
+  }
 
   const [task, setTask] = useState({
     email: {email},
@@ -15,11 +22,16 @@ const ProfileUpdate = ({setfirst, show, onHide}) => {
   });
   // const [change, setChange] = useState(false)
 
-  const update = async (id, email, password) => {
-    console.log(id, email, password)
+  // if(!file){
+  //   return ''
+  // }
+
+  const update = async (id, email, password, file) => {
+    console.log(id, email, password, file)
     try {
       const users = [{
         "email": email,
+        // "img": file.name
       }]
     //   updateUser(id, email, password).then(data => console.log(data)).finally()
     // } 
@@ -64,9 +76,13 @@ const ProfileUpdate = ({setfirst, show, onHide}) => {
                 <Box sx={{ ...style, width: 400 }}>
                     <h2 id="child-modal-title">Изменение профиля</h2>
                     <Input placeholder='Никнейм' id="child-modal-description" value = {email} onChange={e => setEmail(e.target.value)}/>
-                    <Input placeholder='Ссылка на картинку' id="child-modal-description" value={img} onChange={e => setImg(e.target.value)}/>
-                    <Input placeholder='Пароль' id="child-modal-description" value={password} onChange={e => setPassword(e.target.value)}/>
-                    <Button variant="default" onClick={() => update(user.user.id, email, password)}>Изменить</Button>
+                    <Input disabled  placeholder='Ссылка на картинку' id="child-modal-description" value={img} onChange={e => setImg(e.target.value)}/>
+                    <Input disabled  placeholder='Пароль' id="child-modal-description" value={password} onChange={e => setPassword(e.target.value)}/>
+
+                    <input style={{marginTop: '10px'}} type="file" onChange={selectFile}/>
+                    <Button variant="outlined" 
+                      style={{width: '200px', marginTop: '10px'}}
+                      onClick={() => update(user.user.id, email, password)}>Изменить</Button>
                     </Box>
                     
             </Modal>

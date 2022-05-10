@@ -54,10 +54,10 @@ const CreateCourse = ({show, onHide}) => {
                 <Box sx={{ ...style, width: 400 }}>
                     <h2 id="child-modal-title">Добавление курса</h2>
                     <Input placeholder='Название курса' id="child-modal-description" value = {title} onChange={e => setTitle(e.target.value)}/>
-                    {/* <Input placeholder='Ссылка на картинку' id="child-modal-description" value={img} onChange={e => setImg(e.target.value)}/> */}
-                    
-                    <input type="file" onChange={selectFile}/>
-
+                    <input 
+                      style={{marginTop: '10px'}}
+                      type="file" 
+                      onChange={selectFile}/>
                     <Button variant="default" onClick={addCourse}>Добавить</Button>
                     </Box>
                     

@@ -6,6 +6,9 @@ const jwt = require('jsonwebtoken')
 // импорт моделей пользователя и корзины(для работы с ними)
 const{User, Basket} = require('../models/models')
 
+const uuid = require('uuid')
+const path = require('path')
+
 // генерация jwt токена 
 // .sign(обьект, который будет вшиваться в центральную часть токена, секретный ключ, {expiresIn: сколкьо токен будет "жить"})
 const generateJwt = (id, email, role) => {
@@ -111,12 +114,16 @@ class UserController {
 
       async updateCourse(req, res) {
         const { id } = req.params;
-          const { email, password } = req.body;
+        // const {img} = req.files
+        const { email, password } = req.body;
+        // let fileName = uuid.v4() + ".png"
+        // img.mv(path.resolve(__dirname, '..', 'static', fileName))
         console.log(req.body)
 
         const data = await User.update(
                 {
                     email: email,
+                    // img: fileName
                     // password: password,
                 },
                 { where: {id}, }

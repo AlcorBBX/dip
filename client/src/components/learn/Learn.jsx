@@ -7,15 +7,18 @@ import './learn.css'
 import CreateLessonInfo from './modals/CreateLessonInfo'
 import LearnLeasson from './learnLesson/LearnLesson'
 import { deleteCourseInfo } from '../../http/courseInfoAPI'
+import { Context } from '../../index'
+import { Button } from '@mui/material'
 
 const Learn = observer(() => {
-  
+  const {user} = useContext(Context)
   const [change, setChange] = useState(false)
   const [courseVisible, setCourseVisible] = useState(false);
   const {id} = useParams()
   const history = useNavigate()
   const [course, setCourse] = useState( {info: []})
   console.log({id})
+  console.log(user.user.role)
   const handleDelete = async (id) => {
     try {
       deleteCourseInfo(id).then(data => setChange(true)).finally()
@@ -41,27 +44,25 @@ const Learn = observer(() => {
       <div className='sl-learn-course__main__modules-wrapper'>
       
           {course.info.map((info, index) =>
-                    <div key={info.id} className='sl-group__item_sl-group__item-full'>
-                    <span className='sl-lesson-item__index'>{info.name}</span>
-                    <span className='sl-lesson-item__title'>{info.subname}</span>
-                    {/* <button onClick={() => history(LESSON_ROUTE)}>Открыть</button> */}
-                    <button onClick={() => history(LESSON_ROUTE+ '/' + info.id)}>Открыть</button>
-                    <button onClick={() => handleDelete(info.id)}>Удалить</button>
-                    </div>
-                )}
-          <div className='sl-group__item_sl-group__item-full'>
-            <button onClick={() => setCourseVisible(true)}>Добавить</button>
-            
-          </div>
+            <div key={info.id} className='sl-group__item_sl-group__item-full'>
+              <span className='sl-lesson-item__index'>{info.name}</span>
+              <span className='sl-lesson-item__title'>{info.subname}</span>
+              {user.user.role === "ADMIN"?
+              <div style={{display: 'flex', flexDirection: 'column'}}>
+                <Button variant="outlined" color="error" onClick={() => handleDelete(info.id)}>Удалить</Button>
 
-      {/* {course.infoLesson.map((info, index) =>
-                    <div key={info.id}>
-                      {info.name}
-                      {info.subname}
-                    </div>
-                )} */}
-        
-        {/* <LearnLesson/> */}
+                <Button onClick={() => history(LESSON_ROUTE+ '/' + info.id)}>Открыть</Button>  
+              </div>
+              :<Button onClick={() => history(LESSON_ROUTE+ '/' + info.id)}>Открыть</Button>
+              }
+            </div>
+          )}
+          {user.user.role === "ADMIN"?
+          <div className='sl-group__item_sl-group__item-full'>
+            <Button onClick={() => setCourseVisible(true)}>Добавить</Button>            
+          </div>
+          : ''
+          }
       </div>
       <CreateLessonInfo setChange={setChange} show={courseVisible} onHide={() => setCourseVisible(false)}/>
     </div>

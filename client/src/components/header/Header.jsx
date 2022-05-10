@@ -46,6 +46,7 @@ const Header = observer(() => {
 
                             <Button 
                             variant="text" d
+                            style={{color: 'gold'}}
                             to={COURSE_ROUTE}
                             onClick={() => history(COURSE_ROUTE)}
                             // isabled 
@@ -55,10 +56,8 @@ const Header = observer(() => {
                             </Button>
                             <Button 
                             variant="text" 
-                            // to={PROFILE_ROUTE}
+                            style={{color: 'beige'}}
                             onClick={() => history(PROFILE_ROUTE + '/' + user.user.id )}
-                            // disabled 
-                            // endIcon={<KeyboardArrowDownIcon />}
                             >
                                 Профиль
                             </Button>
@@ -66,10 +65,9 @@ const Header = observer(() => {
                             <Divider orientation='vertical' variant='middle' flexItem />
                             <Button 
                             className='btn_exit' 
-                            color="inherit" 
+                            style={{fontWeight: '800'}}
                             variant="outlined" 
-                            // component={NavLink}
-                            // to="/login"
+                            color="error"
                             to={LOGIN_ROUTE}
                             onClick={() => logOut()}
                             >

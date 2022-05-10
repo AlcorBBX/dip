@@ -34,26 +34,26 @@ const Profile = () => {
           <div className="profileInner">
             <div className="profileItem" >
               <Avatar className='profileAvatar' 
-              // key={user.user.id}
-              src={users === undefined ? "" : "http://localhost:5000/" + users.img} 
-              // src="https://blob.sololearn.com/avatars/a78336b1-7cc5-408f-9185-60c7948979fd.jpg" 
-              sx={{ width: 128, height: 128 }}
+                // key={user.user.id}
+                src={users === undefined ? "" : "http://localhost:5000/" + users.img} 
+                // src="https://blob.sololearn.com/avatars/a78336b1-7cc5-408f-9185-60c7948979fd.jpg" 
+                sx={{ width: 128, height: 128 }}
                />   
             </div>
             <div className="profileItem" >
-              <p className="profileText" >{users === undefined ? "loading" : users.email}</p>
+              <p className="profileText" style={{color: 'white'}} >{users === undefined ? "loading" : users.email}</p>
               {/* {user.user.role === "ADMIN"? */}
-              <p>{users === undefined ? "loading" : users.role}</p>
-              {/* :<p></p>} */}
-              <Button variant="default"
-          onClick={() => setCourseVisible(true)}>Изменить профиль</Button>
-              <Button to={CHAT_ROUTE}
+              <p style={{color: 'gold'}}>{users === undefined ? "loading" : users.role}</p>
+                                        {/* :<p></p>} */}
+              <Button variant="outlined" style={{color: 'white', marginBottom: '10px'}}
+                      onClick={() => setCourseVisible(true)}>Изменить профиль</Button>
+              <Button to={CHAT_ROUTE} variant="contained" color="success"
                       onClick={() => history(CHAT_ROUTE+ '/' + id)}>Общий чат</Button>
               <ProfileUpdate setfirst={setfirst} show={courseVisible} onHide={() => setCourseVisible(false)}/>
             </div>
-            </div>
           </div>
         </div>
+      </div>
   )
 }
 

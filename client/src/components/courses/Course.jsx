@@ -20,8 +20,9 @@ const Course = observer(() => {
           <h1 className="courseTitle" style={{color: "#eee", fontWeight: '200', fontSize: '1.6em'}}>Что ты хочешь выучить?</h1>
           {user.user.role === "ADMIN" ?
           <div>
-          <Button variant="default"
-          onClick={() => setCourseVisible(true)}>
+          <Button variant="outlined"
+          onClick={() => setCourseVisible(true)}
+          style={{color: 'gold', fontWeight: '500'}}>
             Добавить курс
           </Button>
           </div>
