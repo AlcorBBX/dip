@@ -52,3 +52,15 @@ export const fetchOneCourseLesson = async (id) => {
     const {data} = await $host.get('api/courseinfo/' + id);
     return data
 }
+
+export const UpdateOneLessonInfo = async (formData, first) => {
+    // ответ, который будет возвращаться от сервера
+    const {data} = await $host.put('api/courseinfo/' + first, formData);
+    return data
+}
+
+export const UpdateOneLesson = async (formData, id) => {
+    // ответ, который будет возвращаться от сервера
+    const {data} = await $host.put('api/courseinfo/update/' + id, formData);
+    return data
+}

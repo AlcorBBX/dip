@@ -9,14 +9,24 @@ import LearnLeasson from './learnLesson/LearnLesson'
 import { deleteCourseInfo } from '../../http/courseInfoAPI'
 import { Context } from '../../index'
 import { Button } from '@mui/material'
+import UpdateLessonInfo from './modals/UpdateLessonInfo'
 
 const Learn = observer(() => {
   const {user} = useContext(Context)
   const [change, setChange] = useState(false)
   const [courseVisible, setCourseVisible] = useState(false);
+  const [updateVisible, setUpdateVisible] = useState(false);
   const {id} = useParams()
   const history = useNavigate()
   const [course, setCourse] = useState( {info: []})
+  const [first, setfirst] = useState()
+
+  const click = (id) => {
+    setfirst(id)
+    setUpdateVisible(true)
+    console.log(first)
+  }
+
   console.log({id})
   console.log(user.user.role)
   const handleDelete = async (id) => {
@@ -50,8 +60,8 @@ const Learn = observer(() => {
               {user.user.role === "ADMIN"?
               <div style={{display: 'flex', flexDirection: 'column'}}>
                 <Button variant="outlined" color="error" onClick={() => handleDelete(info.id)}>Удалить</Button>
-                <Button onClick={() => history(LESSON_ROUTE+ '/' + info.id)}>Редактировать</Button>  
-                
+                <Button onClick={() => click(info.id)}>Редактировать</Button>  
+                {/* UpdateOneLessonInfo */}
                 <Button onClick={() => history(LESSON_ROUTE+ '/' + info.id)}>Открыть</Button>  
               </div>
               :<Button onClick={() => history(LESSON_ROUTE+ '/' + info.id)}>Открыть</Button>
@@ -66,6 +76,7 @@ const Learn = observer(() => {
           }
       </div>
       <CreateLessonInfo setChange={setChange} show={courseVisible} onHide={() => setCourseVisible(false)}/>
+      <UpdateLessonInfo first={first} setChange={setChange} show={updateVisible} onHide={() => setUpdateVisible(false)}/>
     </div>
   )
 })

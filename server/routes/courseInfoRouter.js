@@ -14,9 +14,14 @@ const checkRoles = require('../middleware/checkRoleMiddleware')
 router.post('/', courseInfoController.create)
 
 router.post('/lesson', courseInfoController.createLesson)
-// router.post('/:id', courseInfoController.createLesson)
-
 router.delete('/delete/:id', courseInfoController.delete)
+router.put('/:id', courseInfoController.updateLessonInfo)
+
+
+
+router.put('/update/:id', courseInfoController.updateLesson)
+
+
 
 router.get('/:id', courseInfoController.getOne)
 

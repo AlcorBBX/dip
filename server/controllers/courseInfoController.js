@@ -34,17 +34,43 @@ class CourseInfoController {
         }
     }
 
-    // async createLesson(req, res, next){
-    //     try {
-    //         let {title, text, code, atention} = req.body
-    //         const course = await CourseInfo.create({title, text, code, atention})
-    //         return res.json(course)
-              
-            
-    //     } catch (e) {
-    //         next(ApiError.badRequest(e.message));
-    //     }
-    // }
+    async updateLessonInfo(req, res) {
+        const { id } = req.params;
+        const { name, subname} = req.body;
+        console.log(req.body)
+
+        const data = await CourseInfo.update(
+                {
+                    name: name,
+                    subname: subname,
+                },
+                { where: {id}, }
+            )
+        .then((result) => result)
+        .catch((result) => result)
+        console.log(data)
+        res.send(data);
+    }
+
+    async updateLesson(req, res) {
+        const { id } = req.params;
+        const { title, text, code, atention} = req.body;
+        console.log(req.body)
+
+        const data = await Lesson.update(
+                {
+                    title: title,
+                    text: text,
+                    code: code,
+                    atention: atention,
+                },
+                { where: {id}, }
+            )
+        .then((result) => result)
+        .catch((result) => result)
+        console.log(data)
+        res.send(data);
+    }
 
     
 
@@ -104,27 +130,8 @@ class CourseInfoController {
             }
         )
         // возвращаем на клиенsт девайс
-        console.log(course)
         return res.send(course)
     }
-
-    // async updateCourse(req, res) {
-    //     const { id, name, img } = req.body
-    //     console.log(req.body)
-
-    //     const data = await Course.findOne
-    //         .update(
-    //             {
-    //                 name: name,
-    //                 img: img,
-    //             },
-    //             { where: {id}, }
-    //         )
-    //     .then((result) => result)
-    //     .catch((result) => result)
-    //     console.log(data)
-    //     res.send(data);
-    // }
 }
 
 
