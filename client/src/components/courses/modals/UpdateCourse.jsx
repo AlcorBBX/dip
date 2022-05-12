@@ -1,15 +1,16 @@
 import React, {useContext, useState} from 'react';
 import { Context } from '../../../index';
-import { createCourse } from '../../../http/courseAPI';
+import { createCourse, UpdateOneCourse } from '../../../http/courseAPI';
 import { Box, Button, Input, Modal } from '@mui/material';
 
 
-const UpdateCourse = ({show, onHide}) => {
-  const {course} = useContext(Context)
+const UpdateCourse = ({first ,setChange, show, onHide}) => {
+  // const {course} = useContext(Context)
   const [name, setName] = useState('')
-
+  console.log(first)
   const [title, setTitle] = useState('')
   const [img, setImg] = useState('')
+  const [file, setFile] = useState()
   const style = {
     position: 'absolute',
     top: '50%',
@@ -24,39 +25,22 @@ const UpdateCourse = ({show, onHide}) => {
     pb: 3,
   };
 
-  const [task, setTask] = useState({
-    name: {name},
-    // password: "rr",
-  });
-  const handleChange = (e) =>
-    setTask({ ...task, [e.target.name]: e.target.value });
+  const selectFile = e => {
+    // сохраняем файл в состояниях по 0 индексу!!!
+    setFile(e.target.files[0])
+    console.log(file)
+  }
+  if(!setFile){
+    return ''
+  }
 
-  const update = async (name) => {
-    console.log(name)
-    try {
-      const users = [{
-        "name": name,
-      }]
-    //   updateUser(id, email, password).then(data => console.log(data)).finally()
-    // } 
-    const response = await fetch(
-      "http://localhost:5000/api/course/" + 33,
-      {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(users),
-      }
-    );
-    await response.json();
-    onHide()}
-    catch (error) {
-      console.error(error);
-    }
-    // setfirst(true)
+  const upd = () => {
     
-  };
-
-  
+    const formData = new FormData()
+    formData.append('name', name)
+    formData.append('img', file)
+    UpdateOneCourse(formData, first).then(data => setChange(true), onHide())
+  }  
     return (
         
         <div>
@@ -66,7 +50,9 @@ const UpdateCourse = ({show, onHide}) => {
                     <h2 id="child-modal-title">Редактирование курса</h2>
                     <Input placeholder='Название курса' id="child-modal-description" value = {name} onChange={e => setName(e.target.value)}/>
                     <Input placeholder='Ссылка на картинку' id="child-modal-description" value={img} onChange={e => setImg(e.target.value)}/>
-                    <Button variant="default" onClick={update}>Редактировать</Button>
+                    
+                    <input style={{marginTop: '10px'}} type="file" onChange={selectFile}/>
+                    <Button variant="default" onClick={() => upd()}>Редактировать</Button>
                     </Box>
                     
             </Modal>

@@ -38,6 +38,7 @@ const CreateCourse = ({show, onHide}) => {
       formData.append("name", title)
       // formData.append("img", img)
       formData.append('img', file)
+      console.log(file)
       createCourse(formData).then(data => setChangec(true), onHide())
   }
 

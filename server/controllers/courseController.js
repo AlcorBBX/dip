@@ -13,6 +13,7 @@ class CourseController {
     async create(req, res, next){
         try {
             const {img} = req.files
+            console.log(img)
             const {name} = req.body
             let fileName = uuid.v4() + ".png"
             img.mv(path.resolve(__dirname, '..', 'static', fileName))
@@ -68,13 +69,16 @@ class CourseController {
 
       async updateCourse(req, res) {
         const { id } = req.params;
-          const { name } = req.body;
+        const {img} = req.files
+        const { name} = req.body;
+        let fileName = uuid.v4() + ".png"
+        img.mv(path.resolve(__dirname, '..', 'static', fileName))
         console.log(req.body)
 
         const data = await Course.update(
                 {
                     name: name,
-                    // password: password,
+                    img: fileName
                 },
                 { where: {id}, }
             )

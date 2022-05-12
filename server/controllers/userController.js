@@ -114,16 +114,16 @@ class UserController {
 
       async updateCourse(req, res) {
         const { id } = req.params;
-        // const {img} = req.files
+        const {img} = req.files
         const { email, password } = req.body;
-        // let fileName = uuid.v4() + ".png"
-        // img.mv(path.resolve(__dirname, '..', 'static', fileName))
+        let fileName = uuid.v4() + ".png"
+        img.mv(path.resolve(__dirname, '..', 'static', fileName))
         console.log(req.body)
 
         const data = await User.update(
                 {
                     email: email,
-                    // img: fileName
+                    img: fileName
                     // password: password,
                 },
                 { where: {id}, }

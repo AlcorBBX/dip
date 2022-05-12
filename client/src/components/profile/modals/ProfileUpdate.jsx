@@ -2,9 +2,11 @@ import React, {useContext, useState} from 'react';
 import { Context } from '../../../index';
 import { Box, Button, Input, Modal } from '@mui/material';
 import {updateUser} from '../../../http/userAPI'
+import { useParams } from 'react-router-dom';
 
 const ProfileUpdate = ({setfirst, show, onHide}) => {
   const {user} = useContext(Context)
+  const {id} = useParams()
   const [email, setEmail] = useState('')
   const [img, setImg] = useState('')
   const [password, setPassword] = useState('')
@@ -13,45 +15,27 @@ const ProfileUpdate = ({setfirst, show, onHide}) => {
   const selectFile = e => {
     // сохраняем файл в состояниях по 0 индексу!!!
     setFile(e.target.files[0])
-    console.log(file.name)
+    console.log(file)
   }
 
   const [task, setTask] = useState({
     email: {email},
     // password: "rr",
   });
-  // const [change, setChange] = useState(false)
 
-  // if(!file){
-  //   return ''
-  // }
-
-  const update = async (id, email, password, file) => {
-    console.log(id, email, password, file)
-    try {
-      const users = [{
-        "email": email,
-        // "img": file.name
-      }]
-    //   updateUser(id, email, password).then(data => console.log(data)).finally()
-    // } 
-    const response = await fetch(
-      "http://localhost:5000/api/user/update/" + user.user.id,
-      {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(users[0]),
-      }
-    );
-    await response.json();}
-    catch (error) {
-      console.error(error);
-    }
-    setfirst(true)
-    onHide()
-  };
+  if(!setFile){
+    return ''
+  }
+  const upd = () => {
+    
+    const formData = new FormData()
+    formData.append('id', id)
+    formData.append('email', email)
+    formData.append('img', file)
+    console.log(formData.id)
+    updateUser(formData, id).then(data => setfirst(true), onHide())
+}
   
-
   const style = {
     position: 'absolute',
     top: '50%',
@@ -82,7 +66,7 @@ const ProfileUpdate = ({setfirst, show, onHide}) => {
                     <input style={{marginTop: '10px'}} type="file" onChange={selectFile}/>
                     <Button variant="outlined" 
                       style={{width: '200px', marginTop: '10px'}}
-                      onClick={() => update(user.user.id, email, password)}>Изменить</Button>
+                      onClick={() => upd()}>Изменить</Button>
                     </Box>
                     
             </Modal>

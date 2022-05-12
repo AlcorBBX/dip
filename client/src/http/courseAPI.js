@@ -55,8 +55,8 @@ export const fetchOneCourse = async (id) => {
     return data
 }
 
-export const UpdateCourse = async (id) => {
+export const UpdateOneCourse = async (formData, first) => {
     // ответ, который будет возвращаться от сервера
-    const {data} = await $host.put('api/course/' + id);
+    const {data} = await $host.put('api/course/' + first, formData);
     return data
 }

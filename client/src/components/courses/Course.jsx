@@ -13,11 +13,13 @@ const Course = observer(() => {
 
     return (
         <div className="course">
-    {/* <TypeBar/> */}
       <div className="containerCourse">
         <div className="courseInner">
         <div className="courseItem">
-          <h1 className="courseTitle" style={{color: "#eee", fontWeight: '200', fontSize: '1.6em'}}>Что ты хочешь выучить?</h1>
+          <h1 className="courseTitle" 
+              style={{color: "#eee", fontWeight: '200', fontSize: '1.6em'}}>
+                Что ты хочешь выучить?
+              </h1>
           {user.user.role === "ADMIN" ?
           <div>
           <Button variant="outlined"

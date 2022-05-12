@@ -50,7 +50,8 @@ const Learn = observer(() => {
               {user.user.role === "ADMIN"?
               <div style={{display: 'flex', flexDirection: 'column'}}>
                 <Button variant="outlined" color="error" onClick={() => handleDelete(info.id)}>Удалить</Button>
-
+                <Button onClick={() => history(LESSON_ROUTE+ '/' + info.id)}>Редактировать</Button>  
+                
                 <Button onClick={() => history(LESSON_ROUTE+ '/' + info.id)}>Открыть</Button>  
               </div>
               :<Button onClick={() => history(LESSON_ROUTE+ '/' + info.id)}>Открыть</Button>

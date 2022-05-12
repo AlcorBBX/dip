@@ -29,11 +29,12 @@ export const check = async () => {
     return jwt_decode(data.token)
 }
 
-export const updateUser = async (id,email, password) => {
+export const updateUser = async (formData, id) => {
     // ответ, который будет возвращаться от сервера
     // пост запрос базовый url берется из системной переменой, к нему добавляем api/... 
     // как тело запроса мы передайем 
-    const {data} = await $host.put('api/user/update/' + id);
+    console.log(id)
+    const {data} = await $host.put('api/user/update/' + id, formData);
     // возвращаем данные
     return data
 }

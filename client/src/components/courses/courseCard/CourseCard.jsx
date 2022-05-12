@@ -23,8 +23,14 @@ const CourseCard = observer(() => {
     const {course} = useContext(Context)
     const history = useNavigate()
     const {user} = useContext(Context)
+    const [first, setfirst] = useState()
 
     const [change, setChange] = useState(false)
+
+    const click = (id) => {
+      setfirst(id)
+      setCourseVisible(true)
+    }
 
     const handleDelete = async (id) => {
         try {
@@ -45,11 +51,9 @@ const CourseCard = observer(() => {
         {course.course.map(course =>  
             <div>
             <Card sx={{ maxWidth: 155, margin: 1}}>
-            <CardMedia
-                
+            <CardMedia      
                 component="img"
                 height="150"
-                // image={course.img}
                 image={"http://localhost:5000/" + course.img}
                 alt="course"
             />
@@ -66,13 +70,22 @@ const CourseCard = observer(() => {
             <CardActions>
             {user.user.role === "ADMIN"?
             <div className="btnCard">
-                <Button style={{marginBottom: '5px'}} variant="outlined" color="warning" size="small" onClick={() => setCourseVisible(true)}>Редактировать</Button>
-                <Button variant="outlined" color="error" size="small" onClick={() => handleDelete(course.id)}>Удалить</Button>
-                <Button endIcon={<SendIcon />} onClick={() => history(LEARN_ROUTE+ '/' + course.id)} key={course.id}>Открыть</Button>
+                <Button style={{marginBottom: '5px'}} 
+                    variant="outlined" color="warning" 
+                    size="small"
+                    onClick={() => click(course.id)}>Редактировать</Button>
+                <Button variant="outlined" 
+                    color="error" size="small" 
+                    onClick={() => handleDelete(course.id)}>Удалить</Button>
+                <Button endIcon={<SendIcon />} 
+                    onClick={() => history(LEARN_ROUTE+ '/' + course.id)} 
+                    key={course.id}>Открыть</Button>
+
+                
                 </div>
             :<Button style={{margin: '0 auto'}} onClick={() => history(LEARN_ROUTE+ '/' + course.id)} key={course.id}>Открыть</Button>}
                 
-                <UpdateCourse show={courseVisible} onHide={() => setCourseVisible(false)}/>
+            <UpdateCourse show={courseVisible} first={first} setChange={setChange} onHide={() => setCourseVisible(false)}/>
             </CardActions>
             </Card>
             </div>
