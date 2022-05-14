@@ -5,6 +5,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Context } from '../../index'
 import './profile.css'
 import ProfileUpdate from './modals/ProfileUpdate'
+import ListAdmins from './modals/ListAdmins'
 import { CHAT_ROUTE } from '../../utils/consts'
 import { fetchOneUsers } from '../../http/userAPI'
 // import { fetchOneUsers } from '../../http/userAPI';
@@ -12,44 +13,61 @@ import { fetchOneUsers } from '../../http/userAPI'
 const Profile = () => {
   const {id} = useParams()
   const history = useNavigate()
-  // const {user} = useContext(Context)
+  const {user} = useContext(Context)
   const [users, setUsers] = useState()
   const [courseVisible, setCourseVisible] = useState(false);
+  const [usersVisible, setUsersVisible] = useState(false);
   const [first, setfirst] = useState(false)
 
   const [final, setFinal] = useState(false)
-  
+  console.log(user.user.id)
   useEffect(() => {
     setfirst(false)
     fetchOneUsers(Number(id)).then(data => setUsers(data)).finally(setFinal(true))
 }, [first])
-// console.log(final)
-//     {users === undefined ?
-//       console.log("stop")
-//     : console.log(users)}
-
+  
+{users === undefined ? console.log('n') : console.log(user.user.id)} 
   return (
     <div className='profileMain'>
       <div className="profileContainer">
           <div className="profileInner">
             <div className="profileItem" >
               <Avatar className='profileAvatar' 
-                // key={user.user.id}
-                src={users === undefined ? "" : "http://localhost:5000/" + users.img} 
-                // src="https://blob.sololearn.com/avatars/a78336b1-7cc5-408f-9185-60c7948979fd.jpg" 
+                src={users === undefined ? "" : "http://localhost:5000/" + users.img}  
                 sx={{ width: 128, height: 128 }}
                />   
             </div>
             <div className="profileItem" >
               <p className="profileText" style={{color: 'white'}} >{users === undefined ? "loading" : users.email}</p>
-              {/* {user.user.role === "ADMIN"? */}
-              <p style={{color: 'gold'}}>{users === undefined ? "loading" : users.role}</p>
-                                        {/* :<p></p>} */}
-              <Button variant="outlined" style={{color: 'white', marginBottom: '10px'}}
+
+              <p style={{color: 'gold'}}>{users === undefined ? "loading" :
+               <div>
+                {users.role}
+                
+               </div>
+               }</p>
+               {users === undefined ? '' : 
+                <div>
+                  {users.id === user.user.id? 
+                  <div style={{display: 'flex', flexDirection:'column'}}>
+                  {users.role === 'ADMIN'?
+                    <Button variant="outlined" style={{color: 'white', marginBottom: '10px'}}
+                      onClick={() => setUsersVisible(true)}>Users</Button>: ''}
+                    <Button variant="outlined" style={{color: 'white', marginBottom: '10px'}}
+                        onClick={() => setCourseVisible(true)}>Изменить профиль</Button>
+                    <Button to={CHAT_ROUTE} variant="contained" color="success"
+                        onClick={() => history(CHAT_ROUTE+ '/' + id)}>Общий чат</Button>
+                  </div>
+                  : ''}
+                </div> }
+              {/* <Button variant="outlined" style={{color: 'white', marginBottom: '10px'}}
                       onClick={() => setCourseVisible(true)}>Изменить профиль</Button>
               <Button to={CHAT_ROUTE} variant="contained" color="success"
-                      onClick={() => history(CHAT_ROUTE+ '/' + id)}>Общий чат</Button>
+                      onClick={() => history(CHAT_ROUTE+ '/' + id)}>Общий чат</Button> */}
+
+
               <ProfileUpdate setfirst={setfirst} show={courseVisible} onHide={() => setCourseVisible(false)}/>
+              <ListAdmins show={usersVisible} onHide={() => setUsersVisible(false)}/>
             </div>
           </div>
         </div>

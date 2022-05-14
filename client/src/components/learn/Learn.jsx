@@ -10,6 +10,7 @@ import { deleteCourseInfo } from '../../http/courseInfoAPI'
 import { Context } from '../../index'
 import { Button } from '@mui/material'
 import UpdateLessonInfo from './modals/UpdateLessonInfo'
+import LessonSertificat from '../lesson/lessonSertificat/LessonSertificat'
 
 const Learn = observer(() => {
   const {user} = useContext(Context)
@@ -68,6 +69,9 @@ const Learn = observer(() => {
               }
             </div>
           )}
+          <div className='sl-group__item_sl-group__item-full'>
+            <LessonSertificat course={course.name}/>
+          </div>
           {user.user.role === "ADMIN"?
           <div className='sl-group__item_sl-group__item-full'>
             <Button onClick={() => setCourseVisible(true)}>Добавить</Button>            

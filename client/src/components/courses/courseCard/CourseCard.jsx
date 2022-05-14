@@ -83,7 +83,7 @@ const CourseCard = observer(() => {
 
                 
                 </div>
-            :<Button style={{margin: '0 auto'}} onClick={() => history(LEARN_ROUTE+ '/' + course.id)} key={course.id}>Открыть</Button>}
+            :<Button endIcon={<SendIcon />} style={{margin: '0 auto'}} onClick={() => history(LEARN_ROUTE+ '/' + course.id)} key={course.id}>Открыть</Button>}
                 
             <UpdateCourse show={courseVisible} first={first} setChange={setChange} onHide={() => setCourseVisible(false)}/>
             </CardActions>

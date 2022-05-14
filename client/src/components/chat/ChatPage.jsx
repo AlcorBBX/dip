@@ -1,19 +1,24 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { observer } from "mobx-react-lite";
-import {Box, Button, Container, Input} from '@mui/material'
+import {Avatar, Box, Button, Container, Input} from '@mui/material'
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import {fetchMessage, createMessage} from '../../http/chatAPI'
 import {Context} from '../../index'
 import { fetchUsers } from '../../http/userAPI';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import { PROFILE_ROUTE } from "../../utils/consts";
 
 const ChatPage = () => {
   const {id} = useParams()
+  
   const [users, setUsers] = useState([])
   useEffect(() => {
     fetchUsers().then(data => setUsers(data.rows)).finally(setFinal(true))
 }, [])
-  console.log(users)
+
+
+  
 
   const [change, setChange] = useState(false)
   const [message, setMessage] = useState([])
@@ -25,6 +30,11 @@ const ChatPage = () => {
 }, [change])
 // {users === undefined ? console.log("stop") : console.log(users.email)}
 // console.log(message.userId)
+
+if(!users){
+  return ''
+}
+
   return (
     <Container style={{ paddingTop: "100px"}}>
       <Messages message={message} users={users}/>
@@ -36,7 +46,7 @@ const ChatPage = () => {
 const Messages = ({message, users}) => {
   // console.log(users)
   return (
-    <div style={{height: '400px', width: '500px', overflowY: 'auto' , margin: '0 auto'}}>
+    <div style={{height: '400px', width: '700px', overflowY: 'auto' , margin: '0 auto'}}>
       {message.map((m) => <Message m = {m} users={users}/>) }
     </div>
   )
@@ -44,31 +54,36 @@ const Messages = ({message, users}) => {
 
 
 const Message = ({m, users}) => {
-  // {users.map((user) => 
-  //   <div key={user.id}>
-  //   {console.log(user.email)}
-  //   </div>
-  //   )}
-  // {users === undefined ? console.log("stop") : console.log(users.email)}
-  
-  // console.log(users.id[m.userId].email)
+  const history = useNavigate()
   const message = {
     url: 'https://via.placeholder.com/150',
     }
     return (
       <div style={{display: 'flex', marginBottom: '20px'}}>
-      {/* <div key={users.id[m.userId]}>
-        {console.log(users)}
-      </div> */}
-        <img alt='avatar' src={message.url} style={{height: "36px", borderRadius: "50%", marginRight: '10px'}}/> 
-        <div>
+      {users.map(users => 
+        <div style={{display: 'flex', marginBottom: '20px'}}>
+
+          {users.id === m.userId? 
+            <Avatar alt='avatar' 
+              src={"http://localhost:5000/" + users.img}
+              style={{height: "36px", borderRadius: "50%", marginRight: '10px', cursor:'pointer'}}
+              onClick={() => history(PROFILE_ROUTE+ '/' + m.userId)}
+              /> 
+            :''
+          }
           <div>
-          {/* <p key={m.userId}>{users[m.userId].email}</p> */}
-          {users === undefined ? "loading" : <p>{users.email}</p>}
-          {/* <p>Anonim</p> */}
+            <div>
+             
+              <div>
+                <p style={{color: 'white'}}>{users.id === m.userId? users.email : ''} </p>
+              </div>
+            
+            </div>
           </div>
-          <p>{m.text}</p>
         </div>
+        )}
+          <p style={{width: '400px', color: 'white', marginLeft: '-32px', paddingTop: '10px'}}><br/>{m.text}</p>
+        
     </div>
   )
 }
