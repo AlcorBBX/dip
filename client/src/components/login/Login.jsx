@@ -69,7 +69,12 @@ const Login = observer(() => {
                             style={{color: "gold", fontWeight: '400px', fontSize: '20px', textDecoration: 'none'}} 
                             to={REGISTRATION_ROUTE}>Зарегестрироваться</NavLink>
                     </div>
-                    : <div className = "w-auto">Есть аккаунт? <NavLink style={{color: "#9c27b0", fontWeight: '400px', fontSize: '20px', textDecoration: 'none'}} to={LOGIN_ROUTE}>Войти</NavLink></div>}
+                    : <div className = "w-auto"
+                        style={{display: 'flex', margin: '0 auto', alignItems: 'center'}}>
+                            <p style={{marginRight: '5px', color: 'lightGrey', fontWeight: '400px', fontSize: '18px'}}>Есть акаунт?</p> 
+                            <NavLink style={{color: "gold", fontWeight: '400px', fontSize: '20px', textDecoration: 'none'}} 
+                                to={LOGIN_ROUTE}>Войти</NavLink>
+                      </div>}
                     <Button 
                      onClick={click} 
                      to={COURSE_ROUTE}

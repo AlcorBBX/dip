@@ -33,7 +33,7 @@ const Lesson = () => {
     {courseInfo.info[0] === undefined? console.log("u"): console.log("n")}
   return (
     <div className='sl-lesson__content-container'>
-        <p className='sl-lesson__content-comments' style={{color: 'white'}}>125 Комментария</p>
+        {/* <p className='sl-lesson__content-comments' style={{color: 'white'}}>125 Комментария</p> */}
         <div className='sl-description'>
             <div>                  
                 <div>

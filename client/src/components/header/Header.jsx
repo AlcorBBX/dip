@@ -45,31 +45,29 @@ const Header = observer(() => {
                             <div className='auth_btns'>
 
                             <Button 
-                            variant="text" d
-                            style={{color: 'gold'}}
-                            to={COURSE_ROUTE}
-                            onClick={() => history(COURSE_ROUTE)}
-                            // isabled 
-                            // endIcon={<KeyboardArrowDownIcon />}
+                                variant="text" d
+                                style={{color: 'gold'}}
+                                to={COURSE_ROUTE}
+                                onClick={() => history(COURSE_ROUTE)}
                             >
                                 Курсы
                             </Button>
                             <Button 
-                            variant="text" 
-                            style={{color: 'beige'}}
-                            onClick={() => history(PROFILE_ROUTE + '/' + user.user.id )}
+                                variant="text" 
+                                style={{color: 'beige'}}
+                                onClick={() => history(PROFILE_ROUTE + '/' + user.user.id )}
                             >
                                 Профиль
                             </Button>
 
                             <Divider orientation='vertical' variant='middle' flexItem />
                             <Button 
-                            className='btn_exit' 
-                            style={{fontWeight: '800'}}
-                            variant="outlined" 
-                            color="error"
-                            to={LOGIN_ROUTE}
-                            onClick={() => logOut()}
+                                className='btn_exit' 
+                                style={{fontWeight: '800'}}
+                                variant="outlined" 
+                                color="error"
+                                to={LOGIN_ROUTE}
+                                onClick={() => logOut()}
                             >
                                 Выход
                             </Button>
@@ -77,9 +75,7 @@ const Header = observer(() => {
                         :
                         <Button 
                             color='inherit' 
-                            variant="outlined" 
-                            // onClick={() => setHeader(true)} 
-                            // component={NavLink} 
+                            variant="outlined"  
                             to={LOGIN_ROUTE}
                             onClick={() => history(LOGIN_ROUTE)}
                             >

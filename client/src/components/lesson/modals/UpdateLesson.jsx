@@ -40,11 +40,11 @@ const UpdateCourse = ({i ,setChange, show, onHide}) => {
                     aria-labelledby="child-modal-title" aria-describedby="child-modal-description">
                 <Box sx={{ ...style, width: 400 }}>
                     <h2 id="child-modal-title">Редактирование урока</h2>
-                    <Input placeholder='Заголовок урока' id="child-modal-description" value = {title} onChange={e => setTitle(e.target.value)}/>
-                    <Input placeholder='Подзаголовок урока' id="child-modal-description" value={text} onChange={e => setText(e.target.value)}/>
-                    <Input placeholder='Заголовок урока' id="child-modal-description" value = {code} onChange={e => setCode(e.target.value)}/>
-                    <Input placeholder='Подзаголовок урока' id="child-modal-description" value={atention} onChange={e => setAtention(e.target.value)}/>
-                    <Button variant="default" onClick={() => upd()}>Редактировать</Button>
+                    <Input disabled placeholder='Заголовок урока' id="child-modal-description" value = {title} onChange={e => setTitle(e.target.value)}/>
+                    <Input disabled placeholder='Подзаголовок урока' id="child-modal-description" value={text} onChange={e => setText(e.target.value)}/>
+                    <Input disabled placeholder='Заголовок урока' id="child-modal-description" value = {code} onChange={e => setCode(e.target.value)}/>
+                    <Input disabled placeholder='Подзаголовок урока' id="child-modal-description" value={atention} onChange={e => setAtention(e.target.value)}/>
+                    <Button disabled variant="default" onClick={() => upd()}>Редактировать</Button>
                     </Box>
                     
             </Modal>

@@ -60,11 +60,11 @@ const CourseCard = observer(() => {
             
             <CardContent>
             <Typography gutterBottom variant="h5" component="div">
-            {course.id},{course.name}
+            {course.name}
             </Typography>
             
             <Typography variant="body2" color="text.secondary">
-                12.4M Learn
+                {/* 12.4M Learn */}
             </Typography>
             </CardContent>
             <CardActions>
