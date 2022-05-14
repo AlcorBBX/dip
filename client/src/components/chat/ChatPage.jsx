@@ -55,9 +55,6 @@ const Messages = ({message, users}) => {
 
 const Message = ({m, users}) => {
   const history = useNavigate()
-  const message = {
-    url: 'https://via.placeholder.com/150',
-    }
     return (
       <div style={{display: 'flex', marginBottom: '20px'}}>
       {users.map(users => 
