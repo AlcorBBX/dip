@@ -78,6 +78,7 @@ const Header = observer(() => {
                             variant="outlined"  
                             to={LOGIN_ROUTE}
                             onClick={() => history(LOGIN_ROUTE)}
+                            style={{color: 'white'}}
                             >
                                 Вход
                             </Button>

@@ -51,17 +51,30 @@ const Login = observer(() => {
             <Card variant="outlined" className='Log' sx={{ maxWidth: 400, p: 5 }}  style={{background:'none', border:'none', textAlign: 'center'}}>
                 <Typography variant="h6" 
                 style={{color: "#eee", fontWeight: '200', fontSize: '1.6em', margin: '0', pading: '0' }}>{ isLogin ? 'Авторизация' : 'Регистрация'}</Typography>
-                <form className='form'>
+                <form className='form' style={{color: 'white'}}>
                     <TextField className="loginInp" 
                         value={email} 
                         onChange = {e => setEmail(e.target.value)}
-                        type="text" placeholder="" label="Email" 
+                        type="text" placeholder="" label="Email" color='secondary'
                         style={{border: '0px', marginBottom: '20px'}}
+                        InputLabelProps={{
+                                    style: { color: '#fff' },
+                                }}
+                        InputProps={{
+                            style: { color: '#fff' },
+                        }}
                     />
                     <TextField  
                         value={password} 
                         onChange = {e => setPassword(e.target.value)} 
-                        type="password" placeholder="" label="Пароль"/>
+                        type="password" placeholder="" label="Пароль" color='secondary'
+                        InputLabelProps={{
+                                    style: { color: '#fff' },
+                                }}
+                        InputProps={{
+                            style: { color: '#fff' },
+                        }}
+                        />
                     { isLogin ? <div 
                             style={{display: 'flex', margin: '0 auto', alignItems: 'center'}}>
                         <p style={{marginRight: '5px', color: 'lightGrey', fontWeight: '400px', fontSize: '18px'}}>Нет аккаунта?</p> 

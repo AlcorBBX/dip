@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { Box, Button, Input, Modal } from '@mui/material';
+import { Box, Button, Input, Modal, TextField } from '@mui/material';
 import { createCourseLesson } from '../../../http/courseInfoAPI';
 
 
@@ -49,11 +49,23 @@ const LessonCreate = ({id, setChange, show, onHide}) => {
             aria-labelledby="child-modal-title" aria-describedby="child-modal-description">
                 <Box sx={{ ...style, width: 400 }}>
                     <h2 id="child-modal-title">Добавление урока</h2>
-                    <Input placeholder='Заголовок урока' id="child-modal-description" value = {title} onChange={e => setTitle(e.target.value)}/>
-                    <Input placeholder='Текст урока' id="child-modal-description" value={text} onChange={e => setText(e.target.value)}/>
+                    <Input style={{marginBottom: '10px'}} placeholder='Заголовок урока' id="child-modal-description" value = {title} onChange={e => setTitle(e.target.value)}/>
+                    <TextField multiline
+                                maxRows={4}
+                                style={{marginBottom: '10px'}}
+                                InputLabelProps={{
+                                    style: { color: '#f000' },
+                                }}
+                        placeholder='Текст урока' id="child-modal-description" value={text} onChange={e => setText(e.target.value)}/>
                     
-                    <Input placeholder='Пример кода' id="child-modal-description" value={code} onChange={e => setCode(e.target.value)}/>
-                    <Input placeholder='Предупреждение' id="child-modal-description" value={atention} onChange={e => setAtention(e.target.value)}/>
+                    <TextField multiline
+                                maxRows={4} style={{marginBottom: '10px'}} placeholder='Пример кода' id="child-modal-description" value={code} onChange={e => setCode(e.target.value)}/>
+                    <TextField multiline
+                                maxRows={4} 
+                                InputLabelProps={{
+                                    style: { color: 'black' },
+                                }}
+                                style={{marginBottom: '10px'}} placeholder='Предупреждение' id="child-modal-description" value={atention} onChange={e => setAtention(e.target.value)}/>
                     <Button variant="default" onClick={addCourse}>Добавить</Button>
                     </Box>
                     
