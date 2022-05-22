@@ -21,7 +21,7 @@ const LessonSertificat = ({course}) => {
                 </p>
             </div>
         </div>
-        <Button onClick={() => setCourseVisible(true)}>Claim Certificate</Button>
+        <Button onClick={() => setCourseVisible(true)}>Посмотреть сертификат</Button>
         <LessonCertificate course={course} show={courseVisible} onHide={() => setCourseVisible(false)}/>
         
     </div>

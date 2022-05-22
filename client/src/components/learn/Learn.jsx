@@ -8,7 +8,10 @@ import CreateLessonInfo from './modals/CreateLessonInfo'
 import LearnLeasson from './learnLesson/LearnLesson'
 import { deleteCourseInfo } from '../../http/courseInfoAPI'
 import { Context } from '../../index'
-import { Button } from '@mui/material'
+import { Button, Box, Card, CardContent, Typography, CardActions  } from '@mui/material'
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import BorderColorIcon from '@mui/icons-material/BorderColor';
 import UpdateLessonInfo from './modals/UpdateLessonInfo'
 import LessonSertificat from '../lesson/lessonSertificat/LessonSertificat'
 
@@ -21,6 +24,15 @@ const Learn = observer(() => {
   const history = useNavigate()
   const [course, setCourse] = useState( {info: []})
   const [first, setfirst] = useState()
+
+  const bull = (
+    <Box
+      component="span"
+      sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
+    >
+      •
+    </Box>
+  );
 
   const click = (id) => {
     setfirst(id)
@@ -49,35 +61,55 @@ const Learn = observer(() => {
         <div className='sl-course-desc__texts-wrapper'>
           <h1 className='sl-course-desc__title'>{course.name}</h1>
           <p>{course.rating}</p>
+          {user.user.role === "ADMIN"?
+          
+            <Button style={{color: 'gold'}}
+              variant="outlined"
+              onClick={() => setCourseVisible(true)}>Добавить</Button>             
+          : ''
+          }
         </div>
       </div>
 
-      <div className='sl-learn-course__main__modules-wrapper'>
-      
-          {course.info.map((info, index) =>
-            <div key={info.id} className='sl-group__item_sl-group__item-full'>
-              <span className='sl-lesson-item__index'>{info.name}</span>
-              <span className='sl-lesson-item__title'>{info.subname}</span>
+      <div style={{display: 'flex', flexWrap: 'wrap'}}>
+      {course.info.map((info, index) =>
+        
+          <Card key={info.id} sx={{width: 309, margin: 1}}>
+          <CardContent >
+            <div style={{display: 'flex', justifyContent: 'space-between'}}>
+              <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                {info.name}
+              </Typography>
+              <div>
               {user.user.role === "ADMIN"?
-              <div style={{display: 'flex', flexDirection: 'column'}}>
-                <Button variant="outlined" color="error" onClick={() => handleDelete(info.id)}>Удалить</Button>
-                <Button onClick={() => click(info.id)}>Редактировать</Button>  
-                {/* UpdateOneLessonInfo */}
+              <div>
+                  <IconButton style={{width: '10px', height: '15px'}}
+                    onClick={() => click(info.id)} aria-label="delete" size="large" color="secondary">
+                    <BorderColorIcon />
+                  </IconButton>
+                  <IconButton style={{width: '10px', height: '15px'}}
+                    onClick={() => handleDelete(info.id)} aria-label="delete" size="large" color="error">
+                    <DeleteIcon />
+                  </IconButton>
+              </div>
+                  :''
+                  }
+              </div>
+            </div>
+            <Typography variant="h5" component="div">
+              {info.subname}
+            </Typography>
+          </CardContent>
+          <CardActions>
+              <div> 
                 <Button onClick={() => history(LESSON_ROUTE+ '/' + info.id)}>Открыть</Button>  
               </div>
-              :<Button onClick={() => history(LESSON_ROUTE+ '/' + info.id)}>Открыть</Button>
-              }
-            </div>
-          )}
-          <div className='sl-group__item_sl-group__item-full'>
-            <LessonSertificat course={course.name}/>
-          </div>
-          {user.user.role === "ADMIN"?
-          <div className='sl-group__item_sl-group__item-full'>
-            <Button onClick={() => setCourseVisible(true)}>Добавить</Button>            
-          </div>
-          : ''
-          }
+          </CardActions>
+          </Card>
+      )}   
+      </div>
+      <div className='sl-group__item_sl-group__item-full'>
+        <LessonSertificat course={course.name}/>
       </div>
       <CreateLessonInfo setChange={setChange} show={courseVisible} onHide={() => setCourseVisible(false)}/>
       <UpdateLessonInfo first={first} setChange={setChange} show={updateVisible} onHide={() => setUpdateVisible(false)}/>

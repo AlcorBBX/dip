@@ -104,7 +104,7 @@ const MessageForm = ({setChange, id}) => {
     <div>
         <Box sx={{ display: 'flex', alignItems: 'flex-end' , justifyContent: 'center'}}>
           <AccountCircle sx={{ color: 'action.active', mr: 1, my: 0.5 }} />
-          <Input value={text} onChange={e => setText(e.target.value)} id="input-with-sx" placeholder = 'Message' variant="standard" style={{width: '300px'}}/>
+          <Input value={text} onChange={e => setText(e.target.value)} id="input-with-sx" placeholder = 'Message' variant="standard" style={{width: '300px', color: 'white'}}/>
           <Button onClick={addMessage}>Отправить</Button>
           
         </Box>
