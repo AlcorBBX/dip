@@ -8,10 +8,11 @@ import CreateLessonInfo from './modals/CreateLessonInfo'
 import LearnLeasson from './learnLesson/LearnLesson'
 import { deleteCourseInfo } from '../../http/courseInfoAPI'
 import { Context } from '../../index'
-import { Button, Box, Card, CardContent, Typography, CardActions  } from '@mui/material'
+import { Button, Box, Card, CardContent, Typography, CardActions, Tooltip  } from '@mui/material'
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import UpdateLessonInfo from './modals/UpdateLessonInfo'
 import LessonSertificat from '../lesson/lessonSertificat/LessonSertificat'
 
@@ -83,14 +84,19 @@ const Learn = observer(() => {
               <div>
               {user.user.role === "ADMIN"?
               <div>
-                  <IconButton style={{width: '10px', height: '15px'}}
-                    onClick={() => click(info.id)} aria-label="delete" size="large" color="secondary">
-                    <BorderColorIcon />
-                  </IconButton>
-                  <IconButton style={{width: '10px', height: '15px'}}
-                    onClick={() => handleDelete(info.id)} aria-label="delete" size="large" color="error">
-                    <DeleteIcon />
-                  </IconButton>
+                  <Tooltip title="Редактировать">
+                    <IconButton style={{width: '10px', height: '15px'}}
+                      onClick={() => click(info.id)} aria-label="delete" size="large" color="secondary">
+                      <BorderColorIcon />    
+                    </IconButton>
+                  </Tooltip>
+
+                  <Tooltip title="Удалить">
+                    <IconButton style={{width: '10px', height: '15px'}}
+                      onClick={() => handleDelete(info.id)} aria-label="delete" size="large" color="error">
+                      <DeleteIcon />
+                    </IconButton>
+                  </Tooltip>
               </div>
                   :''
                   }
@@ -101,9 +107,16 @@ const Learn = observer(() => {
             </Typography>
           </CardContent>
           <CardActions>
-              <div> 
-                <Button onClick={() => history(LESSON_ROUTE+ '/' + info.id)}>Открыть</Button>  
-              </div>
+              <div style={{display: 'flex', justifyContent: 'space-between', width: '100%'}}> 
+                <div>
+                  <Button onClick={() => history(LESSON_ROUTE+ '/' + info.id)}>Открыть</Button>
+                </div>
+                <div>
+                  <Tooltip title="Прочитано">
+                    <CheckCircleIcon color='success' sx={{height: '36.5px', margin: 'auto 0'}}/>  
+                  </Tooltip>
+                </div>
+            </div>
           </CardActions>
           </Card>
       )}   

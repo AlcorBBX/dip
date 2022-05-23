@@ -1,8 +1,10 @@
 import React, {useState, useContext, useEffect} from 'react';
 import { Box, Button, Input, Modal, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { DataGrid, ruRU } from '@mui/x-data-grid';
 import { UpdateOneLesson } from '../../../http/courseInfoAPI';
 import { Context } from '../../../index';
 import { fetchUsers } from '../../../http/userAPI'
+
 
 
 const LessonCertificate = ({show, onHide}) => {
@@ -32,17 +34,40 @@ const LessonCertificate = ({show, onHide}) => {
     windowPrint.print();
     windowPrint.close();
   }  
+
+  const columns = [
+    { field: 'id', headerName: 'ID', width: 70 },
+    { field: 'email', headerName: 'Login', width: 130, editable: true },
+    { field: 'role', headerName: 'Role', width: 130, editable: true },
+    // {
+    //   field: 'age',
+    //   headerName: 'Age',
+    //   type: 'number',
+    //   width: 90,
+    // },
+    // {
+    //   field: 'fullName',
+    //   headerName: 'Full name',
+    // //   description: 'This column has a value getter and is not sortable.',
+    // //   sortable: false,
+    //   width: 160,
+    //   valueGetter: (params) =>
+    //     `${params.row.firstName || ''} ${params.row.lastName || ''}`,
+    // },
+  ];
+  
+  console.log(users)
     return (
         
         <div>
             <Modal onClose={onHide} open={show} 
                     aria-labelledby="child-modal-title" aria-describedby="child-modal-description">
-                <Box sx={{ ...style, width: 400 }}> 
+                <Box sx={{ ...style, width: 850 }}> 
                 {/* style={{width:'1754px', height: '1238px'}} */}
                         <div id='paymentForm'>
-                        <TableContainer>
+                        {/* <TableContainer>
                             <Table sx={{ minWidth: 300 }} aria-label="simple table">
-                                <TableHead>
+                                <TableHead> 
                                 <TableRow>
                                     <TableCell>Id</TableCell>
                                     <TableCell align="right">Email</TableCell>
@@ -62,14 +87,34 @@ const LessonCertificate = ({show, onHide}) => {
                                 ))}
                                 </TableBody>
                             </Table>
-                            </TableContainer>
+                            </TableContainer> */}
+
+                            <DataGrid
+                                sx={{height: '400px'}}
+                                localeText={ruRU.components.MuiDataGrid.defaultProps.localeText}
+                                rows={users}
+                                columns={columns}
+                                pageSize={5}
+                                rowsPerPageOptions={[5]}
+                                checkboxSelection
+                                
+                            />
                         </div>
-                    <Button variant="contained" onClick={upd} >
-                        Распечатать
-                    </Button>
-                    </Box>
-                    
+                        <div>
+                            <Button variant="contained" onClick={upd} sx={{margin: '2px'}} >
+                                Распечатать
+                            </Button>
+                            <Button variant="contained" color='secondary' sx={{margin: '2px'}}>
+                                Редактировать
+                            </Button>
+                            <Button variant="contained" color='error' sx={{margin: '2px'}}>
+                                Удалить
+                            </Button>
+                        </div>
+                    </Box>                   
             </Modal>
+            
+
         </div>
     )
 }
