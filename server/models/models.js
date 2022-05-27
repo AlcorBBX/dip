@@ -95,13 +95,16 @@ const Comments = sequelize.define('comments', {
 User.hasOne(Basket)
 Basket.belongsTo(User)
 
-// ffsffffffffffffffffffffffffffff
+
 
 User.hasOne(Chat)
 Chat.belongsTo(User)
 
 User.hasOne(Comments)
 Comments.belongsTo(User)
+
+CourseInfo.hasOne(User)
+User.belongsTo(CourseInfo)
 
 CourseInfo.hasOne(Comments)
 Comments.belongsTo(CourseInfo)

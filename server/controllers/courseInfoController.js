@@ -2,7 +2,7 @@
 const uuid = require('uuid')
 const path = require('path')
 // импорт моделей
-const {CourseInfo, Lesson} = require('../models/models')
+const {CourseInfo, Lesson, User} = require('../models/models')
 // импорт ошибок
 const ApiError = require('../error/ApiError')
 
@@ -72,7 +72,22 @@ class CourseInfoController {
         res.send(data);
     }
 
-    
+    async updateUserLesson(req, res) {
+        const { id } = req.params;
+        const { courseInfoId } = req.body;
+        console.log(req.body)
+
+        const data = await User.update(
+                {
+                    courseInfoId: courseInfoId,
+                },
+                { where: {id}, }
+            )
+        .then((result) => result)
+        .catch((result) => result)
+        console.log(data)
+        res.send(data);
+    }
 
 
     async delete(req, res, next){

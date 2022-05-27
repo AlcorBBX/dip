@@ -17,7 +17,7 @@ router.post('/lesson', courseInfoController.createLesson)
 router.delete('/delete/:id', courseInfoController.delete)
 router.put('/:id', courseInfoController.updateLessonInfo)
 
-
+router.put('/user/:id', courseInfoController.updateUserLesson)
 
 router.put('/update/:id', courseInfoController.updateLesson)
 

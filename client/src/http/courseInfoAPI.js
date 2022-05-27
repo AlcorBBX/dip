@@ -64,3 +64,10 @@ export const UpdateOneLesson = async (formData, id) => {
     const {data} = await $host.put('api/courseinfo/update/' + id, formData);
     return data
 }
+
+
+export const UpdateUserLesson = async (formData, userId) => {
+    // ответ, который будет возвращаться от сервера
+    const {data} = await $host.put('api/courseinfo/user/' + userId, formData);
+    return data
+}

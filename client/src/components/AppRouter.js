@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import {Navigate, Route, Routes} from 'react-router-dom'
 import {authRoutes, publicRoutes} from '../routes'
 import {Context} from '../index'
-import { LOGIN_ROUTE } from '../utils/consts';
+import { COURSE_ROUTE, LOGIN_ROUTE } from '../utils/consts';
 
 function AppRouter() {
     // моковая переменная, она будет показывать авторизован ли пользователь
@@ -28,7 +28,11 @@ function AppRouter() {
             <Route key={path} path={path} element={<Component/>} exact/>
         )}
         {/* Если никакой маршрут не отработал, то нас перекидывает в SHOP */}
-        {/* <Route path='*' element={<Navigate to={LOGIN_ROUTE}/>}/> */}
+        {/* {user.isAuth ?
+        <Route path='*' element={<Navigate to={COURSE_ROUTE}/>}/>
+        : */}
+        <Route path='*' element={<Navigate to={LOGIN_ROUTE}/>}/>
+        {/* } */}
     </Routes>
   )
 }

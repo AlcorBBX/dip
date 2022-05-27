@@ -6,7 +6,7 @@ import { LESSON_ROUTE } from '../../utils/consts'
 import './learn.css'
 import CreateLessonInfo from './modals/CreateLessonInfo'
 import LearnLeasson from './learnLesson/LearnLesson'
-import { deleteCourseInfo } from '../../http/courseInfoAPI'
+import { deleteCourseInfo, UpdateUserLesson } from '../../http/courseInfoAPI'
 import { Context } from '../../index'
 import { Button, Box, Card, CardContent, Typography, CardActions, Tooltip  } from '@mui/material'
 import IconButton from '@mui/material/IconButton';
@@ -15,9 +15,12 @@ import BorderColorIcon from '@mui/icons-material/BorderColor';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import UpdateLessonInfo from './modals/UpdateLessonInfo'
 import LessonSertificat from '../lesson/lessonSertificat/LessonSertificat'
+import { fetchOneUsers } from '../../http/userAPI'
 
 const Learn = observer(() => {
   const {user} = useContext(Context)
+  const [users, setUsers] = useState()
+  // const [infoId, setinfoId] = useState()
   const [change, setChange] = useState(false)
   const [courseVisible, setCourseVisible] = useState(false);
   const [updateVisible, setUpdateVisible] = useState(false);
@@ -26,14 +29,26 @@ const Learn = observer(() => {
   const [course, setCourse] = useState( {info: []})
   const [first, setfirst] = useState()
 
-  const bull = (
-    <Box
-      component="span"
-      sx={{ display: 'inline-block', mx: '2px', transform: 'scale(0.8)' }}
-    >
-      •
-    </Box>
-  );
+  console.log(user.user.id)
+  useEffect(() => {
+    fetchOneUsers(user.user.id).then(data => setUsers(data)).finally()
+}, [])
+
+  console.log(users?.courseInfoId)
+  console.log(users?.createdAt)
+  // var arr = JSON.parse("[" + users?.courseInfoId + "]");
+  // console.log( arr)
+  // {users?.courseInfoId.map((cos)=>
+  //   console.log(cos))}
+  
+
+  const upd = (courseInfoId, userId) => {
+    
+    const formData = new FormData()
+    formData.append('courseInfoId', courseInfoId)
+    UpdateUserLesson(formData, userId).then()
+    history(LESSON_ROUTE+ '/' + courseInfoId)
+}
 
   const click = (id) => {
     setfirst(id)
@@ -54,6 +69,8 @@ const Learn = observer(() => {
     setChange(false)
     fetchOneCourse(id).then(data => setCourse(data))
   }, [change])
+
+  // console.log(course.info.id.length())
 
   return (
     <div className='sl-learn-course__main' style={{paddingTop: "100px"}}>
@@ -109,12 +126,16 @@ const Learn = observer(() => {
           <CardActions>
               <div style={{display: 'flex', justifyContent: 'space-between', width: '100%'}}> 
                 <div>
-                  <Button onClick={() => history(LESSON_ROUTE+ '/' + info.id)}>Открыть</Button>
+                  <Button onClick={() => upd(info.id, user.user.id)}>Открыть</Button>
                 </div>
                 <div>
-                  <Tooltip title="Прочитано">
+                {users?.courseInfoId === info.id?
+                  <Tooltip title="Последний прочитанный урок">
                     <CheckCircleIcon color='success' sx={{height: '36.5px', margin: 'auto 0'}}/>  
                   </Tooltip>
+                  :''
+                }
+                  
                 </div>
             </div>
           </CardActions>

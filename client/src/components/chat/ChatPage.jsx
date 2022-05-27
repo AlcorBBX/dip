@@ -23,7 +23,8 @@ const ChatPage = () => {
   const [change, setChange] = useState(false)
   const [message, setMessage] = useState([])
   const [final, setFinal] = useState(false)
- 
+  const [time, setTime] = useState()
+  setInterval(() => setChange(true), 10000)
   useEffect(() => {
     setChange(false)
     fetchMessage().then(data => setMessage(data.rows))
@@ -80,7 +81,7 @@ const Message = ({m, users}) => {
         </div>
         )}
           <p style={{width: '400px', color: 'white', marginLeft: '-32px', paddingTop: '10px'}}><br/>{m.text}</p>
-        
+          <p>{m.createdAt}</p>
     </div>
   )
 }
@@ -99,6 +100,7 @@ const MessageForm = ({setChange, id}) => {
     formData.append("text", text)
     formData.append("userId", userId)
     createMessage(formData).then(data => setChange(true))
+    setText('')
 }
   return (
     <div>
