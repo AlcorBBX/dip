@@ -26,6 +26,7 @@ const ProfileUpdate = ({setfirst, show, onHide}) => {
   if(!setFile){
     return ''
   }
+  // setEmail(user.user.email)
   const upd = () => {
     
     const formData = new FormData()

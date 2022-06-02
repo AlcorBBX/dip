@@ -74,18 +74,21 @@ class CourseInfoController {
 
     async updateUserLesson(req, res) {
         const { id } = req.params;
-        const { courseInfoId } = req.body;
+        const { courseInfoId, lessons } = req.body;
+        const less = JSON.parse(lessons)
         console.log(req.body)
 
         const data = await User.update(
                 {
                     courseInfoId: courseInfoId,
+                    lessons: less
                 },
                 { where: {id}, }
             )
         .then((result) => result)
         .catch((result) => result)
         console.log(data)
+        console.log(lessons)
         res.send(data);
     }
 

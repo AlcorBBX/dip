@@ -41,7 +41,8 @@ class UserController {
         const hashPassword = await bcrypt.hash(password, 5)
 
         // создание юзера
-        const user = await User.create({email, role, password: hashPassword})
+        
+        const user = await User.create({email, role, password: hashPassword, lessons: []})
         // создаем корзину и передает туда id пользователя
         const basket = await Basket.create({userId: user.id})
 

@@ -92,15 +92,17 @@ const MessageForm = ({setChange, id}) => {
   const [text, setText] = useState('')
   const [userId, setUserId] = useState()
   // {id !== undefined ? setUserId(Number(id)) : console.log("stop")}
-  console.log(user.user.id)
+  // console.log(user.user.id)
+  
   const addMessage = () => {
-    setUserId(user.user.id)
+    
     console.log(userId)
     const formData = new FormData()
+    setUserId(user.user.id)
     formData.append("text", text)
     formData.append("userId", userId)
-    createMessage(formData).then(data => setChange(true))
-    setText('')
+    createMessage(formData).then(data => setChange(true)).finally(setText(''))
+    
 }
   return (
     <div>

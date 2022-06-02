@@ -101,15 +101,15 @@ const LessonCertificate = ({show, onHide}) => {
                             />
                         </div>
                         <div>
-                            <Button variant="contained" onClick={upd} sx={{margin: '2px'}} >
-                                Распечатать
+                            <Button onClick={upd} sx={{margin: '2px'}} >
+                                
                             </Button>
-                            <Button variant="contained" color='secondary' sx={{margin: '2px'}}>
+                            {/* <Button variant="contained" color='secondary' sx={{margin: '2px'}}>
                                 Редактировать
                             </Button>
                             <Button variant="contained" color='error' sx={{margin: '2px'}}>
                                 Удалить
-                            </Button>
+                            </Button> */}
                         </div>
                     </Box>                   
             </Modal>

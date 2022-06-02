@@ -50,7 +50,7 @@ const Lesson = () => {
                     <div>
                         <Button onClick={() => setCourseVisible(true)}>Добавить</Button>
                         {courseInfo.info[0] === undefined? ""
-                            :<Button onClick={() => setUpdateVisible(true)}>Редактировать</Button>}
+                            :<Button onClick={() => setUpdateVisible(true)}></Button>}
                         
                     </div>
                 :''}  

@@ -55,7 +55,7 @@ const Login = observer(() => {
                     <TextField className="loginInp" 
                         value={email} 
                         onChange = {e => setEmail(e.target.value)}
-                        type="text" placeholder="" label="Email" color='secondary'
+                        type="text" placeholder="" label="Login" color='secondary'
                         style={{border: '0px', marginBottom: '20px'}}
                         InputLabelProps={{
                                     style: { color: '#fff' },

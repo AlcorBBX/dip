@@ -35,17 +35,14 @@ const Learn = observer(() => {
 }, [])
 
   console.log(users?.courseInfoId)
-  console.log(users?.createdAt)
-  // var arr = JSON.parse("[" + users?.courseInfoId + "]");
-  // console.log( arr)
-  // {users?.courseInfoId.map((cos)=>
-  //   console.log(cos))}
-  
 
   const upd = (courseInfoId, userId) => {
-    
+    console.log(users.lessons)
     const formData = new FormData()
     formData.append('courseInfoId', courseInfoId)
+    formData.append('lessons', JSON.stringify([
+      ...users.lessons, courseInfoId
+      ]))
     UpdateUserLesson(formData, userId).then()
     history(LESSON_ROUTE+ '/' + courseInfoId)
 }
@@ -70,7 +67,6 @@ const Learn = observer(() => {
     fetchOneCourse(id).then(data => setCourse(data))
   }, [change])
 
-  // console.log(course.info.id.length())
 
   return (
     <div className='sl-learn-course__main' style={{paddingTop: "100px"}}>
@@ -78,12 +74,12 @@ const Learn = observer(() => {
         <img className='sl-course-desc__icon' src={"http://localhost:5000/" + course.img} alt='React'/>
         <div className='sl-course-desc__texts-wrapper'>
           <h1 className='sl-course-desc__title'>{course.name}</h1>
-          <p>{course.rating}</p>
+          {/* <p>{course.rating}</p> */}
           {user.user.role === "ADMIN"?
           
             <Button style={{color: 'gold'}}
               variant="outlined"
-              onClick={() => setCourseVisible(true)}>Добавить</Button>             
+              onClick={() => setCourseVisible(true)}>Добавить урок</Button>             
           : ''
           }
         </div>
@@ -129,8 +125,9 @@ const Learn = observer(() => {
                   <Button onClick={() => upd(info.id, user.user.id)}>Открыть</Button>
                 </div>
                 <div>
-                {users?.courseInfoId === info.id?
-                  <Tooltip title="Последний прочитанный урок">
+                {/* users.lessons.find(info.id) */}
+                {users?.lessons.find(e => e === info.id) ?
+                  <Tooltip title="Урок прочитан">
                     <CheckCircleIcon color='success' sx={{height: '36.5px', margin: 'auto 0'}}/>  
                   </Tooltip>
                   :''
