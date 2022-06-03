@@ -78,7 +78,7 @@ class CourseInfoController {
         const less = JSON.parse(lessons)
         console.log(req.body)
 
-        const data = await User.update(
+        const data = await User.update( 
                 {
                     courseInfoId: courseInfoId,
                     lessons: less

@@ -80,7 +80,7 @@ const Login = observer(() => {
                         <p style={{marginRight: '5px', color: 'lightGrey', fontWeight: '400px', fontSize: '18px'}}>Нет аккаунта?</p> 
                         <NavLink 
                             style={{color: "gold", fontWeight: '400px', fontSize: '20px', textDecoration: 'none'}} 
-                            to={REGISTRATION_ROUTE}>Зарегестрироваться</NavLink>
+                            to={REGISTRATION_ROUTE}>Зарегистрироваться</NavLink>
                     </div>
                     : <div className = "w-auto"
                         style={{display: 'flex', margin: '0 auto', alignItems: 'center'}}>

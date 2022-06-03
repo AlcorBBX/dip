@@ -17,10 +17,11 @@ import UpdateLessonInfo from './modals/UpdateLessonInfo'
 import LessonSertificat from '../lesson/lessonSertificat/LessonSertificat'
 import { fetchOneUsers } from '../../http/userAPI'
 
-const Learn = observer(() => {
+const Learn = () => {
   const {user} = useContext(Context)
   const [users, setUsers] = useState()
   // const [infoId, setinfoId] = useState()
+  const [indx, setIndx] = useState(true)
   const [change, setChange] = useState(false)
   const [courseVisible, setCourseVisible] = useState(false);
   const [updateVisible, setUpdateVisible] = useState(false);
@@ -67,18 +68,24 @@ const Learn = observer(() => {
     fetchOneCourse(id).then(data => setCourse(data))
   }, [change])
 
-
+    const cl = () => {
+      var uciq = []
+      course?.info.map((info, index) => {
+        console.log(index)
+        index === 0 ? uciq = uciq + info.id :
+        uciq = uciq + ',' + info.id 
+    })
+      console.log(Array.from(uciq))
+    }
   return (
     <div className='sl-learn-course__main' style={{paddingTop: "100px"}}>
       <div className='sl-learn-course__main__desc-wrapper'>
         <img className='sl-course-desc__icon' src={"http://localhost:5000/" + course.img} alt='React'/>
         <div className='sl-course-desc__texts-wrapper'>
           <h1 className='sl-course-desc__title'>{course.name}</h1>
-          {/* <p>{course.rating}</p> */}
           {user.user.role === "ADMIN"?
-          
             <Button style={{color: 'gold'}}
-              variant="outlined"
+              variant="outlined" 
               onClick={() => setCourseVisible(true)}>Добавить урок</Button>             
           : ''
           }
@@ -87,7 +94,6 @@ const Learn = observer(() => {
 
       <div style={{display: 'flex', flexWrap: 'wrap'}}>
       {course.info.map((info, index) =>
-        
           <Card key={info.id} sx={{width: 309, margin: 1}}>
           <CardContent >
             <div style={{display: 'flex', justifyContent: 'space-between'}}>
@@ -111,7 +117,7 @@ const Learn = observer(() => {
                     </IconButton>
                   </Tooltip>
               </div>
-                  :''
+                  : ''
                   }
               </div>
             </div>
@@ -130,7 +136,7 @@ const Learn = observer(() => {
                   <Tooltip title="Урок прочитан">
                     <CheckCircleIcon color='success' sx={{height: '36.5px', margin: 'auto 0'}}/>  
                   </Tooltip>
-                  :''
+                  : indx !== false ? setIndx(false): ''
                 }
                   
                 </div>
@@ -140,12 +146,12 @@ const Learn = observer(() => {
       )}   
       </div>
       <div className='sl-group__item_sl-group__item-full'>
-        <LessonSertificat course={course.name}/>
+        <LessonSertificat course={course.name} indx={indx}/>
       </div>
       <CreateLessonInfo setChange={setChange} show={courseVisible} onHide={() => setCourseVisible(false)}/>
       <UpdateLessonInfo first={first} setChange={setChange} show={updateVisible} onHide={() => setUpdateVisible(false)}/>
     </div>
   )
-})
+}
 
 export default Learn

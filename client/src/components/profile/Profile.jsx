@@ -27,6 +27,15 @@ const Profile = () => {
 }, [first])
   
 {users === undefined ? console.log('n') : console.log(user.user.id)} 
+
+const style = {
+  width: '360px',
+  height: '360px', 
+  padding: '24px',
+  margin: '32px',
+  background: 'grey',
+  borderRadius: '8px'
+};
   return (
     <div className='profileMain'>
       <div className="profileContainer">
@@ -60,16 +69,21 @@ const Profile = () => {
                   </div>
                   : ''}
                 </div> }
-              {/* <Button variant="outlined" style={{color: 'white', marginBottom: '10px'}}
-                      onClick={() => setCourseVisible(true)}>Изменить профиль</Button>
-              <Button to={CHAT_ROUTE} variant="contained" color="success"
-                      onClick={() => history(CHAT_ROUTE+ '/' + id)}>Общий чат</Button> */}
-
-
               <ProfileUpdate setfirst={setfirst} show={courseVisible} onHide={() => setCourseVisible(false)}/>
               <ListAdmins show={usersVisible} onHide={() => setUsersVisible(false)}/>
             </div>
           </div>
+            <div style={{display: 'flex', justifyContent: 'center'}}>
+              <div style={{...style}}>
+                <p style={{color: '#2d3846',
+                  fontSize: '20px',
+                  fontWeight: '600',
+                  lineHeight: '120%'}}>Прогресс прохождения курсов</p>
+              </div>
+              <div style={{...style}}>
+                <p>Сертификаты</p>
+              </div>
+            </div>
         </div>
       </div>
   )

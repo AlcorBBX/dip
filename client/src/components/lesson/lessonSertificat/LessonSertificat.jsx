@@ -1,11 +1,11 @@
-import { Button } from '@mui/material'
+import { Button, Tooltip } from '@mui/material'
 import React, { useState } from 'react'
 import  './lessonSertificat.css'
 import CardMembershipIcon from '@mui/icons-material/CardMembership';
 import LessonCertificate from '../modals/LessonCertificate';
 // import LessonCertificate from './modals/LessonCertificate'
 
-const LessonSertificat = ({course}) => {
+const LessonSertificat = ({course, indx}) => {
     const [courseVisible, setCourseVisible] = useState(false);
     console.log(course)
   return (
@@ -16,12 +16,23 @@ const LessonSertificat = ({course}) => {
             </div>
             <div className='sl-certificate__info'>
                 <p className='sl-certificate__title sl-certificate__title'>Сертификат</p>
-                <p className='sl-certificate__info-text'>
-                    Мы рады вручить вам сертификат об окончании этого курса.
-                </p>
+                {indx === true ?
+                    <p className='sl-certificate__info-text'>
+                        Мы рады вручить вам сертификат об окончании этого курса.
+                    </p>
+                :<Tooltip title="Вы не прочли все уроки!" placement="left">
+                    <p className='sl-certificate__info-text'>
+                        Мы рады вручить вам сертификат об окончании этого курса.
+                    </p>
+                </Tooltip>
+                }
             </div>
         </div>
-        <Button onClick={() => setCourseVisible(true)}>Посмотреть сертификат</Button>
+        {indx === true ?
+            <Button onClick={() => setCourseVisible(true)}>Посмотреть сертификат</Button>
+            :<Button disabled onClick={() => setCourseVisible(true)}>Посмотреть сертификат</Button>
+        }
+        
         <LessonCertificate course={course} show={courseVisible} onHide={() => setCourseVisible(false)}/>
         
     </div>

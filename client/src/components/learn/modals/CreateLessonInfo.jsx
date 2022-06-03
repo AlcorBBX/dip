@@ -44,9 +44,9 @@ const CreateLessonInfo = observer(({show, onHide, setChange}) => {
         <Modal onClose={onHide} open={show} 
         aria-labelledby="child-modal-title" aria-describedby="child-modal-description">
             <Box sx={{ ...style, width: 400 }}>
-                <h2 id="child-modal-title">Добавление курса</h2>
-                <Input placeholder='Название курса' id="child-modal-description" value = {name} onChange={e => setName(e.target.value)}/>
-                <Input placeholder='Название' id="child-modal-description" value={subname} onChange={e => setSubname(e.target.value)}/>
+                <h2 id="child-modal-title">Добавление урока</h2>
+                <Input placeholder='Название урока' id="child-modal-description" value = {name} onChange={e => setName(e.target.value)}/>
+                <Input placeholder='Заголовок урока' id="child-modal-description" value={subname} onChange={e => setSubname(e.target.value)}/>
                 <Button variant="default" onClick={addCourse}>Добавить</Button>
                 </Box>
                 
