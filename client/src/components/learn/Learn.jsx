@@ -29,7 +29,7 @@ const Learn = () => {
   const history = useNavigate()
   const [course, setCourse] = useState( {info: []})
   const [first, setfirst] = useState()
-
+  const [counting, setcounting] = useState(0)
   console.log(user.user.id)
   useEffect(() => {
     fetchOneUsers(user.user.id).then(data => setUsers(data)).finally()
@@ -77,6 +77,8 @@ const Learn = () => {
     })
       console.log(Array.from(uciq))
     }
+    
+    // console.log(course?.info[2]?.lesson)
   return (
     <div className='sl-learn-course__main' style={{paddingTop: "100px"}}>
       <div className='sl-learn-course__main__desc-wrapper'>

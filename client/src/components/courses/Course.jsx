@@ -1,4 +1,4 @@
-import { Button, Input } from "@mui/material";
+import { Alert, Button, Fade, Snackbar } from "@mui/material";
 import { observer } from "mobx-react-lite";
 import React, { useContext, useEffect, useState } from 'react'
 import { fetchCourse } from "../../http/courseAPI";
@@ -10,7 +10,15 @@ import CreateCourse from './modals/CreateCourse'
 const Course = observer(() => {
   const {user} = useContext(Context)
   const [courseVisible, setCourseVisible] = useState(false);
+  const [state, setState] = useState(false)
 
+  useEffect(() => {
+    setState(true)
+    const timer = setTimeout(() => {
+      setState(false)
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, []);
     return (
         <div className="course">
       <div className="containerCourse">
@@ -38,6 +46,17 @@ const Course = observer(() => {
           </div>
         </div>
       </div>
+        <Snackbar
+            open={state}
+            TransitionComponent={Fade}
+            // message={user.user.email + ' выберите курс'}
+            key={Fade}
+        >
+          <Alert severity="success" sx={{ width: '100%' }}>
+            {/* {user.user.email + ' выберите курс'} */}
+            <p><span style={{fontWeight: 'bold'}}>{user.user.email}</span> выберите курс</p>
+          </Alert>
+        </Snackbar>
     </div>
     )
 })

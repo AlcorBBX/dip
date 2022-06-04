@@ -6,6 +6,7 @@ export default class UserStore {
         this._isAuth = true
         this._user = {}
         this._role = {}
+        // this._countLessons = 0
         // this._isAdmin = true
         // mobx будет следить за изменениями этих переменных, при их изменении компоненты будут перерендериваться
         makeAutoObservable(this)

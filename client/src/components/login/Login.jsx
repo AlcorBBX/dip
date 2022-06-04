@@ -6,8 +6,6 @@ import { COURSE_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE } from '../../utils/const
 import './index.css';
 import { Button, Card, TextField, Typography } from '@mui/material';
 import { observer } from 'mobx-react-lite';
-    
-    
 
 const Login = observer(() => {
 
@@ -20,7 +18,6 @@ const Login = observer(() => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-
 
     const click = async () => {
         try {
@@ -35,9 +32,6 @@ const Login = observer(() => {
         // сохраняем данные о пользователи в юзерстор
         // user.setUser({})
         user.setUser(user)
-        // user.setIsAuth(true)
-        
-        
         history(COURSE_ROUTE)
         window.location.reload()
         }catch (e) {
@@ -95,7 +89,6 @@ const Login = observer(() => {
                     variant="outlined" sx={{ mt: 3 }}>{isLogin ? 'Войти' : 'Зарегестрироваться'}</Button>
 
                 </form>
-
             </Card>
         </div>
     );
