@@ -1,9 +1,9 @@
 // импорт модуля, который будет генерировать случайные id
 const uuid = require('uuid')
 const path = require('path')
-// импорт моделей
-const {CourseInfo, Lesson, User} = require('../models/models')
-// импорт ошибок
+
+const {CourseInfo, Lesson, User, LessonPractic} = require('../models/models')
+
 const ApiError = require('../error/ApiError')
 
 
@@ -150,6 +150,24 @@ class CourseInfoController {
         // возвращаем на клиенsт девайс
         return res.send(course)
     }
+
+    async getOnePractic(req, res){
+        // const {id} = req.params
+
+        // console.log({id})
+        const practic = await LessonPractic.findAndCountAll()
+        // const practic = await LessonPractic.findOne(
+        //     {
+        //         // where: {lessonId: {id},}
+
+        //         where: {id},
+
+        //     }
+        // )
+
+        return res.send(practic)
+    }
+
 }
 
 

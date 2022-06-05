@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 import {  fetchOneCourseLesson } from '../../http/courseInfoAPI'
 import { Context } from '../../index'
 import './lesson.css'
+import LessonPractic from './lessonPractic/LessonPractic'
 import LessonCreate from './modals/LessonCreate'
 import UpdateLesson from './modals/UpdateLesson'
 
@@ -54,6 +55,7 @@ const Lesson = () => {
                         
                     </div>
                 :''}  
+                <LessonPractic lessonId = {id}/>
                 <LessonCreate id={id} setChange={setChange} show={courseVisible} onHide={() => setCourseVisible(false)}/>
                 <UpdateLesson id={i} setChange={setChange} show={updateVisible} onHide={() => setUpdateVisible(false)}/>                 
             </div>                

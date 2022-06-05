@@ -21,7 +21,8 @@ router.put('/user/:id', courseInfoController.updateUserLesson)
 
 router.put('/update/:id', courseInfoController.updateLesson)
 
-
+router.get('/practic', courseInfoController.getOnePractic)
+//getOnePractic
 
 router.get('/:id', courseInfoController.getOne)
 

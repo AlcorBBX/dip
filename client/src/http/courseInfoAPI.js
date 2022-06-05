@@ -71,3 +71,10 @@ export const UpdateUserLesson = async (formData, userId) => {
     const {data} = await $host.put('api/courseinfo/user/' + userId, formData);
     return data
 }
+
+export const fetchOneCourseLessonPractic = async () => {
+    // ответ, который будет возвращаться от сервера
+    const {data} = await $host.get('api/courseinfo/practic' );
+    return data
+}
+///api/courseinfo/practic

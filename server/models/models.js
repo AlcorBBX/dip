@@ -20,6 +20,15 @@ const User = sequelize.define('user', {
     lessons: {type: DataTypes.JSON, allowNull: true},
 })
 
+const LessonPractic = sequelize.define('lesson_practic', {
+    id : {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+    type : {type: DataTypes.STRING},
+    answer : {type: DataTypes.STRING},
+    variant : {type: DataTypes.JSON, allowNull: true},
+    title: {type: DataTypes.STRING},
+    text: {type: DataTypes.STRING}
+})
+
 const Basket = sequelize.define('basket', {
     id : {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
 })
@@ -96,7 +105,9 @@ const Comments = sequelize.define('comments', {
 User.hasOne(Basket)
 Basket.belongsTo(User)
 
-
+//LessonPractic
+Lesson.hasOne(LessonPractic)
+LessonPractic.belongsTo(Lesson)
 
 User.hasOne(Chat)
 Chat.belongsTo(User)
@@ -160,5 +171,6 @@ module.exports = {
     Lesson,
     Chat, 
     LessonInfo, 
-    Comments
+    Comments,
+    LessonPractic
 }
