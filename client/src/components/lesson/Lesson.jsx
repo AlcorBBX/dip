@@ -7,12 +7,14 @@ import { Context } from '../../index'
 import './lesson.css'
 import LessonPractic from './lessonPractic/LessonPractic'
 import LessonCreate from './modals/LessonCreate'
+import PracticCreate from './modals/PracticCreate'
 import UpdateLesson from './modals/UpdateLesson'
 
 const Lesson = () => {
     const {user} = useContext(Context)
     const [courseVisible, setCourseVisible] = useState(false);
     const [updateVisible, setUpdateVisible] = useState(false);
+    const [practicVisible, setPracticVisible] = useState(false);
     const [i, setI] = useState()
     const {id} = useParams()
     const [change, setChange] = useState(false)
@@ -49,13 +51,15 @@ const Lesson = () => {
                 </div>
                 {user.user.role === "ADMIN"?
                     <div>
-                        <Button onClick={() => setCourseVisible(true)}>Добавить</Button>
+                        <Button onClick={() => setCourseVisible(true)}>Добавить урок</Button>
+                        <Button onClick={() => setPracticVisible(true)}>Добавить практику</Button>
                         {courseInfo.info[0] === undefined? ""
                             :<Button onClick={() => setUpdateVisible(true)}></Button>}
                         
                     </div>
                 :''}  
-                <LessonPractic lessonId = {id}/>
+                <LessonPractic lessonId = {id} courseInfoId = {courseInfo.info[0].id}/>
+                <PracticCreate id={courseInfo.info[0].id} setChange={setChange} show={practicVisible} onHide={() => setPracticVisible(false)}/>
                 <LessonCreate id={id} setChange={setChange} show={courseVisible} onHide={() => setCourseVisible(false)}/>
                 <UpdateLesson id={i} setChange={setChange} show={updateVisible} onHide={() => setUpdateVisible(false)}/>                 
             </div>                

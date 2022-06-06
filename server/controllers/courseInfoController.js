@@ -168,6 +168,18 @@ class CourseInfoController {
         return res.send(practic)
     }
 
+    async createPractic(req, res, next){
+        try {
+            let {title, text, answer, lessonId} = req.body
+            const course = await LessonPractic.create({title, text, answer, lessonId})
+            return res.json(course)
+              
+            
+        } catch (e) {
+            next(ApiError.badRequest(e.message));
+        }
+    }
+
 }
 
 

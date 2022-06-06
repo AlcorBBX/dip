@@ -8,7 +8,7 @@ const courseInfoController = require('../controllers/courseInfoController')
 
 // импорт мидлвейра с проверкой роли
 const checkRoles = require('../middleware/checkRoleMiddleware')
-
+//createPractic
 
 // .post() создание бренда и т.д
 router.post('/', courseInfoController.create)
@@ -22,7 +22,7 @@ router.put('/user/:id', courseInfoController.updateUserLesson)
 router.put('/update/:id', courseInfoController.updateLesson)
 
 router.get('/practic', courseInfoController.getOnePractic)
-//getOnePractic
+router.post('/practic', courseInfoController.createPractic)
 
 router.get('/:id', courseInfoController.getOne)
 

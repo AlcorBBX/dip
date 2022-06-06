@@ -77,4 +77,13 @@ export const fetchOneCourseLessonPractic = async () => {
     const {data} = await $host.get('api/courseinfo/practic' );
     return data
 }
+
+export const createPractic = async (formData) => {
+    // ответ, который будет возвращаться от сервера
+    // пост запрос базовый url берется из системной переменой, к нему добавляем api/... 
+    // как тело запроса мы передайем 
+    const {data} = await $authHost.post('api/courseinfo/practic', formData);
+    // возвращаем данные
+    return data
+}
 ///api/courseinfo/practic

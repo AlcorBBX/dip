@@ -8,7 +8,7 @@ import CreateLessonInfo from './modals/CreateLessonInfo'
 import LearnLeasson from './learnLesson/LearnLesson'
 import { deleteCourseInfo, UpdateUserLesson } from '../../http/courseInfoAPI'
 import { Context } from '../../index'
-import { Button, Box, Card, CardContent, Typography, CardActions, Tooltip  } from '@mui/material'
+import { Button, Box, Card, CardContent, Typography, CardActions, Tooltip, Slider  } from '@mui/material'
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import BorderColorIcon from '@mui/icons-material/BorderColor';
@@ -30,6 +30,8 @@ const Learn = () => {
   const [course, setCourse] = useState( {info: []})
   const [first, setfirst] = useState()
   const [counting, setcounting] = useState(0)
+  const [loading, setLoading] = useState()
+
   console.log(user.user.id)
   useEffect(() => {
     fetchOneUsers(user.user.id).then(data => setUsers(data)).finally()
@@ -38,13 +40,13 @@ const Learn = () => {
   console.log(users?.courseInfoId)
 
   const upd = (courseInfoId, userId) => {
-    console.log(users.lessons)
-    const formData = new FormData()
-    formData.append('courseInfoId', courseInfoId)
-    formData.append('lessons', JSON.stringify([
-      ...users.lessons, courseInfoId
-      ]))
-    UpdateUserLesson(formData, userId).then()
+    // console.log(users.lessons)
+    // const formData = new FormData()
+    // formData.append('courseInfoId', courseInfoId)
+    // formData.append('lessons', JSON.stringify([
+    //   ...users.lessons, courseInfoId
+    //   ]))
+    // UpdateUserLesson(formData, userId).then()
     history(LESSON_ROUTE+ '/' + courseInfoId)
 }
 
@@ -78,13 +80,29 @@ const Learn = () => {
       console.log(Array.from(uciq))
     }
     
+    setTimeout(() => {
+      setLoading(false)
+    }, 4000);
     // console.log(course?.info[2]?.lesson)
+    console.log(users?.lessons.length)
   return (
     <div className='sl-learn-course__main' style={{paddingTop: "100px"}}>
       <div className='sl-learn-course__main__desc-wrapper'>
         <img className='sl-course-desc__icon' src={"http://localhost:5000/" + course.img} alt='React'/>
         <div className='sl-course-desc__texts-wrapper'>
           <h1 className='sl-course-desc__title'>{course.name}</h1>
+          {loading === false ?
+            <Slider style={{height: '30px'}}
+              color="secondary"
+              aria-label="Temperature"
+              defaultValue={users?.lessons.length}
+              disabled={true}
+              max={course?.info.length}
+            // valueLabelDisplay={'off'}
+          />
+          : ''
+          }
+          
           {user.user.role === "ADMIN"?
             <Button style={{color: 'gold'}}
               variant="outlined" 
@@ -134,8 +152,9 @@ const Learn = () => {
                 </div>
                 <div>
                 {/* users.lessons.find(info.id) */}
-                {users?.lessons.find(e => e === info.id) ?
+                {users?.lessons.find(e => e == info.id) ?
                   <Tooltip title="Урок прочитан">
+                    
                     <CheckCircleIcon color='success' sx={{height: '36.5px', margin: 'auto 0'}}/>  
                   </Tooltip>
                   : indx !== false ? setIndx(false): ''

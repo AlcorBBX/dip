@@ -36,6 +36,7 @@ const style = {
   background: 'grey',
   borderRadius: '8px'
 };
+  console.log(users?.lessons.length)
   return (
     <div className='profileMain'>
       <div className="profileContainer">
@@ -73,7 +74,7 @@ const style = {
               <ListAdmins show={usersVisible} onHide={() => setUsersVisible(false)}/>
             </div>
           </div>
-            <div style={{display: 'flex', justifyContent: 'center'}}>
+            {/* <div style={{display: 'flex', justifyContent: 'center'}}>
               <div style={{...style}}>
                 <p style={{color: '#2d3846',
                   fontSize: '20px',
@@ -83,7 +84,7 @@ const style = {
               <div style={{...style}}>
                 <p>Сертификаты</p>
               </div>
-            </div>
+            </div> */}
         </div>
       </div>
   )
