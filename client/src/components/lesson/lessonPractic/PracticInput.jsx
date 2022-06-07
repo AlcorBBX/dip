@@ -1,7 +1,7 @@
 import { Alert, Button, Fade, FormControl, InputLabel, OutlinedInput, Snackbar, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { UpdateUserLesson } from '../../../http/courseInfoAPI';
-// import { SnackbarProvider, useSnackbar } from 'notistack';
+import CircularProgress from '@mui/material/CircularProgress';
 
 const PracticInput = ({practic, lessonId, userId, users, infoId}) => {
   const [name, setName] = useState();
@@ -79,7 +79,7 @@ const PracticInput = ({practic, lessonId, userId, users, infoId}) => {
           }
         </div>
     </div>
-    : 'loading'}
+    : <div style={{overflowY: 'hidden', display: 'flex', justifyContent: 'center'}}><CircularProgress color="success"/></div>}
     <Snackbar
             open={state}
             TransitionComponent={Fade}

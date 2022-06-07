@@ -32,12 +32,14 @@ const Learn = () => {
   const [counting, setcounting] = useState(0)
   const [loading, setLoading] = useState()
 
+  const [check, setCheck] = useState()
+
   console.log(user.user.id)
   useEffect(() => {
     fetchOneUsers(user.user.id).then(data => setUsers(data)).finally()
 }, [])
 
-  console.log(users?.courseInfoId)
+  
 
   const upd = (courseInfoId, userId) => {
     // console.log(users.lessons)
@@ -81,9 +83,22 @@ const Learn = () => {
     }
     
     setTimeout(() => {
+      // var arr = []
+      // course?.info.map((info, index) => 
+      //   users?.lessons.find(e => e == info.id) ?
+      //     index === 0 ? arr = arr + info.id :
+      //       arr = arr + ',' + info.id 
+      //     : console.log('ch')
+      // )
+      // setCheck(Array.from(arr))
       setLoading(false)
+      // console.log(check)
     }, 4000);
     // console.log(course?.info[2]?.lesson)
+    // console.log(`${users?.lessons} ${course.info?.id}`)
+
+    
+
     console.log(users?.lessons.length)
   return (
     <div className='sl-learn-course__main' style={{paddingTop: "100px"}}>

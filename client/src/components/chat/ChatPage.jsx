@@ -81,7 +81,7 @@ const Message = ({m, users}) => {
         </div>
         )}
           <p style={{width: '400px', color: 'white', marginLeft: '-32px', paddingTop: '10px'}}><br/>{m.text}</p>
-          <p>{m.createdAt}</p>
+          <p style={{color: 'white'}}>{m.createdAt}</p>
     </div>
   )
 }
